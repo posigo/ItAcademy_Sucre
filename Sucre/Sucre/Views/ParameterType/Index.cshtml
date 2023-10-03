@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ParameterTypeM>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Parameter Type - Index";
+}
+
+<div class="container p-3 bg-white">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Parameter Types Sheet</h2>
+        </div>
+        <div class="col-6 text-end">
+           @*  <a asp-controller="ParameterType" asp-action="Create" class="btn btn-primary">
+                Create a new parameter type
+            </a> *@
+            <a asp-controller="ParameterType" asp-action="Upsert" class="btn btn-primary-custom">
+                Create a new parameter type
+            </a>
+        </div>
+    </div>
+
+    @if (Model.Count()>0)
+    {
+        <table class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Параметр
+                </th>
+                <th>
+                    Мнемоника
+                </th>
+                <th>
+                    Единицы измерения
+                </th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="5%">@obj.Id</td>
+                        <td width="50%">@obj.Name</td>
+                        <td width="10%">@obj.Mnemo</td>
+                        <td width="15%">@obj.UnitMeas</td>
+                        <td class="text-center">
+                            <a asp-controller="ParameterType" asp-action="Upsert" asp-route-Id="@obj.Id" class="btn btn-primary-custom mx-2">
+                                Edit
+                            </a>
+                            <a asp-controller="ParameterType" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-2">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }   
+    else
+    {
+    <p class="text-danger h4">No parameter type list!</p>
+    }
+</div>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sucre_DataAccess;
 using Sucre_DataAccess.Data;
-using Sucre_DataAccess.Entity;
+using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 
@@ -17,9 +17,10 @@ namespace Sucre.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var ggg = _parameterTypeDb.GetAll();
+            //var ggg = _parameterTypeDb.GetAll();
+            var ggg = await _parameterTypeDb.GetAllAsync();
             IEnumerable<ParameterTypeM> fff = ggg.Select(u => new ParameterTypeM { 
                 Id = u.Id, Name = u.Name, Mnemo = u.Mnemo, UnitMeas = u.UnitMeas });
             return View(fff);
@@ -51,8 +52,33 @@ namespace Sucre.Controllers
             return View (parameterTypeM);
         }
 
+        //[HttpGet]
+        //public IActionResult Upsert(int? Id)
+        //{
+        //    ParameterTypeM parameterTypeM = new ParameterTypeM();
+        //    if (Id == null)
+        //    {
+        //        return View(parameterTypeM);
+        //    }
+        //    else
+        //    {
+        //        ParameterType parameterType = _parameterTypeDb.Find(Id.GetValueOrDefault());
+        //        if (parameterType == null) 
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            parameterTypeM.Id = parameterType.Id;
+        //            parameterTypeM.Name = parameterType.Name;
+        //            parameterTypeM.Mnemo = parameterType.Mnemo;
+        //            parameterTypeM.UnitMeas = parameterType.UnitMeas;
+        //            return View(parameterTypeM);
+        //        }
+        //    }
+        //}
         [HttpGet]
-        public IActionResult Upsert(int? Id)
+        public async Task<IActionResult> Upsert(int? Id)
         {
             ParameterTypeM parameterTypeM = new ParameterTypeM();
             if (Id == null)
@@ -61,8 +87,8 @@ namespace Sucre.Controllers
             }
             else
             {
-                ParameterType parameterType = _parameterTypeDb.Find(Id.GetValueOrDefault());
-                if (parameterType == null) 
+                ParameterType parameterType = await _parameterTypeDb.FindAsync(Id.GetValueOrDefault());
+                if (parameterType == null)
                 {
                     return NotFound();
                 }
@@ -77,8 +103,47 @@ namespace Sucre.Controllers
             }
         }
 
+        //[HttpPost]
+        //public IActionResult Upsert(ParameterTypeM parameterTypeM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ParameterType parameterType = new ParameterType();
+        //        if (parameterTypeM.Id == 0)
+        //        {
+        //            //Creating
+        //            //parameterType.Id = parameterTypeM.Id;
+        //            //parameterType.Name = parameterTypeM.Name;
+        //            //parameterType.Mnemo = parameterTypeM.Mnemo;
+        //            //parameterType.UnitMeas = parameterTypeM.UnitMeas;
+        //            sp_ParameterType(ref parameterType,ref parameterTypeM, false);
+        //            _parameterTypeDb.Add(parameterType);
+        //        }
+        //        else
+        //        {
+        //            //Update
+        //            parameterType = _parameterTypeDb.FirstOrDefault(filter: item => item.Id == parameterTypeM.Id, isTracking: false);
+        //            if (parameterType == null) 
+        //            {
+        //                return NotFound(parameterType);
+        //            }
+        //            else
+        //            {
+        //                //parameterType.Id = parameterTypeM.Id;
+        //                //parameterType.Name = parameterTypeM.Name;
+        //                //parameterType.Mnemo = parameterTypeM.Mnemo;
+        //                //parameterType.UnitMeas = parameterTypeM.UnitMeas;
+        //                sp_ParameterType(ref parameterType, ref parameterTypeM, false);
+        //                _parameterTypeDb.Update(parameterType);
+        //            }
+        //        }
+        //        _parameterTypeDb.Save();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(parameterTypeM);
+        //}
         [HttpPost]
-        public IActionResult Upsert(ParameterTypeM parameterTypeM)
+        public async Task<IActionResult> Upsert(ParameterTypeM parameterTypeM)
         {
             if (ModelState.IsValid)
             {
@@ -90,14 +155,14 @@ namespace Sucre.Controllers
                     //parameterType.Name = parameterTypeM.Name;
                     //parameterType.Mnemo = parameterTypeM.Mnemo;
                     //parameterType.UnitMeas = parameterTypeM.UnitMeas;
-                    sp_ParameterType(ref parameterType,ref parameterTypeM, false);
-                    _parameterTypeDb.Add(parameterType);
+                    sp_ParameterType(ref parameterType, ref parameterTypeM, false);
+                    await _parameterTypeDb.AddAsync(parameterType);
                 }
                 else
                 {
                     //Update
-                    parameterType = _parameterTypeDb.FirstOrDefault(filter: item => item.Id == parameterTypeM.Id, isTracking: false);
-                    if (parameterType == null) 
+                    parameterType = await _parameterTypeDb.FirstOrDefaultAsync(filter: item => item.Id == parameterTypeM.Id, isTracking: false);
+                    if (parameterType == null)
                     {
                         return NotFound(parameterType);
                     }
@@ -108,17 +173,17 @@ namespace Sucre.Controllers
                         //parameterType.Mnemo = parameterTypeM.Mnemo;
                         //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                         sp_ParameterType(ref parameterType, ref parameterTypeM, false);
-                        _parameterTypeDb.Update(parameterType);
+                        await _parameterTypeDb.UpdateAsync(parameterType);
                     }
                 }
-                _parameterTypeDb.Save();
+                await _parameterTypeDb.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(parameterTypeM);
         }
 
         [HttpGet]
-        public IActionResult Delete(int? Id)
+        private IActionResult DeleteNoAsync(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
             ParameterType parameterType = _parameterTypeDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
@@ -127,11 +192,16 @@ namespace Sucre.Controllers
             sp_ParameterType(ref parameterType, ref parameterTypeM, true);
             return View(parameterTypeM);
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? Id)
+        {
+            return await Task.Run(() => DeleteNoAsync(Id));
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public IActionResult DeletePost (int? Id)
+        private IActionResult DeletePostNoAsync (int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
             var parameterType = _parameterTypeDb.Find(Id.GetValueOrDefault());
@@ -139,7 +209,14 @@ namespace Sucre.Controllers
             _parameterTypeDb.Remove(parameterType);
             _parameterTypeDb.Save();
             return RedirectToAction(nameof(Index));
-            return View();
+            //return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int? Id)
+        {
+            return await Task.Run(() => DeletePostNoAsync(Id));
         }
 
         [NonAction]

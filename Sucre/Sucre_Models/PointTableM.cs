@@ -14,8 +14,12 @@ namespace Sucre_Models
         [Required]
         [MaxLength(25)]
         public string Name { get; set; } = string.Empty;
+        [MaxLength(255)]
+        public string? Description { get; set; }
         
         public string? EnergyName { get; set; }
+        public string? CexName { get; set; }
+        
         public string? ServiceStaff { get; set; } = string.Empty;
     }
 }

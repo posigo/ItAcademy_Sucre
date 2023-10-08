@@ -55,7 +55,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("GroupUserReport");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.AsPaz", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.AsPaz", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("AsPazs");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Canal", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Canal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +153,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Canals");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Cex", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Cex", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,7 +186,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Cexs");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Energy", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Energy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Enegies");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.GroupUser", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.GroupUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("GroupUsers");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ParameterType", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ParameterType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,7 +255,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("ParameterTypes");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Point", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Point", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -291,7 +291,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Points");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Report", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Report", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -314,7 +314,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ReportDetail", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ReportDetail", b =>
                 {
                     b.Property<int>("CanalId")
                         .HasColumnType("int");
@@ -334,7 +334,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("ReportDetails");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.User", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -367,7 +367,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueDay", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueDay", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -386,7 +386,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("ValuesDay");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueHour", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueHour", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -408,7 +408,7 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("ValuesHour");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueMounth", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueMounth", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -432,13 +432,13 @@ namespace Sucre_DataAccess.Migrations
 
             modelBuilder.Entity("CanalPoint", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", null)
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", null)
                         .WithMany()
                         .HasForeignKey("CanalsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sucre_DataAccess.Entity.Point", null)
+                    b.HasOne("Sucre_DataAccess.Entities.Point", null)
                         .WithMany()
                         .HasForeignKey("PointsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,33 +447,33 @@ namespace Sucre_DataAccess.Migrations
 
             modelBuilder.Entity("GroupUserReport", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.GroupUser", null)
+                    b.HasOne("Sucre_DataAccess.Entities.GroupUser", null)
                         .WithMany()
                         .HasForeignKey("GroupUsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sucre_DataAccess.Entity.Report", null)
+                    b.HasOne("Sucre_DataAccess.Entities.Report", null)
                         .WithMany()
                         .HasForeignKey("ReportsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.AsPaz", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.AsPaz", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", "Canal")
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithOne("AsPaz")
-                        .HasForeignKey("Sucre_DataAccess.Entity.AsPaz", "CanalId")
+                        .HasForeignKey("Sucre_DataAccess.Entities.AsPaz", "CanalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Canal");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Canal", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Canal", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.ParameterType", "ParameterType")
+                    b.HasOne("Sucre_DataAccess.Entities.ParameterType", "ParameterType")
                         .WithMany("Canals")
                         .HasForeignKey("ParameterTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -482,15 +482,15 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("ParameterType");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Point", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Point", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Cex", "Cex")
+                    b.HasOne("Sucre_DataAccess.Entities.Cex", "Cex")
                         .WithMany("Points")
                         .HasForeignKey("CexId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sucre_DataAccess.Entity.Energy", "Energy")
+                    b.HasOne("Sucre_DataAccess.Entities.Energy", "Energy")
                         .WithMany("Points")
                         .HasForeignKey("EnergyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -501,21 +501,21 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Energy");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ReportDetail", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ReportDetail", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", "Canal")
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithMany()
                         .HasForeignKey("CanalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sucre_DataAccess.Entity.Point", "Point")
+                    b.HasOne("Sucre_DataAccess.Entities.Point", "Point")
                         .WithMany()
                         .HasForeignKey("PointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sucre_DataAccess.Entity.Report", "Report")
+                    b.HasOne("Sucre_DataAccess.Entities.Report", "Report")
                         .WithMany()
                         .HasForeignKey("ReportId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,9 +528,9 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Report");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.User", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.User", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.GroupUser", "GroupUser")
+                    b.HasOne("Sucre_DataAccess.Entities.GroupUser", "GroupUser")
                         .WithMany("Users")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -539,9 +539,9 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("GroupUser");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueDay", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueDay", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", "Canal")
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithMany("ValueDays")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -550,9 +550,9 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Canal");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueHour", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueHour", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", "Canal")
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithMany("ValueHours")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -561,9 +561,9 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Canal");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ValueMounth", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ValueMounth", b =>
                 {
-                    b.HasOne("Sucre_DataAccess.Entity.Canal", "Canal")
+                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithMany("ValueMounths")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,7 +572,7 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Canal");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Canal", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Canal", b =>
                 {
                     b.Navigation("AsPaz");
 
@@ -583,22 +583,22 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("ValueMounths");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Cex", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Cex", b =>
                 {
                     b.Navigation("Points");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.Energy", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.Energy", b =>
                 {
                     b.Navigation("Points");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.GroupUser", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.GroupUser", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entity.ParameterType", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ParameterType", b =>
                 {
                     b.Navigation("Canals");
                 });

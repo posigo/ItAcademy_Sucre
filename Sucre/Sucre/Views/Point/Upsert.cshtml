@@ -41,7 +41,8 @@
                                 <label asp-for="PointM.Description"></label>
                             </div>
                             <div class="col-8">
-                                <input asp-for="PointM.Description" class="form-control" />
+                                @*<input asp-for="PointM.Description" class="form-control" />*@
+                                <textarea asp-for="PointM.Description" class="form-control"></textarea>
                                 <span asp-validation-for="PointM.Description" class="text-danger"></span>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sucre_DataAccess.Entity;
+using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 

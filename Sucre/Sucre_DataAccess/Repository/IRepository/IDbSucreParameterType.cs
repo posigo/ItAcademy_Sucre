@@ -1,4 +1,4 @@
-﻿using Sucre_DataAccess.Entity;
+﻿using Sucre_DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,6 @@ namespace Sucre_DataAccess.Repository.IRepository
     public interface IDbSucreParameterType: IDbSucre<ParameterType>
     {
         void Update(ParameterType parameterType);
+        Task UpdateAsync(ParameterType parameterType);
     }
 }

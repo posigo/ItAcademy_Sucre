@@ -18,10 +18,14 @@ namespace Sucre
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddScoped<IDbSucreParameterType, DbSucreParameterType>();
-            builder.Services.AddScoped<IDbSucreEnergy, DbSucreEnergy>();
+            builder.Services.AddScoped<IDbSucreAsPaz, DbSucreAsPaz>();
+            builder.Services.AddScoped<IDbSucreCanal, DbSucreCanal>();
             builder.Services.AddScoped<IDbSucreCex, DbSucreCex>();
+            builder.Services.AddScoped<IDbSucreEnergy, DbSucreEnergy>();
+            builder.Services.AddScoped<IDbSucreParameterType, DbSucreParameterType>();
             builder.Services.AddScoped<IDbSucrePoint, DbSucrePoint>();
+            
+            
 
             var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿using Sucre_DataAccess.Entity;
+﻿using Sucre_DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

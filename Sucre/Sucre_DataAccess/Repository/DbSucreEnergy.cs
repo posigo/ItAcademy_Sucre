@@ -1,5 +1,5 @@
 ﻿using Sucre_DataAccess.Data;
-using Sucre_DataAccess.Entity;
+using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using System;
 using System.Collections.Generic;

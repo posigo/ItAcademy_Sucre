@@ -1,0 +1,228 @@
+﻿@model ICollection<CanalTableM>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Canals - Index";
+}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container p-3 bg-white">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Channel List</h2>
+        </div>
+        <div class="col-6 text-end">           
+            <a asp-controller="Canal" asp-action="Upsert" class="btn btn-primary-custom">
+                Add channel
+            </a>
+        </div>
+    </div>
+
+    @if (Model.Count()>0)
+    {
+        <table class="table table-bordered table-striped" style="width: 100%">
+            <thead valign="middle">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Parameter Type</th>
+                    <th>In Work</th>
+                    <th>Source Type</th>
+                    <th>Use AsPaz</th>
+                    <th></th>
+                </tr>
+                
+            </thead>
+            
+            <tbody>
+                @foreach (var obj in Model)
+                {   
+                    <tr>
+                        @if (obj.canalM.PointMs == null || obj.canalM.PointMs.Count() == 0)
+                        {
+                            @*<td width="3%" rowspan="2" valign="top">*@
+                            <td width="5%" valign="top">
+                                <a class="btn btn-primary-custom" asp-controller="" asp-action="" asp-route-Id="@obj.canalM.Id">
+                                    @obj.canalM.Id
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td width="5%">@obj.canalM.Id</td>
+                        }
+                        <td width="10%">@obj.canalM.Name</td>
+                        <td width="25%">@obj.canalM.Description</td>
+                        <td width="15%">@obj.ParameterTypeName</td>
+                        <td width="5%">
+                            @if (obj.canalM.Reader)
+                            {
+                                <p class="">YES</p>
+                            }
+                            else
+                            {
+                                <p class="">NO</p>
+                            }                                    
+                        </td>
+                        <td width="15%">
+                            @if (obj.canalM.SourceType == 0)
+                            {
+                                <p class="">Device</p>
+                            }
+                            @if (obj.canalM.SourceType == 1)
+                            {
+                                <p class="">External</p>
+                            }
+                            @if (obj.canalM.SourceType == 2)
+                            {
+                                <p class="">Manual</p>
+                            }                                    
+                        </td>
+                        <td width="5%">
+                            @if (obj.canalM.AsPazEin)
+                            {
+                                if (obj.canalM.AsPazM != null)
+                                {
+                                    <a class="btn btn-primary-custom" asp-controller="" , asp-action="" , asp-route-Id="@obj.canalM.Id">
+                                        YES
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-danger" asp-controller="" , asp-action="" , asp-route-Id="@obj.canalM.Id">
+                                        YES
+                                    </a>
+                                    
+                                }
+                                
+                                @*<p class="">YES</p>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindowAsPaz" data-bs-whatever="@obj.canalM.AsPazM">
+                                    YES   @obj.canalM.AsPazM.Id                                                    
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalWindowAsPaz" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title @obj.canalM.Id</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input id="idDelSol" type="hidden" value="0" name="idDelSol" class="form-control" />
+                                                <p>High->@obj.canalM.AsPazM.High.ToString()</p>
+                                                <p>Low->@obj.canalM.AsPazM.Low.ToString()</p>
+                                                @if (obj.canalM.AsPazM.A_HighEin.Value)
+                                                {
+                                                    @if (obj.canalM.AsPazM.A_HighType.Value)
+                                                    {
+                                                        <p>
+                                                            A_High->@obj.canalM.AsPazM.A_High.ToString();
+                                                            %
+                                                        </p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>
+                                                            A_High->@obj.canalM.AsPazM.A_High.ToString();
+                                                            
+                                                        </p>
+                                                    }
+
+
+                                                }
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Understood</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    var modalWindowAsPaz = document.getElementById('modalWindowAsPaz')
+                                    modalWindowAsPaz.addEventListener('show.bs.modal', function (event) {
+                                        // Кнопка, запускающая модальное окно
+                                        var button = event.relatedTarget
+                                        // Извлечь информацию из атрибутов data-bs- *
+                                        var recipient = button.getAttribute('data-bs-whatever')
+                                        // При необходимости вы можете инициировать запрос AJAX здесь
+                                        // а затем выполните обновление в обратном вызове.
+                                        //
+                                        // Обновите содержимое модального окна.
+                                        var modalTitle = deleteModal.querySelector('.modal-title')
+                                        var modalBodyInput = deleteModal.querySelector('.modal-body input')
+
+                                        modalTitle.textContent = 'Удаление раствора (Id=' + @obj.canalM.Id.ToString() + '.' + recipient + ')'
+                                        //modalBodyInput.value = recipient
+
+                                        document.getElementById('idDelSol').value = recipient
+
+                                        //document.getElementById('idDelSol').setAttribute('asp-route-idSolution', '89')
+                                    })
+                                </script>
+*@
+
+                            }
+                            else
+                            {
+                                <p class="">NO</p>
+                            }
+                        </td>
+                        <td class="text-center w-auto">
+                            <a asp-controller="Canal" asp-action="Upsert" asp-route-Id="@obj.canalM.Id" class="btn btn-primary-custom m-auto">
+                                Edit
+                            </a>
+                            <a asp-controller="Canal" asp-action="Delete" asp-route-Id="@obj.canalM.Id" class="btn btn-danger m-auto">
+                                Del
+                            </a>                            
+                        </td>
+                    </tr>
+                    @*@if (obj.canalM.AsPazEin)
+                    {
+                        <tr>
+                            <td colspan="7">
+                                <details>
+                                    <summary>ffffff</summary>
+                                    <p>@obj.canalM.AsPazM.High</p>
+                                    <p>@obj.canalM.AsPazM.Low</p>
+                                </details>
+                            </td>
+                        </tr>
+                    }*@
+                    
+                }
+            </tbody>
+        </table>
+    }   
+    else
+    {
+        <p class="text-danger h4">Channel list is empty!</p>
+    }
+</div>

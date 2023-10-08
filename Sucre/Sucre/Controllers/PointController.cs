@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sucre_DataAccess.Entity;
+using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 using Sucre_Utility;
@@ -18,13 +18,14 @@ namespace Sucre.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var pointsDb = _pointDb.GetAll(includeProperties:"Energy");
+            var pointsDb = _pointDb.GetAll(includeProperties:"Energy,Cex");
             IEnumerable<PointTableM> pointTablesM = pointsDb.Select(u => new PointTableM
             {
                 Id = u.Id,
                 Name = u.Name,
                 ServiceStaff = u.ServiceStaff,
-                EnergyName = u.Energy.EnergyName
+                EnergyName = u.Energy.EnergyName,
+                //CexName = _pointDb.GetStringCex(u.Cex)
             });
             return View(pointTablesM);
         }
@@ -65,7 +66,7 @@ namespace Sucre.Controllers
             if (ModelState.IsValid)
             {
                 Point point = new Point();
-                if (point.Id == 0)
+                if (pointM.Id == 0)
                 {
                     //Creating                    
                     sp_Point(ref point, ref pointM, false);
@@ -91,29 +92,39 @@ namespace Sucre.Controllers
             return View(pointM);
         }
 
-        //[HttpGet]
-        //public IActionResult Delete(int? Id)
-        //{
-        //    if (Id == null || Id == 0) return NotFound();
-        //    Cex cex = _cexDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
-        //    if (cex == null) return NotFound(cex);
-        //    CexM cexM = new CexM();
-        //    sp_Cex(ref cex, ref cexM, true);
-        //    return View(cexM);
-        //}
+        [HttpGet]
+        public IActionResult Delete(int? Id)
+        {
+            if (Id == null || Id == 0) return NotFound();
+            Point point = _pointDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault(),includeProperties: "Energy,Cex");
+            if (point == null) return NotFound(point);
+            PointM pointM = new PointM();
+            PointTableM pointTableM = new PointTableM()
+            {
+                Id = point.Id,
+                Name = point.Name,
+                Description = point.Description,
+                EnergyName = point.Energy.EnergyName,
+                //CexName = _pointDb.GetStringCex(point.Cex),
+                CexName = _pointDb.GetStringName(point.Cex),
+                ServiceStaff = point.ServiceStaff
+            };
+            //sp_Point(ref point, ref pointM, true);
+            return View(pointTableM);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[ActionName("Delete")]
-        //public IActionResult DeletePost(int? Id)
-        //{
-        //    if (Id == null || Id == 0) return NotFound();
-        //    Cex cex = _cexDb.Find(Id.GetValueOrDefault());
-        //    if (cex == null) return NotFound(cex);
-        //    _cexDb.Remove(cex);
-        //    _cexDb.Save();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public IActionResult DeletePost(int? Id)
+        {
+            if (Id == null || Id == 0) return NotFound();
+            Point point = _pointDb.Find(Id.GetValueOrDefault());
+            if (point == null) return NotFound(point);
+            _pointDb.Remove(point);
+            _pointDb.Save();
+            return RedirectToAction(nameof(Index));
+        }
 
         /// <summary>
         /// Синхронизация между моделью и сущностью

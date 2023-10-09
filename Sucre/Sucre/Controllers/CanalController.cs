@@ -11,11 +11,13 @@ namespace Sucre.Controllers
     {
         private readonly IDbSucreCanal _canalDb;
         private readonly IDbSucreAsPaz _asPazDb;
+        private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
-        public CanalController(IDbSucreCanal canalDb, IDbSucreAsPaz asPazDb)
+        public CanalController(IDbSucreCanal canalDb, IDbSucreAsPaz asPazDb, ISucreUnitOfWork sucreUnitOfWork)
         {
             _canalDb = canalDb;        
             _asPazDb = asPazDb;
+            _sucreUnitOfWork = sucreUnitOfWork;
         }
 
         [HttpGet]
@@ -237,43 +239,66 @@ namespace Sucre.Controllers
             }
         }
 
-        public IActionResult IndexAsPas()
+        //public IActionResult IndexAsPaz()
+        //{
+        //    var AsPazsDb = _asPazDb.GetAll(includeProperties: $"{WC.CanalName}");
+        //    ICollection<AsPazCanalM> asPazCanalMs = new HashSet<AsPazCanalM>();
+
+        //    foreach (var aspaz in AsPazsDb)
+        //    {
+        //        AsPazCanalM asPazCanalM = new AsPazCanalM(); 
+        //        AsPazM asPazM = new AsPazM();
+        //        AsPaz ggg = (AsPaz)aspaz;
+        //        sp_AsPaz(ref ggg, ref asPazM, true); 
+
+        //        asPazCanalM.AsPazM = asPazM;
+        //        asPazCanalM.CanalId = aspaz.Canal.Id;
+        //        asPazCanalM.CanalName = aspaz.Canal.Name;
+
+        //        asPazCanalMs.Add(asPazCanalM);
+
+        //    }
+        //    return View(asPazCanalMs);            
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> IndexAsPaz()
         {
-            var AsPazsDb = _asPazDb.GetAll(includeProperties: $"{WC.CanalName}");
+            //var AsPazsDb = _asPazDb.GetAll(includeProperties: $"{WC.CanalName}");
+            var AsPazsDb = await _sucreUnitOfWork.repoSukreAsPaz.GetAllAsync(includeProperties: $"{WC.CanalName}");
             ICollection<AsPazCanalM> asPazCanalMs = new HashSet<AsPazCanalM>();
 
             foreach (var aspaz in AsPazsDb)
             {
-                AsPazCanalM asPazCanalM = new AsPazCanalM(); 
+                AsPazCanalM asPazCanalM = new AsPazCanalM();
                 AsPazM asPazM = new AsPazM();
                 AsPaz ggg = (AsPaz)aspaz;
-                sp_AsPaz(ref ggg, ref asPazM, true); 
+                sp_AsPaz(ref ggg, ref asPazM, true);
 
                 asPazCanalM.AsPazM = asPazM;
-                asPazCanalM.CanalId = aspaz.Id;
+                asPazCanalM.CanalId = aspaz.Canal.Id;
                 asPazCanalM.CanalName = aspaz.Canal.Name;
-                
+
                 asPazCanalMs.Add(asPazCanalM);
-               
+
             }
-            return View(asPazCanalMs);            
+            return View(asPazCanalMs);
         }
 
-
         [HttpGet]
-        public IActionResult UpsertAsPaz(int? Id, int? canalId, string? canaLName)
+        public async Task<IActionResult> UpsertAsPaz(int? Id, int? canalId, string? canalName)
         {
             if (canalId == null || canalId == 0)
             {
                 return NotFound("Non canal Id");
             }
-            if (canaLName == null) canaLName = string.Empty;
+            if (canalName == null) canalName = string.Empty;
             AsPazCanalM asPazCanalM = new AsPazCanalM()
             {
                 AsPazM = new AsPazM()
                 { CanalId = canalId.GetValueOrDefault()},
                 CanalId = canalId.GetValueOrDefault(),
-                CanalName = canaLName
+                CanalName = canalName
             };
             if (Id == null)
             {
@@ -281,7 +306,7 @@ namespace Sucre.Controllers
             }
             else
             {
-                AsPaz asPaz = _asPazDb.FirstOrDefault(filter: item => item.Id == Id.Value && item.CanalId == canalId.Value);
+                AsPaz asPaz = await _sucreUnitOfWork.repoSukreAsPaz.FirstOrDefaultAsync(filter: item => item.Id == Id.Value && item.CanalId == canalId.Value);
                 if (asPaz == null)
                 {
                     return NotFound("Not found aspaz");
@@ -298,46 +323,46 @@ namespace Sucre.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Upsert(CanalM canalM)
-        {
-            if (ModelState.IsValid)
-            {
-                Canal canal = new Canal();
-                if (canalM.Id == 0)
-                {
-                    //Creating                    
-                    sp_Canal(ref canal, ref canalM, false);
-                    _canalDb.Add(canal);
-                }
-                else
-                {
-                    //Update
-                    canal = _canalDb.FirstOrDefault(filter: item => item.Id == canalM.Id, isTracking: false);
-                    if (canal == null)
-                    {
-                        return NotFound(canal);
-                    }
-                    else
-                    {
-                        sp_Canal(ref canal, ref canalM, false);
-                        _canalDb.Update(canal);
-                    }
-                }
-                if (!canal.AsPazEin)
-                {
-                    AsPaz asPaz = _asPazDb.FirstOrDefault(filter: item => item.CanalId == canal.Id);
-                    if (asPaz != null)
-                    {
-                        _asPazDb.Remove(asPaz);
-                        _asPazDb.Save();
-                    }
-                }
-                _canalDb.Save();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(canalM);
-        }
+        //[HttpPost]
+        //public IActionResult Upsert(CanalM canalM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Canal canal = new Canal();
+        //        if (canalM.Id == 0)
+        //        {
+        //            //Creating                    
+        //            sp_Canal(ref canal, ref canalM, false);
+        //            _canalDb.Add(canal);
+        //        }
+        //        else
+        //        {
+        //            //Update
+        //            canal = _canalDb.FirstOrDefault(filter: item => item.Id == canalM.Id, isTracking: false);
+        //            if (canal == null)
+        //            {
+        //                return NotFound(canal);
+        //            }
+        //            else
+        //            {
+        //                sp_Canal(ref canal, ref canalM, false);
+        //                _canalDb.Update(canal);
+        //            }
+        //        }
+        //        if (!canal.AsPazEin)
+        //        {
+        //            AsPaz asPaz = _asPazDb.FirstOrDefault(filter: item => item.CanalId == canal.Id);
+        //            if (asPaz != null)
+        //            {
+        //                _asPazDb.Remove(asPaz);
+        //                _asPazDb.Save();
+        //            }
+        //        }
+        //        _canalDb.Save();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(canalM);
+        //}
 
 
         /// <summary>
@@ -366,7 +391,8 @@ namespace Sucre.Controllers
                 asPaz.A_HighType = asPazM.A_HighType.Value;
                 asPaz.W_HighType = asPazM.W_HighType.Value;
                 asPaz.W_LowType = asPazM.W_LowType.Value;
-                asPaz.A_LowType = asPazM.A_LowType.Value;                
+                asPaz.A_LowType = asPazM.A_LowType.Value;
+                asPaz.CanalId = asPazM.CanalId;
             }
             else //MFrom entity in model
             {
@@ -385,6 +411,7 @@ namespace Sucre.Controllers
                 asPazM.W_HighType = asPaz.W_HighType;
                 asPazM.W_LowType = asPaz.W_LowType;
                 asPazM.A_LowType = asPaz.A_LowType;
+                asPazM.CanalId = asPaz.CanalId.Value;
             }
         }
 

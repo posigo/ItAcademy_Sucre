@@ -21,5 +21,9 @@ namespace Sucre_DataAccess.Repository
         {
             _db.Update(energy);
         }
+        public async Task UpdateAsync(Energy energy)
+        {
+            await Task.Run(() => Update(energy));
+        }
     }
 }

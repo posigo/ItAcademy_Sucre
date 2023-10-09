@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDBSucreMethodList
+    public interface IDbSucreMethodList
     {
         IEnumerable<SelectListItem> GetAllDropdownList(string strInclude);
         string GetStringName(object obj);

@@ -1,0 +1,155 @@
+﻿@model Sucre_Models.AsPazCanalM
+@{
+    Layout = "_Layout";
+    var title = "";
+    if (Model.AsPazM.Id == 0)
+    {
+        ViewData["Title"] = "AsPaz - Create";
+        title = $"Adding AsPaz For Canal {Model.CanalName} (Id {Model.CanalId})";
+    }
+    else
+    {
+        ViewData["Title"] = "AsPaz - Edit";
+        title = $"Edit AsPaz For Canal {Model.CanalName} (Id {Model.CanalId})";
+    }
+}
+
+<div class="container">
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+        @if (Model.AsPazM.Id !=0)
+        {
+            <input asp-for="@Model.AsPazM.Id" hidden>
+        }
+        <input asp-for="AsPazM.CanalId" hidden>
+        <input asp-for="CanalId" hidden>
+        <input asp-for="CanalName" hidden>
+        <div class="row card p-3 bg-white box-shadow">
+            <div class="card-header">                
+                <h2 class="text-primary-custom pl-3">@title</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="AsPazM.High"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="AsPazM.High" class="form-control" />
+                                <span asp-validation-for="AsPazM.A_High" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="AsPazM.Low"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="AsPazM.Low" class="form-control" />
+                                <span asp-validation-for="AsPazM.Low" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="border-5 border-primary">
+                            <div class="row py-2">
+                                <div class="col-4">
+                                    <label asp-for="AsPazM.A_HighEin.Value">Use</label>
+                                </div>
+                                <div class="col-8">
+                                    <input asp-for="AsPazM.A_HighEin.Value" type="checkbox" class="form-check form-check-input" />
+                                    <span asp-validation-for="AsPazM.A_HighEin.Value" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-4">
+                                    <label asp-for="AsPazM.A_HighType.Value">Number or Percent</label>
+                                </div>
+                                <div class="col-8">
+                                    <input asp-for="AsPazM.A_HighType.Value" type="checkbox" class="form-check form-check-input" />
+                                    <span asp-validation-for="AsPazM.A_HighType.Value" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-4">
+                                    <label asp-for="AsPazM.A_High"></label>
+                                </div>
+                                <div class="col-8">
+                                    <input asp-for="AsPazM.A_High" class="form-control" />
+                                    <span asp-validation-for="AsPazM.A_High" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="CanalM.ParameterTypeId"></label>
+                            </div>
+                            <div class="col-8">
+                                <select asp-for="CanalM.ParameterTypeId" asp-items="@Model.ParametryTyoeSelectList" class="form-select">
+                                    <option disabled selected>--Select energy type--</option>
+                                </select>                                
+                                <span asp-validation-for="CanalM.ParameterTypeId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="CanalM.Reader"></label>
+                            </div>
+                            <div class="col-8">
+                                <input type="checkbox" asp-for="CanalM.Reader" class="form-check form-check-input"/>
+                                <span asp-validation-for="CanalM.Reader" class="text-danger"></span>
+                            </div>
+                        </div>                                              
+                        <div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="CanalM.SourceType"></label>
+                            </div>
+                            <div class="col-8">
+                                <input type="number" min="0" max="2" asp-for="CanalM.SourceType" class="form-control form-range" />
+                                <span asp-validation-for="CanalM.SourceType" class="text-danger"></span>
+                                @* <input type="text" readonly="readonly" value="8uhn" /> *@
+                           @* </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-4">
+                                <label asp-for="CanalM.AsPazEin"></label>
+                            </div>
+                            <div class="col-8">
+                                <input type="checkbox" asp-for="CanalM.AsPazEin" class="form-check form-check-input" />
+                                <span asp-validation-for="CanalM.AsPazEin" class="text-danger"></span>
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="col-4">
+                        Keep
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row py-2">
+                    <div class="col">
+                        @if (Model.AsPazM.Id !=0)
+                        {
+                            <input type="submit" class="btn btn-success w-100" value="Update" />
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success w-100" value="Create" />    
+                        }                        
+                    </div>
+                    <div class="col">
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

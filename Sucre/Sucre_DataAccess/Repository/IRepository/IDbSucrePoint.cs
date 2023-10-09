@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucrePoint: IDbSucre<Point>, IDBSucreMethodList
+    public interface IDbSucrePoint: IDbSucre<Point>, IDbSucreMethodList
     {
         //IEnumerable<SelectListItem> GetAllDropdownList(string strInclude);
         //string GetStringCex(Cex cex);

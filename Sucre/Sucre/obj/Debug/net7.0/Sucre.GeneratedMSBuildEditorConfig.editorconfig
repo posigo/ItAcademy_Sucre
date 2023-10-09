@@ -24,8 +24,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Canal/IndexAsPaz.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcSW5kZXhBc1Bhei5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Canal/Upsert.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcVXBzZXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Canal/UpsertAsPaz.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcVXBzZXJ0QXNQYXouY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Cex/Delete.cshtml]

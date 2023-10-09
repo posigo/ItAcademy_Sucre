@@ -17,15 +17,16 @@ namespace Sucre
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection").ToString();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-
+                        
             builder.Services.AddScoped<IDbSucreAsPaz, DbSucreAsPaz>();
             builder.Services.AddScoped<IDbSucreCanal, DbSucreCanal>();
             builder.Services.AddScoped<IDbSucreCex, DbSucreCex>();
             builder.Services.AddScoped<IDbSucreEnergy, DbSucreEnergy>();
+            //builder.Services.AddScoped<IDbSucreMethodList, DbSucreMethodList>();
             builder.Services.AddScoped<IDbSucreParameterType, DbSucreParameterType>();
             builder.Services.AddScoped<IDbSucrePoint, DbSucrePoint>();
-            
-            
+            builder.Services.AddScoped<ISucreUnitOfWork, SucreUnitOfWork>();
+
 
             var app = builder.Build();
 

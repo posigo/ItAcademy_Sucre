@@ -8,16 +8,20 @@ namespace Sucre.Controllers
     public class EnergyController : Controller
     {
         private readonly IDbSucreEnergy _energyDb;
+        private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
-        public EnergyController(IDbSucreEnergy energyDb)
+        public EnergyController(IDbSucreEnergy energyDb, ISucreUnitOfWork sucreUnitOfWork)
         {
             _energyDb = energyDb;
+            _sucreUnitOfWork = sucreUnitOfWork;
+
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var energiesDb = _energyDb.GetAll();
+            //var energiesDb = await _energyDb.GetAllAsync();
+            var energiesDb = await _sucreUnitOfWork.repoSukreEnergy.GetAllAsync();
             IEnumerable<EnergyM> energiesM = energiesDb.Select(u => new EnergyM
             {
                 Id = u.Id,
@@ -25,9 +29,21 @@ namespace Sucre.Controllers
             });
             return View(energiesM);
         }
-
+      
+        //[HttpGet]
+        //public IActionResult Index()
+        //{
+        //    var energiesDb = _energyDb.GetAll();
+        //    IEnumerable<EnergyM> energiesM = energiesDb.Select(u => new EnergyM
+        //    {
+        //        Id = u.Id,
+        //        EnergyName = u.EnergyName
+        //    });
+        //    return View(energiesM);
+        //}
+       
         [HttpGet]
-        public IActionResult Upsert(int? Id)
+        public async Task<IActionResult> Upsert(int? Id)
         {
             EnergyM energyM = new EnergyM();
             if (Id == null)
@@ -36,6 +52,7 @@ namespace Sucre.Controllers
             }
             else
             {
+                //Energy energy = await _energyDb.FindAsync(Id.GetValueOrDefault());
                 Energy energy = _energyDb.Find(Id.GetValueOrDefault());
                 if (energy == null)
                 {
@@ -51,8 +68,34 @@ namespace Sucre.Controllers
             }
         }
 
+        //[HttpGet]
+        //public IActionResult Upsert(int? Id)
+        //{
+        //    EnergyM energyM = new EnergyM();
+        //    if (Id == null)
+        //    {
+        //        return View(energyM);
+        //    }
+        //    else
+        //    {
+        //        Energy energy = _energyDb.Find(Id.GetValueOrDefault());
+        //        if (energy == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            //energyM.Id = energy.Id;
+        //            //energyM.EnergyName = energy.EnergyName;
+        //            sp_Energy(ref energy, ref energyM, true);
+        //            return View(energyM);
+        //        }
+        //    }
+        //}
+
         [HttpPost]
-        public IActionResult Upsert(EnergyM energyM)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(EnergyM energyM)
         {
             if (ModelState.IsValid)
             {
@@ -65,12 +108,13 @@ namespace Sucre.Controllers
                     //parameterType.Mnemo = parameterTypeM.Mnemo;
                     //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                     sp_Energy(ref energy, ref energyM, false);
-                    _energyDb.Add(energy);                    
+                    //await _energyDb.AddAsync(energy);                    
+                    _energyDb.Add(energy);
                 }
                 else
                 {
                     //Update
-                    energy = _energyDb.FirstOrDefault(filter: item => item.Id == energyM.Id, isTracking: false);
+                    energy = await _energyDb.FirstOrDefaultAsync(filter: item => item.Id == energyM.Id, isTracking: false);
                     if (energy == null)
                     {
                         return NotFound(energy);
@@ -85,35 +129,101 @@ namespace Sucre.Controllers
                         _energyDb.Update(energy);                        
                     }
                 }
+                //_energyDb.SaveAsync();
                 _energyDb.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(energyM);
         }
 
+        //[HttpPost]
+        //public IActionResult Upsert(EnergyM energyM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Energy energy = new Energy();
+        //        if (energyM.Id == 0)
+        //        {
+        //            //Creating
+        //            //parameterType.Id = parameterTypeM.Id;
+        //            //parameterType.Name = parameterTypeM.Name;
+        //            //parameterType.Mnemo = parameterTypeM.Mnemo;
+        //            //parameterType.UnitMeas = parameterTypeM.UnitMeas;
+        //            sp_Energy(ref energy, ref energyM, false);
+        //            _energyDb.Add(energy);
+        //        }
+        //        else
+        //        {
+        //            //Update
+        //            energy = _energyDb.FirstOrDefault(filter: item => item.Id == energyM.Id, isTracking: false);
+        //            if (energy == null)
+        //            {
+        //                return NotFound(energy);
+        //            }
+        //            else
+        //            {
+        //                //parameterType.Id = parameterTypeM.Id;
+        //                //parameterType.Name = parameterTypeM.Name;
+        //                //parameterType.Mnemo = parameterTypeM.Mnemo;
+        //                //parameterType.UnitMeas = parameterTypeM.UnitMeas;
+        //                sp_Energy(ref energy, ref energyM, false);
+        //                _energyDb.Update(energy);
+        //            }
+        //        }
+        //        _energyDb.Save();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(energyM);
+        //}
+
         [HttpGet]
-        public IActionResult Delete(int? Id)
+        public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Energy energy = _energyDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
+            Energy energy = await _energyDb.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault());
             if (energy == null) return NotFound(energy);
             EnergyM energyM = new EnergyM();
             sp_Energy(ref energy, ref energyM, true);
             return View(energyM);
         }
 
+        //[HttpGet]
+        //public IActionResult Delete(int? Id)
+        //{
+        //    if (Id == null || Id == 0) return NotFound();
+        //    Energy energy = _energyDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
+        //    if (energy == null) return NotFound(energy);
+        //    EnergyM energyM = new EnergyM();
+        //    sp_Energy(ref energy, ref energyM, true);
+        //    return View(energyM);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public IActionResult DeletePost(int? Id)
+        public async Task<IActionResult> DeletePost(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            var energy = _energyDb.Find(Id.GetValueOrDefault());
+            var energy = await _energyDb.FindAsync(Id.GetValueOrDefault());
             if (energy == null) return NotFound(energy);
             _energyDb.Remove(energy);
+            //_energyDb.SaveAsync();
             _energyDb.Save();
             return RedirectToAction(nameof(Index));            
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("Delete")]
+        //public IActionResult DeletePost(int? Id)
+        //{
+        //    if (Id == null || Id == 0) return NotFound();
+        //    var energy = _energyDb.Find(Id.GetValueOrDefault());
+        //    if (energy == null) return NotFound(energy);
+        //    _energyDb.Remove(energy);
+        //    _energyDb.Save();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         /// <summary>
         /// Синхронизация между моделью и сущностью

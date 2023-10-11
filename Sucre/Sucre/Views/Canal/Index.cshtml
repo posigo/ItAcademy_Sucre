@@ -106,89 +106,27 @@
                             {
                                 if (obj.canalM.AsPazM != null)
                                 {
-                                    <a class="btn btn-primary-custom" asp-controller="" , asp-action="" , asp-route-Id="@obj.canalM.Id">
+                                    @* ICollection<AsPazCanalM> asPazCanalMs = new HashSet<AsPazCanalM>();
+                                    AsPazCanalM asPazCanalM = new AsPazCanalM();
+                                    asPazCanalM.AsPazM = obj.canalM.AsPazM;
+                                    asPazCanalM.CanalId = obj.canalM.Id;
+                                    asPazCanalM.CanalName = obj.canalM.Name;
+                                    asPazCanalMs.Add(asPazCanalM);
+                                    <a class="btn btn-primary-custom" asp-controller="Canal", asp-action="IndexAsPaz", asp-route-pazCanalMs="@asPazCanalMs">
+                                        YES
+                                    </a> *@
+                                    <a class="btn btn-primary-custom" asp-controller="Canal", asp-action="IndexAsPaz", asp-route-CanalId="@obj.canalM.Id">
                                         YES
                                     </a>
                                 }
                                 else
                                 {
-                                    <a class="btn btn-danger" asp-controller="" , asp-action="" , asp-route-Id="@obj.canalM.Id">
+                                    <a class="btn btn-danger" asp-controller="Canal", asp-action="UpsertAsPaz", asp-route-Id="0", asp-route-canalId="@obj.canalM.Id", asp-route-canalName="@obj.canalM.Name">
                                         YES
                                     </a>
                                     
                                 }
                                 
-                                @*<p class="">YES</p>
-
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindowAsPaz" data-bs-whatever="@obj.canalM.AsPazM">
-                                    YES   @obj.canalM.AsPazM.Id                                                    
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="modalWindowAsPaz" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title @obj.canalM.Id</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input id="idDelSol" type="hidden" value="0" name="idDelSol" class="form-control" />
-                                                <p>High->@obj.canalM.AsPazM.High.ToString()</p>
-                                                <p>Low->@obj.canalM.AsPazM.Low.ToString()</p>
-                                                @if (obj.canalM.AsPazM.A_HighEin.Value)
-                                                {
-                                                    @if (obj.canalM.AsPazM.A_HighType.Value)
-                                                    {
-                                                        <p>
-                                                            A_High->@obj.canalM.AsPazM.A_High.ToString();
-                                                            %
-                                                        </p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p>
-                                                            A_High->@obj.canalM.AsPazM.A_High.ToString();
-                                                            
-                                                        </p>
-                                                    }
-
-
-                                                }
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Understood</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <script>
-                                    var modalWindowAsPaz = document.getElementById('modalWindowAsPaz')
-                                    modalWindowAsPaz.addEventListener('show.bs.modal', function (event) {
-                                        // Кнопка, запускающая модальное окно
-                                        var button = event.relatedTarget
-                                        // Извлечь информацию из атрибутов data-bs- *
-                                        var recipient = button.getAttribute('data-bs-whatever')
-                                        // При необходимости вы можете инициировать запрос AJAX здесь
-                                        // а затем выполните обновление в обратном вызове.
-                                        //
-                                        // Обновите содержимое модального окна.
-                                        var modalTitle = deleteModal.querySelector('.modal-title')
-                                        var modalBodyInput = deleteModal.querySelector('.modal-body input')
-
-                                        modalTitle.textContent = 'Удаление раствора (Id=' + @obj.canalM.Id.ToString() + '.' + recipient + ')'
-                                        //modalBodyInput.value = recipient
-
-                                        document.getElementById('idDelSol').value = recipient
-
-                                        //document.getElementById('idDelSol').setAttribute('asp-route-idSolution', '89')
-                                    })
-                                </script>
-*@
-
                             }
                             else
                             {

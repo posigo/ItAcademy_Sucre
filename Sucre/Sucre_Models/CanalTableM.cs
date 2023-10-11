@@ -10,7 +10,7 @@ namespace Sucre_Models
     {
         public CanalM canalM {  get; set; }
         
-        public string? ParameterTypeName { get; set; }
+        public string ParameterTypeName { get; set; }
 
         public CanalTableM()
         {

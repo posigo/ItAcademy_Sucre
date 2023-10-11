@@ -11,12 +11,12 @@ namespace Sucre_DataAccess.Entities
     {
         [Key]
         public int Id { get; set; }
-        public decimal? High { get; set; }
-        public decimal? Low { get; set; }
-        public decimal? A_High { get; set; }
-        public decimal? W_High { get; set; }
-        public decimal? W_Low { get; set; }
-        public decimal? A_Low { get; set;}
+        public decimal? High { get; set; } = null;
+        public decimal? Low { get; set; } = null;
+        public decimal? A_High { get; set; } = null;
+        public decimal? W_High { get; set; } = null;
+        public decimal? W_Low { get; set; } = null;
+        public decimal? A_Low { get; set; } = null;
         public bool A_HighEin { get; set; } = false;
         public bool W_HighEin { get; set; } = false;
         public bool W_LowEin { get; set; } = false;

@@ -60,7 +60,7 @@ namespace Sucre_DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("A_High")
+                    b.Property<decimal?>("A_High")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("A_HighEin")
@@ -69,7 +69,7 @@ namespace Sucre_DataAccess.Migrations
                     b.Property<bool>("A_HighType")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("A_Low")
+                    b.Property<decimal?>("A_Low")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("A_LowEin")
@@ -78,16 +78,16 @@ namespace Sucre_DataAccess.Migrations
                     b.Property<bool>("A_LowType")
                         .HasColumnType("bit");
 
-                    b.Property<int>("CanalId")
+                    b.Property<int?>("CanalId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("High")
+                    b.Property<decimal?>("High")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Low")
+                    b.Property<decimal?>("Low")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("W_High")
+                    b.Property<decimal?>("W_High")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("W_HighEin")
@@ -96,7 +96,7 @@ namespace Sucre_DataAccess.Migrations
                     b.Property<bool>("W_HighType")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("W_Low")
+                    b.Property<decimal?>("W_Low")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("W_LowEin")
@@ -108,7 +108,8 @@ namespace Sucre_DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CanalId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CanalId] IS NOT NULL");
 
                     b.ToTable("AsPazs");
                 });
@@ -131,8 +132,8 @@ namespace Sucre_DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("ParameterTypeId")
                         .HasColumnType("int");
@@ -461,9 +462,7 @@ namespace Sucre_DataAccess.Migrations
                 {
                     b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
                         .WithOne("AsPaz")
-                        .HasForeignKey("Sucre_DataAccess.Entities.AsPaz", "CanalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Sucre_DataAccess.Entities.AsPaz", "CanalId");
 
                     b.Navigation("Canal");
                 });

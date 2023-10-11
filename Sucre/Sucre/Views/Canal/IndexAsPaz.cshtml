@@ -60,7 +60,7 @@
                         <td width="">@obj.CanalName</td>
                         <td width="">@obj.AsPazM.High</td>
                         <td width="">@obj.AsPazM.Low</td>                        
-                        @if (!obj.AsPazM.A_HighEin.Value)
+                        @if (!obj.AsPazM.A_HighEin)
                         {
                             <td width="">NO</td>
                             <td width="">Non</td>
@@ -69,7 +69,7 @@
                         else
                         {
                             <td width="">YES</td>                            
-                            if (!obj.AsPazM.A_HighType.Value)
+                            if (!obj.AsPazM.A_HighType)
                             {
                                 <td width="">Number</td>
                                 <td width="">@obj.AsPazM.A_High</td>
@@ -80,7 +80,7 @@
                                 <td width="">@obj.AsPazM.A_High %</td>
                             }
                         }                        
-                        @if (!obj.AsPazM.W_HighEin.Value)
+                        @if (!obj.AsPazM.W_HighEin)
                         {
                             <td width="">NO</td>
                             <td width="">Non</td>
@@ -89,7 +89,7 @@
                         else
                         {
                             <td width="">YES</td>                            
-                            if (!obj.AsPazM.W_HighType.Value)
+                            if (!obj.AsPazM.W_HighType)
                             {
                                 <td width="">Number</td>
                                 <td width="">@obj.AsPazM.W_High</td>
@@ -100,7 +100,7 @@
                                 <td width="">@obj.AsPazM.W_High %</td>
                             }
                         }                        
-                        @if (!obj.AsPazM.W_LowEin.Value)
+                        @if (!obj.AsPazM.W_LowEin)
                         {
                             <td width="">NO</td>
                             <td width="">Non</td>
@@ -109,7 +109,7 @@
                         else
                         {
                             <td width="">YES</td>                            
-                            if (!obj.AsPazM.W_LowEin.Value)
+                            if (!obj.AsPazM.W_LowEin)
                             {
                                 <td width="">Number</td>
                                 <td width="">@obj.AsPazM.W_Low</td>
@@ -120,7 +120,7 @@
                                 <td width="">@obj.AsPazM.W_Low %</td>
                             }
                         }                        
-                        @if (!obj.AsPazM.A_LowEin.Value)
+                        @if (!obj.AsPazM.A_LowEin)
                         {
                             <td width="">NO</td>
                             <td width="">Non</td>
@@ -129,7 +129,7 @@
                         else
                         {
                             <td width="">YES</td>
-                            if (!obj.AsPazM.A_LowType.Value)
+                            if (!obj.AsPazM.A_LowType)
                             {
                                 <td width="">Number</td>
                                 <td width="">@obj.AsPazM.A_Low</td>
@@ -145,7 +145,7 @@
                             <a asp-controller="Canal" asp-action="UpsertAsPaz" asp-route-Id="@obj.AsPazM.Id" asp-route-canalId="@obj.CanalId" asp-route-canalName="@obj.CanalName" class="btn btn-primary-custom m-auto">
                                 Edit
                             </a>
-                            <a asp-controller="Canal" asp-action="Delete" asp-route-Id="@obj.CanalId" class="btn btn-danger m-auto">
+                            <a asp-controller="Canal" asp-action="DeleteAsPaz" asp-route-Id="@obj.AsPazM.Id" class="btn btn-danger m-auto">
                                 Del
                             </a>                            
                         </td>

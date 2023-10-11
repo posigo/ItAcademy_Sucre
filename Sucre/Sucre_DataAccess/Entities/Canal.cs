@@ -11,7 +11,7 @@ namespace Sucre_DataAccess.Entities
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(25)]
+        [MaxLength(30)]
         public string Name { get; set; } = string.Empty;
         [MaxLength(255)]
         public string Description { get; set; } = string.Empty;
@@ -26,6 +26,7 @@ namespace Sucre_DataAccess.Entities
         /// 2-ручной ввод
         /// </summary>        
         [Required]
+        [Range(0,2)]
         public int SourceType { get; set; }
         [Required]
         public bool AsPazEin { get; set; } = false;

@@ -15,8 +15,7 @@ namespace Sucre_Models
         [MaxLength(255)]
         public string Description { get; set; } = string.Empty;
         [Required]
-        public int ParameterTypeId { get; set; }
-        public string? ParameterTypeName { get; set; }
+        public int ParameterTypeId { get; set; }        
         [Required]
         public bool Reader { get; set; }
         /// <summary>
@@ -26,6 +25,7 @@ namespace Sucre_Models
         /// 2-ручной ввод
         /// </summary>        
         [Required]
+        [Range(0,2)]
         public int SourceType { get; set; }
         [Required]
         public bool AsPazEin { get; set; } = false;

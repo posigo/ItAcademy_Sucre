@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PointTableM>
+﻿@model IEnumerable<Sucre_Models.PointTableM>
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Points - Index";
@@ -23,7 +23,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Energy</th>
-                <th>Service Staff</th>
+                <th>Location</th>
                 <th></th>
             </thead>
             
@@ -32,17 +32,20 @@
                 {
                     <tr>
                         <td width="5%">@obj.Id</td>
-                        <td width="40%">@obj.Name</td>                        
+                        <td width="30%">@obj.Name</td>                        
                         <td width="15%">@obj.EnergyName</td>
-                        <td width="20%">@obj.ServiceStaff</td>
+                        <td width="20%">@obj.CexName</td>
                         
                         <td class="text-center">
                             <a asp-controller="Point" asp-action="Upsert" asp-route-Id="@obj.Id" class="btn btn-primary-custom mx-2">
                                 Edit
                             </a>
-                            <a asp-controller="Point" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-2">
-                                Delete
+                            <a asp-controller="Point" asp-action="PointCannalesIndex" asp-route-Id="@obj.Id" class="btn btn-success mx-2">
+                                Cannales
                             </a>
+                            <a asp-controller="Point" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger-custom mx-2">
+                                Delete
+                            </a>                            
                         </td>
                     </tr>
                 }

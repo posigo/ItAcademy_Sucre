@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LinqKit;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualBasic;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Entities;
+using Sucre_DataAccess.Repository;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 using Sucre_Utility;
+using System.Linq.Expressions;
 
 namespace Sucre.Controllers
 {
@@ -495,6 +499,154 @@ namespace Sucre.Controllers
                 asPazM.CanalId = asPaz.CanalId.Value;
             }
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> CannalePointsIndex(int? Id)
+        {
+            //var pointCanalesDb = _sukreUnitOfWork.repoSukrePoint.GetAll(filter: item => item.Id == Id.Value,
+            //                                                         includeProperties: WC.CanalsName);
+            if (Id == null || Id.Value == 0)
+                return BadRequest("Channel Id is null or equal to zero");
+
+            Canal canalDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+                                            filter: item => item.Id == Id.Value,
+                                            includeProperties: $"{WC.ParameterTypeName},{WC.PointsName}");
+            #region dynamic predicate
+            //var predicates = new List<Expression<Func<Canal, bool>>>();
+            //predicates.Add(item => item.Id != 3);
+            //predicates.Add(item => item.Id != 4);
+
+            //Expression<Func<Canal, bool>> exprprd2 =  item => item.Id != 2;// && item.Id != 4;
+
+            //exprprd2 = exprprd2.And(item => item.Id != 3);
+            //exprprd2 = exprprd2.And(item => item.Id != 4);
+            //exprprd2 = exprprd2.And(item => item.Id != 5);
+
+            //prd3 = item => item.Id != 3;
+            //prd3 = item => prd3(item) && item.Id !=4;
+            //var parameter = Expression.Parameter(typeof(Func<Canal, bool>),"item");
+
+            //Expression idProp = Expression.PropertyOrField(parameter, "Id");
+            //Expression filter = Expression.NotEqual(idProp, Expression.Constant(3));
+
+            //Expression idProp2 = Expression.PropertyOrField(parameter, "Id");
+            //Expression filter2 = Expression.NotEqual(idProp2, Expression.Constant(4));
+            //predicatre = Expression.AndAlso(predicatre, filter2);
+
+            //Expression lamda = Expression.Lambda(predicatre, par
+            //prd2 = Expression.Lambda<Func<Canal, bool>>(
+            #endregion
+
+            List<int> listIdPoints = new List<int>();
+            
+            ICollection<CannalePointsM> cannalePointssM = new HashSet<CannalePointsM>();
+
+            CannalePointsM cannalePointsM = new CannalePointsM();
+            cannalePointsM.Id = canalDb.Id;
+            cannalePointsM.Name = canalDb.Name;
+            cannalePointsM.PointsM = new HashSet<PointM>();
+                        
+            foreach (var point in canalDb.Points)
+            {
+                PointM pointM = new PointM();
+                pointM.Id = point.Id;
+                pointM.Name = point.Name;
+                cannalePointsM.PointsM.Add(pointM);
+                listIdPoints.Add(pointM.Id);                
+            };
+            
+            Expression<Func<Point, bool>> epFilter = null;
+
+            IEnumerable<Point> PointsId;
+            if (listIdPoints.Count == 0)
+            {
+                PointsId = _sucreUnitOfWork.repoSukrePoint.GetAll(
+                                                includeProperties: $"{WC.EnergyName},{WC.CexName}",
+                                                isTracking: false);
+            }
+            else
+            {
+                bool begId = true;
+
+                foreach (var id in listIdPoints)
+                {
+                    if (begId)
+                    {
+                        epFilter = item => item.Id != id;
+                        begId = false;
+                    }
+                    else
+                    {
+                        epFilter = epFilter.And(item => item.Id != id);
+                    }
+                }
+
+                PointsId = _sucreUnitOfWork.repoSukrePoint.GetAll(filter: epFilter,
+                                                                includeProperties: $"{WC.EnergyName},{WC.CexName}",
+                                                                isTracking: false);
+            }
+
+
+            List<SelectListItem> returnValues = new List<SelectListItem>();
+
+
+
+            foreach (var item in PointsId)
+            {
+                SelectListItem value = new SelectListItem();
+                string cexName=_sucreUnitOfWork.repoSukrePoint.GetStringName(item.Cex);
+                value.Text = $"{item.Id},{item.Name},{item.Energy.EnergyName},{cexName}";
+                value.Value = item.Id.ToString();
+
+                returnValues.Add(value);
+            };
+
+            cannalePointsM.FreePointsSelectList = returnValues;
+            
+            return View(cannalePointsM);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CannalePointsDelete(int Id, int IdPoint, CannalePointsM cannalePointsM)
+        {
+            //var id = Id;
+            //var idc = IdCannale;            
+            Canal cannaleDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+                                                    filter: item => item.Id == Id,
+                                                    includeProperties: $"{WC.PointsName},{WC.ParameterTypeName}");
+            Point point = cannaleDb.Points.FirstOrDefault(item => item.Id == IdPoint);
+            cannaleDb.Points.Remove(point);
+            _sucreUnitOfWork.Commit();
+
+            return RedirectToAction(nameof(CannalePointsIndex), new { Id = Id });
+            //return Ok("ssss");
+            //return View(pointCannalesM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CannalePointsAdding(int Id, int Add, CannalePointsM cannalePointsM)
+        {
+            int AddIdPoint = cannalePointsM.AddPoint;
+
+            Canal cannaleDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+                                                        filter: item => item.Id == Id,
+                                                        includeProperties: $"{WC.PointsName},{WC.ParameterTypeName}");
+            Point addPointDb = await _sucreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+                                                filter: item => item.Id == AddIdPoint,
+                                                includeProperties: $"{WC.EnergyName},{WC.CexName}");
+            cannaleDb.Points.Add(addPointDb);
+            _sucreUnitOfWork.Commit();
+
+            return RedirectToAction(nameof(CannalePointsIndex), new { Id = Id });
+
+            //return Ok("ssss");
+            //return View(pointCannalesM);
+        }
+
 
     }
 }

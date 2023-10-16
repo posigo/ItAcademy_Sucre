@@ -22,16 +22,16 @@ namespace Sucre.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var pointsDb = _pointDb.GetAll(includeProperties:"Energy,Cex");
+            var pointsDb = _sukreUnitOfWork.repoSukrePoint.GetAll(includeProperties:"Energy,Cex");
             IEnumerable<PointTableM> pointTablesM = pointsDb.Select(u => new PointTableM
             {
                 Id = u.Id,
                 Name = u.Name,
                 ServiceStaff = u.ServiceStaff,
                 EnergyName = u.Energy.EnergyName,
-                //CexName = _pointDb.GetStringCex(u.Cex)
+                CexName = _pointDb.GetStringName(u.Cex)
             });
             return View(pointTablesM);
         }
@@ -132,18 +132,23 @@ namespace Sucre.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> PointCannalesIndex(int? Id)
         {
             //var pointCanalesDb = _sukreUnitOfWork.repoSukrePoint.GetAll(filter: item => item.Id == Id.Value,
             //                                                         includeProperties: WC.CanalsName);
+            if (Id == null || Id.Value == 0)
+                return BadRequest("Id null or equal zero");
+
             Point pointCanalesDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
                                                                     filter: item => item.Id == Id.Value,
                                                                     includeProperties: WC.CanalsName);
 
+            #region dynamic predicate
             //var predicates = new List<Expression<Func<Canal, bool>>>();
             //predicates.Add(item => item.Id != 3);
             //predicates.Add(item => item.Id != 4);
-                        
+
             //Expression<Func<Canal, bool>> exprprd2 =  item => item.Id != 2;// && item.Id != 4;
 
             //exprprd2 = exprprd2.And(item => item.Id != 3);
@@ -153,7 +158,7 @@ namespace Sucre.Controllers
             //prd3 = item => item.Id != 3;
             //prd3 = item => prd3(item) && item.Id !=4;
             //var parameter = Expression.Parameter(typeof(Func<Canal, bool>),"item");
-            
+
             //Expression idProp = Expression.PropertyOrField(parameter, "Id");
             //Expression filter = Expression.NotEqual(idProp, Expression.Constant(3));
 
@@ -163,7 +168,7 @@ namespace Sucre.Controllers
 
             //Expression lamda = Expression.Lambda(predicatre, par
             //prd2 = Expression.Lambda<Func<Canal, bool>>(
-
+            #endregion
 
             List<int> listIdCannales = new List<int>();
             ICollection<PointCannalesM> pointCannalessM = new HashSet<PointCannalesM>();
@@ -185,7 +190,8 @@ namespace Sucre.Controllers
             IEnumerable<Canal> cannalesId;
             if (listIdCannales.Count == 0)
             {
-                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(isTracking: false);
+                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(includeProperties: WC.ParameterTypeName,
+                                                                isTracking: false);
             }
             else
             {
@@ -233,8 +239,51 @@ namespace Sucre.Controllers
            
             //var dddd = pointCannalessM.ToList();
             //var ssss = $"{dddd[0].Id.ToString()}->{dddd[0].Name}->Count cannal: {dddd[0].CannalesM.Count().ToString()}"; 
-            return Ok("ssss");
-            //return View();
+            //return Ok("ssss");
+            return View(pointCannalesM);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PointCannalesDelete(int Id, int IdCannale, PointCannalesM pointCannalesM)
+        {
+            //var id = Id;
+            //var idc = IdCannale;            
+            Point pointDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == Id,
+                                                                    includeProperties: WC.CanalsName);
+            Canal canal = pointDb.Canals.FirstOrDefault(item => item.Id == IdCannale);
+            pointDb.Canals.Remove(canal);
+            _sukreUnitOfWork.Commit();
+            
+            return RedirectToAction(nameof(PointCannalesIndex), new { Id = Id });
+            //return Ok("ssss");
+            //return View(pointCannalesM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PointCannalesAdding(int Id, int Add, PointCannalesM pointCannalesM)
+        {
+            //var res = HttpContext;
+            //var id = Id;
+            //var idc = Add;
+            int AddIdCannale = pointCannalesM.AddCannale;
+
+            Point pointDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == Id,
+                                                                    includeProperties: WC.CanalsName);
+            Canal addCannaleDb = await _sukreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == AddIdCannale,
+                                                                    includeProperties: WC.ParameterTypeName);
+            pointDb.Canals.Add(addCannaleDb);
+            _sukreUnitOfWork.Commit();
+
+            return RedirectToAction(nameof(PointCannalesIndex), new { Id = Id });
+
+            //return Ok("ssss");
+            //return View(pointCannalesM);
         }
 
         /// <summary>

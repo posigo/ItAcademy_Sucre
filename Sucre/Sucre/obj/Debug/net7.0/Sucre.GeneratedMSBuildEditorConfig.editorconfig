@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Canal/CannalePointsIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcQ2FubmFsZVBvaW50c0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Canal/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -98,6 +102,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Point/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9pbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Point/PointCannalesIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9pbnRcUG9pbnRDYW5uYWxlc0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/ItAcademy/Sukre-v00/Sucre/Sucre/Views/Point/Upsert.cshtml]

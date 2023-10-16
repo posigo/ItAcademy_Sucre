@@ -10,12 +10,13 @@ namespace Sucre_Utility
     public static class WC
     {
         #region IncludeProperties-Conatants and Entities-Name 
-        public const string CexName = "Cex";
-        public const string EnergyName = "Energy";
-        public const string ParameterTypeName = "ParameterType";
         public const string AsPazName = "AsPaz";
         public const string CanalName = "Canal";
         public const string CanalsName = "Canals";
+        public const string CexName = "Cex";
+        public const string EnergyName = "Energy";
+        public const string ParameterTypeName = "ParameterType";
+        public const string PointsName = "Points";
         #endregion
 
     }

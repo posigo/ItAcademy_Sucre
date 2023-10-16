@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Primitives;
-using Sucre_DataAccess.Data;
+﻿using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Sucre_DataAccess.Repository.IRepository;
+using Microsoft.Extensions.Primitives;
 using Sucre_Utility;
 using System;
 using System.Collections.Generic;
@@ -61,21 +61,21 @@ namespace Sucre_DataAccess.Repository
             return null;
         }
 
-        public string GetStringCex(Cex cex)
-        {
-            List<string> listText = new List<string>();
-            if (cex.Management != null && cex.Management.Trim() != "")
-                listText.Add(cex.Management);
-            if (cex.CexName != null && cex.CexName.Trim() != "")
-                listText.Add(cex.CexName);
-            if (cex.Area != null && cex.Area.Trim() != "")
-                listText.Add(cex.Area);
-            if (cex.Device != null && cex.Device.Trim() != "")
-                listText.Add(cex.Device);
-            if (cex.Location != null && cex.Location.Trim() != "")
-                listText.Add(cex.Location);
-            return String.Join("->", listText.ToArray());
-        }
+        //public string GetStringCex(Cex cex)
+        //{
+        //    List<string> listText = new List<string>();
+        //    if (cex.Management != null && cex.Management.Trim() != "")
+        //        listText.Add(cex.Management);
+        //    if (cex.CexName != null && cex.CexName.Trim() != "")
+        //        listText.Add(cex.CexName);
+        //    if (cex.Area != null && cex.Area.Trim() != "")
+        //        listText.Add(cex.Area);
+        //    if (cex.Device != null && cex.Device.Trim() != "")
+        //        listText.Add(cex.Device);
+        //    if (cex.Location != null && cex.Location.Trim() != "")
+        //        listText.Add(cex.Location);
+        //    return String.Join("->", listText.ToArray());
+        //}
 
         public string GetStringName(object obj)
         {
@@ -92,7 +92,7 @@ namespace Sucre_DataAccess.Repository
             if (cex.Location != null && cex.Location.Trim() != "")
                 listText.Add(cex.Location);
             return String.Join("->", listText.ToArray());
-            throw new NotImplementedException();
+          
         }
 
         public void Update(Point point)

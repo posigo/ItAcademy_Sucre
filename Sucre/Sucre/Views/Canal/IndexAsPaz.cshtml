@@ -9,16 +9,16 @@
         <div class="col-6">
             <h2 class="text-primary">Channel AsPaz List</h2>
         </div>
-        @* <div class="col-6 text-end">           
-            <a asp-controller="Canal" asp-action="Upsert" class="btn btn-primary-custom">
-                Add channel
+        <div class="col-6 text-end">           
+            <a asp-controller="Canal" asp-action="Index" class="btn btn-primary-custom">
+                Go to the list of channels
             </a>
-        </div> *@
+        </div>
     </div>
 
     @if (Model.Count()>0)
     {
-        <table class="table table-bordered table-striped" style="width: 100%">
+        <table class="table table-sm table-bordered border-primary table-striped" style="width: 100%">
             <thead valign="middle">
                 <tr>
                     <th rowspan="2" valign="middle">IdCan (Id)</th>
@@ -145,7 +145,7 @@
                             <a asp-controller="Canal" asp-action="UpsertAsPaz" asp-route-Id="@obj.AsPazM.Id" asp-route-canalId="@obj.CanalId" asp-route-canalName="@obj.CanalName" class="btn btn-primary-custom m-auto">
                                 Edit
                             </a>
-                            <a asp-controller="Canal" asp-action="DeleteAsPaz" asp-route-Id="@obj.AsPazM.Id" class="btn btn-danger m-auto">
+                            <a asp-controller="Canal" asp-action="DeleteAsPaz" asp-route-Id="@obj.AsPazM.Id" class="btn btn-danger-custom m-auto">
                                 Del
                             </a>                            
                         </td>

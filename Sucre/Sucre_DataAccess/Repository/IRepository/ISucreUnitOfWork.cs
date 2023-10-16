@@ -16,7 +16,7 @@ namespace Sucre_DataAccess.Repository.IRepository
         IDbSucreCex repoSukreEnergyCex
         { get; }
         IDbSucreEnergy repoSukreEnergy
-        { get; }        
+        { get; }
         IDbSucreParameterType repoSukreParameterType
         { get; }
         IDbSucrePoint repoSukrePoint

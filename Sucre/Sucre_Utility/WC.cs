@@ -15,7 +15,9 @@ namespace Sucre_Utility
         public const string ParameterTypeName = "ParameterType";
         public const string AsPazName = "AsPaz";
         public const string CanalName = "Canal";
+        public const string CanalsName = "Canals";
         #endregion
+
     }
 }
 

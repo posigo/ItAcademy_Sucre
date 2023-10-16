@@ -32,8 +32,8 @@ namespace Sucre_DataAccess.Repository
             _repoSukreCanal = repoSukreCanal;
             _repoSukreCex = repoSukreCex;
             _repoSukreEnergy = repoSukreEnergy;
-            _repoSukreParameterType = repoSukreParameterType;
-            _repoSukrePoint = repoSukrePoint;
+            _repoSukreParameterType = repoSucreParameterType;
+            _repoSukrePoint = repoSucrePoint ;
         }
 
         public IDbSucreAsPaz repoSukreAsPaz => _repoSukreAsPaz;
@@ -45,10 +45,16 @@ namespace Sucre_DataAccess.Repository
         public IDbSucreEnergy repoSukreEnergy
         {
             get { return _repoSukreEnergy; }
-        }        
-        public IDbSucreParameterType repoSukreParameterType => _repoSukreParameterType;
+        }
+        public IDbSucreParameterType repoSukreParameterType
+        {
+            get { return _repoSukreParameterType; }
+        }
 
-        public IDbSucrePoint repoSukrePoint => _repoSukrePoint;
+        public IDbSucrePoint repoSukrePoint
+        {
+            get { return _repoSukrePoint;}
+        }
 
         public void Commit() => _dbSucre.SaveChanges();
         public async Task CommitAsync() => await _dbSucre.SaveChangesAsync();

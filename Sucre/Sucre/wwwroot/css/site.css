@@ -32,6 +32,12 @@ body {
     border-color: #1861ac;
 }
 
+.btn-danger-custom {
+    color: #fff;
+    background-color: #b5252f;
+    border-color: #b2121f;
+}
+
 .text-primary-custom {
     color: #1b6ec2;
 }

@@ -522,3 +522,5 @@ D:\Projects\Sukre-v00\Sucre\Sucre\obj\Debug\net7.0\Sucre.pdb
 D:\Projects\Sukre-v00\Sucre\Sucre\obj\Debug\net7.0\Sucre.genruntimeconfig.cache
 D:\Projects\Sukre-v00\Sucre\Sucre\obj\Debug\net7.0\ref\Sucre.dll
 D:\Projects\Sukre-v00\Sucre\Sucre\obj\Debug\net7.0\Sucre.MvcApplicationPartsAssemblyInfo.cs
+C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre\bin\Debug\net7.0\LinqKit.Core.dll
+C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre\bin\Debug\net7.0\LinqKit.Microsoft.EntityFrameworkCore.dll

@@ -54,6 +54,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "LinqKit.Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.1.4, )"
+            },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[7.0.11, )"

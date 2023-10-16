@@ -1,18 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LinqKit;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 using Sucre_Utility;
+using System.Linq.Expressions;
 
 namespace Sucre.Controllers
 {
     public class PointController : Controller
     {
         private readonly IDbSucrePoint _pointDb;
+        private readonly ISucreUnitOfWork _sukreUnitOfWork;
 
-        public PointController(IDbSucrePoint pointDb)
+        public PointController(IDbSucrePoint pointDb, ISucreUnitOfWork sucreUnitOfWork)
         {
             _pointDb = pointDb;        
+            _sukreUnitOfWork = sucreUnitOfWork;
         }
 
         [HttpGet]
@@ -124,6 +130,111 @@ namespace Sucre.Controllers
             _pointDb.Remove(point);
             _pointDb.Save();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> PointCannalesIndex(int? Id)
+        {
+            //var pointCanalesDb = _sukreUnitOfWork.repoSukrePoint.GetAll(filter: item => item.Id == Id.Value,
+            //                                                         includeProperties: WC.CanalsName);
+            Point pointCanalesDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == Id.Value,
+                                                                    includeProperties: WC.CanalsName);
+
+            //var predicates = new List<Expression<Func<Canal, bool>>>();
+            //predicates.Add(item => item.Id != 3);
+            //predicates.Add(item => item.Id != 4);
+                        
+            //Expression<Func<Canal, bool>> exprprd2 =  item => item.Id != 2;// && item.Id != 4;
+
+            //exprprd2 = exprprd2.And(item => item.Id != 3);
+            //exprprd2 = exprprd2.And(item => item.Id != 4);
+            //exprprd2 = exprprd2.And(item => item.Id != 5);
+
+            //prd3 = item => item.Id != 3;
+            //prd3 = item => prd3(item) && item.Id !=4;
+            //var parameter = Expression.Parameter(typeof(Func<Canal, bool>),"item");
+            
+            //Expression idProp = Expression.PropertyOrField(parameter, "Id");
+            //Expression filter = Expression.NotEqual(idProp, Expression.Constant(3));
+
+            //Expression idProp2 = Expression.PropertyOrField(parameter, "Id");
+            //Expression filter2 = Expression.NotEqual(idProp2, Expression.Constant(4));
+            //predicatre = Expression.AndAlso(predicatre, filter2);
+
+            //Expression lamda = Expression.Lambda(predicatre, par
+            //prd2 = Expression.Lambda<Func<Canal, bool>>(
+
+
+            List<int> listIdCannales = new List<int>();
+            ICollection<PointCannalesM> pointCannalessM = new HashSet<PointCannalesM>();
+            
+            PointCannalesM pointCannalesM = new PointCannalesM();
+            pointCannalesM.Id = pointCanalesDb.Id;
+            pointCannalesM.Name = pointCanalesDb.Name;
+            pointCannalesM.CannalesM = new HashSet<CanalM>();
+            foreach (var canal in pointCanalesDb.Canals)
+            {
+                CanalM canalM = new CanalM();
+                canalM.Id = canal.Id;
+                canalM.Name = canal.Name;
+                pointCannalesM.CannalesM.Add(canalM);
+                listIdCannales.Add(canalM.Id);
+            }
+            pointCannalessM.Add(pointCannalesM);
+            Expression<Func<Canal, bool>> epFilter = null;
+            IEnumerable<Canal> cannalesId;
+            if (listIdCannales.Count == 0)
+            {
+                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(isTracking: false);
+            }
+            else
+            {
+                bool begId = true;
+
+                foreach (var id in listIdCannales)
+                {
+                    if (begId)
+                    {
+                        epFilter = item => item.Id != id;
+                        begId = false;
+                    }
+                    else
+                    {
+                        epFilter = epFilter.And(item => item.Id != id);
+                    }
+                }
+
+                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(filter: epFilter, 
+                                                                includeProperties: WC.ParameterTypeName,
+                                                                isTracking: false);
+
+            }
+
+
+            List<SelectListItem> returnValues = new List<SelectListItem>();
+
+
+
+            foreach (var item in cannalesId)
+            {
+                SelectListItem value = new SelectListItem();
+                value.Text = $"{item.Id},{item.Name},{item.ParameterType.Mnemo},{item.ParameterType.UnitMeas}";
+                value.Value = item.Id.ToString();
+                
+                returnValues.Add(value);
+            };
+            
+            pointCannalesM.FreeCanalesSelectList = returnValues;
+            
+
+
+         
+         
+           
+            //var dddd = pointCannalessM.ToList();
+            //var ssss = $"{dddd[0].Id.ToString()}->{dddd[0].Name}->Count cannal: {dddd[0].CannalesM.Count().ToString()}"; 
+            return Ok("ssss");
+            //return View();
         }
 
         /// <summary>

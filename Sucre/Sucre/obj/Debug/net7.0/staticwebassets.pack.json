@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SucreIcoBg.png",
+      "PackagePath": "staticwebassets\\images\\SucreIcoBg.png"
+    },
+    {
+      "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\Sukred.png",
+      "PackagePath": "staticwebassets\\images\\Sukred.png"
+    },
+    {
       "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

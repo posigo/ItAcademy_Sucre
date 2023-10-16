@@ -2,7 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row bg-info">
+        <div class="col text-center">
+            <h1 class="display-4 fw-bold">С У К Р Э</h1>
+        </div>
+        
+    </div>
+    <div class="row text-center m-2">
+        <div class="col">
+            <img src="~/images/Sukred.png" class="w-50 img-fluid img-thumbnail" alt="Calculation of calibration graph" />
+        </div>
+    </div>
+    <a asp-controller="Point" asp-action="PointCannalesIndex" asp-route-Id="1">
+        <p class="h1 display-1">Point Id-1 Canals</p>
+    </a>
 </div>
+
+

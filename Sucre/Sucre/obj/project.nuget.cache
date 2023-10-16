@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n2acQENqSTfQLjfxynvtQiQ8b8VgE0VkmAJNTHrhsWgmr9Wnjyr1eRjAOHvOHLz4UZctrvZeKY/bEbTft96IPQ==",
+  "dgSpecHash": "ymkURX//w8nE+E0I76+JKA/RKaXsnmTgYLiNVvSayTPaRYcZj1NMNZCPc2bb1IySWoYS5r7zLcqZcmJwpSLmcg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\Sucre.csproj",
   "expectedPackageFiles": [
@@ -56,6 +56,8 @@
     "C:\\Users\\posig\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "C:\\Users\\posig\\.nuget\\packages\\linqkit.core\\1.2.4\\linqkit.core.1.2.4.nupkg.sha512",
+    "C:\\Users\\posig\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\7.1.4\\linqkit.microsoft.entityframeworkcore.7.1.4.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

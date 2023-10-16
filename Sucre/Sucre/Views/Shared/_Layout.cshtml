@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sucre</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/SucreIcoBg.png" width="40%" /> </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Content Admin
                             </a>
                             <ul class="dropdown-menu">
@@ -35,34 +35,13 @@
                                 <li><a class="dropdown-item" asp-controller="Energy" asp-action="Index">Energies List</a></li>
                                 <li><a class="dropdown-item" asp-controller="Cex" asp-action="Index">Locations of metering points</a></li>
                                 <li><a class="dropdown-item" asp-controller="Point" asp-action="Index">List of metering points</a></li>
-                                <li><a class="dropdown-item" asp-controller="Canal" asp-action="Index">List of canals</a></li>
-                                <li><a class="dropdown-item" asp-controller="Canal" asp-action="IndexAsPaz">List of AsPaz canals</a></li>
+                                <li><a class="dropdown-item" asp-controller="Canal" asp-action="Index">List of cannales</a></li>                                
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>                                             
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-item">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Dropdown
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
+                        
 
                     </ul>
                 </div>

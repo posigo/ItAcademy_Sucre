@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h90enwJpSNeO7aDHWjfPBz5EEv0S/heGNxO3vLrCFc4=",
+  "Hash": "z/GHdLY7BWCDRWAq2ZgeVlLk8LxMCK60cRng2faLMYE=",
   "Source": "Sucre",
   "BasePath": "_content/Sucre",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SucreIcoBg.png",
+      "SourceId": "Sucre",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\",
+      "BasePath": "_content/Sucre",
+      "RelativePath": "images/SucreIcoBg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\SucreIcoBg.png"
+    },
+    {
+      "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\Sukred.png",
+      "SourceId": "Sucre",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\",
+      "BasePath": "_content/Sucre",
+      "RelativePath": "images/Sukred.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Sukred.png"
     },
     {
       "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\js\\site.js",

@@ -86,6 +86,7 @@ namespace Sucre_DataAccess.Repository
                 query = query.AsNoTracking();
 
             return query.ToList();
+
         }
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null, bool isTracking = true)
         {

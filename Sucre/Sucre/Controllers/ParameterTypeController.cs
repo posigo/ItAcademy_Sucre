@@ -9,13 +9,13 @@ namespace Sucre.Controllers
 {
     public class ParameterTypeController : Controller
     {
-        private readonly IDbSucreParameterType _parameterTypeDb;
+        //private readonly IDbSucreParameterType _parameterTypeDb;
         private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
         public ParameterTypeController(IDbSucreParameterType parameterTypeDb,
                                     ISucreUnitOfWork sucreUnitOfWork)
         {
-            _parameterTypeDb = parameterTypeDb;
+            //_parameterTypeDb = parameterTypeDb;
             _sucreUnitOfWork = sucreUnitOfWork;     
 
         }
@@ -25,7 +25,7 @@ namespace Sucre.Controllers
         {
             //var ggg = _parameterTypeDb.GetAll();
             //var ggg = await _parameterTypeDb.GetAllAsync();
-            var ggg = await _sucreUnitOfWork.repoSukreParameterType.GetAllAsync();
+            var ggg = await _sucreUnitOfWork.repoSucreParameterType.GetAllAsync();
             IEnumerable<ParameterTypeM> fff = ggg.Select(u => new ParameterTypeM { 
                 Id = u.Id, Name = u.Name, Mnemo = u.Mnemo, UnitMeas = u.UnitMeas });
             return View(fff);
@@ -50,9 +50,9 @@ namespace Sucre.Controllers
                     Mnemo = parameterTypeM.Mnemo,
                     UnitMeas = parameterTypeM.UnitMeas
                 };
-                _sucreUnitOfWork.repoSukreParameterType.Add(parameterType);
+                await _sucreUnitOfWork.repoSucreParameterType.AddAsync(parameterType);
                 //_parameterTypeDb.Add(parameterType);
-                _sucreUnitOfWork.Commit();
+                await _sucreUnitOfWork.CommitAsync();
                 //_parameterTypeDb.Save();
                 return RedirectToAction(nameof(Index));
             }
@@ -95,7 +95,7 @@ namespace Sucre.Controllers
             else
             {
                 //ParameterType parameterType = await _parameterTypeDb.FindAsync(Id.GetValueOrDefault());
-                ParameterType parameterType = await _sucreUnitOfWork.repoSukreParameterType.FindAsync(Id.GetValueOrDefault());
+                ParameterType parameterType = await _sucreUnitOfWork.repoSucreParameterType.FindAsync(Id.GetValueOrDefault());
                 if (parameterType == null)
                 {
                     return NotFound();
@@ -165,12 +165,14 @@ namespace Sucre.Controllers
                     //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                     sp_ParameterType(ref parameterType, ref parameterTypeM, false);
                     //await _parameterTypeDb.AddAsync(parameterType);
-                    await _sucreUnitOfWork.repoSukreParameterType.AddAsync(parameterType);
+                    await _sucreUnitOfWork.repoSucreParameterType.AddAsync(parameterType);
                 }
                 else
                 {
                     //Update
-                    parameterType = await _parameterTypeDb.FirstOrDefaultAsync(filter: item => item.Id == parameterTypeM.Id, isTracking: false);
+                    parameterType = await _sucreUnitOfWork.repoSucreParameterType.FirstOrDefaultAsync(
+                                                                                filter: item => item.Id == parameterTypeM.Id, 
+                                                                                isTracking: false);
                     if (parameterType == null)
                     {
                         return NotFound(parameterType);
@@ -183,56 +185,57 @@ namespace Sucre.Controllers
                         //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                         sp_ParameterType(ref parameterType, ref parameterTypeM, false);
                         //await _parameterTypeDb.UpdateAsync(parameterType);
-                        await _sucreUnitOfWork.repoSukreParameterType.UpdateAsync(parameterType);
+                        await _sucreUnitOfWork.repoSucreParameterType.UpdateAsync(parameterType);
                     }
                 }
                 //await _parameterTypeDb.SaveAsync();
-                _sucreUnitOfWork.Commit();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(parameterTypeM);
         }
 
-        [HttpGet]
-        private IActionResult DeleteNoAsync(int? Id)
+        [HttpGet]        
+        public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
             //ParameterType parameterType = _parameterTypeDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
-            ParameterType parameterType = _sucreUnitOfWork.repoSukreParameterType.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
+            ParameterType parameterType = await _sucreUnitOfWork.repoSucreParameterType.FirstOrDefaultAsync(
+                                                                                filter: item => item.Id == Id.GetValueOrDefault());
             if (parameterType == null) return NotFound(parameterType);
             ParameterTypeM parameterTypeM = new ParameterTypeM();
             sp_ParameterType(ref parameterType, ref parameterTypeM, true);
             return View(parameterTypeM);
         }
-        [HttpGet]
-        public async Task<IActionResult> Delete(int? Id)
-        {
-            return await Task.Run(() => DeleteNoAsync(Id));
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Delete(int? Id)
+        //{
+        //    return await Task.Run(() => DeleteNoAsync(Id));
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        private IActionResult DeletePostNoAsync (int? Id)
+        public async Task<IActionResult> DeletePost (int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
             //var parameterType = _parameterTypeDb.Find(Id.GetValueOrDefault());
-            var parameterType = _sucreUnitOfWork.repoSukreParameterType.Find(Id.GetValueOrDefault());
+            var parameterType = await _sucreUnitOfWork.repoSucreParameterType.FindAsync(Id.GetValueOrDefault());
             if (parameterType == null) return NotFound(parameterType);
             //_parameterTypeDb.Remove(parameterType);
             //_parameterTypeDb.Save();
-            _sucreUnitOfWork.repoSukreParameterType.Remove(parameterType);
-            _sucreUnitOfWork.Commit();
+            _sucreUnitOfWork.repoSucreParameterType.Remove(parameterType);
+            await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));
             //return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ActionName("Delete")]
-        public async Task<IActionResult> DeletePost(int? Id)
-        {
-            return await Task.Run(() => DeletePostNoAsync(Id));
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("Delete")]
+        //public async Task<IActionResult> DeletePost(int? Id)
+        //{
+        //    return await Task.Run(() => DeletePostNoAsync(Id));
+        //}
 
         [NonAction]
         private void sp_ParameterType(ref ParameterType parameterType, ref ParameterTypeM parameterTypeM, bool md = false)

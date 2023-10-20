@@ -12,38 +12,39 @@ namespace Sucre.Controllers
 {
     public class PointController : Controller
     {
-        private readonly IDbSucrePoint _pointDb;
-        private readonly ISucreUnitOfWork _sukreUnitOfWork;
+        //private readonly IDbSucrePoint _pointDb;
+        private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
         public PointController(IDbSucrePoint pointDb, ISucreUnitOfWork sucreUnitOfWork)
         {
-            _pointDb = pointDb;        
-            _sukreUnitOfWork = sucreUnitOfWork;
+            //_pointDb = pointDb;        
+            _sucreUnitOfWork = sucreUnitOfWork;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var pointsDb = _sukreUnitOfWork.repoSukrePoint.GetAll(includeProperties:"Energy,Cex");
+            //var pointsDb = _sucreUnitOfWork.repoSucrePoint.GetAll(includeProperties: $"{WC.EnergyName},{WC.CexName}");
+            var pointsDb = await _sucreUnitOfWork.repoSucrePoint.GetAllAsync(includeProperties: $"{WC.EnergyName},{WC.CexName}");
             IEnumerable<PointTableM> pointTablesM = pointsDb.Select(u => new PointTableM
             {
                 Id = u.Id,
                 Name = u.Name,
                 ServiceStaff = u.ServiceStaff,
                 EnergyName = u.Energy.EnergyName,
-                CexName = _pointDb.GetStringName(u.Cex)
+                CexName = _sucreUnitOfWork.repoSucrePoint.GetStringName(u.Cex)
             });
             return View(pointTablesM);
         }
 
         [HttpGet]
-        public IActionResult Upsert(int? Id)
+        public async Task<IActionResult> Upsert(int? Id)
         {
             PointUpsertM pointUpsertM = new PointUpsertM()
             {
                 PointM = new PointM(),
-                EnergySelectList = _pointDb.GetAllDropdownList(WC.EnergyName),
-                CexSelectList = _pointDb.GetAllDropdownList(WC.CexName)
+                EnergySelectList = _sucreUnitOfWork.repoSucrePoint.GetAllDropdownList(WC.EnergyName),
+                CexSelectList = _sucreUnitOfWork.repoSucrePoint.GetAllDropdownList(WC.CexName)
             };
             if (Id == null)
             {
@@ -51,7 +52,8 @@ namespace Sucre.Controllers
             }
             else
             {
-                Point point = _pointDb.Find(Id.GetValueOrDefault());
+                //Point point = _sucreUnitOfWork.repoSucrePoint.Find(Id.GetValueOrDefault());
+                Point point = await _sucreUnitOfWork.repoSucrePoint.FindAsync(Id.GetValueOrDefault());
                 if (point == null)
                 {
                     return NotFound(point);
@@ -67,7 +69,7 @@ namespace Sucre.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(PointM pointM)
+        public async Task<IActionResult> Upsert(PointM pointM)
         {
             if (ModelState.IsValid)
             {
@@ -76,12 +78,18 @@ namespace Sucre.Controllers
                 {
                     //Creating                    
                     sp_Point(ref point, ref pointM, false);
-                    _pointDb.Add(point);
+                    //_sucreUnitOfWork.repoSucrePoint.Add(point);
+                    await _sucreUnitOfWork.repoSucrePoint.AddAsync(point);
                 }
                 else
                 {
                     //Update
-                    point = _pointDb.FirstOrDefault(filter: item => item.Id == pointM.Id, isTracking: false);
+                    //point = _sucreUnitOfWork.repoSucrePoint.FirstOrDefault(
+                    //                                                filter: item => item.Id == pointM.Id, 
+                    //                                                isTracking: false);
+                    point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
+                                                                        filter: item => item.Id == pointM.Id,
+                                                                        isTracking: false);
                     if (point == null)
                     {
                         return NotFound(point);
@@ -89,20 +97,26 @@ namespace Sucre.Controllers
                     else
                     {                        
                         sp_Point(ref point, ref pointM, false);
-                        _pointDb.Update(point);
+                        _sucreUnitOfWork.repoSucrePoint.Update(point);
                     }
                 }
-                _pointDb.Save();
+                //_sucreUnitOfWork.Commit();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(pointM);
         }
 
         [HttpGet]
-        public IActionResult Delete(int? Id)
+        public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Point point = _pointDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault(),includeProperties: "Energy,Cex");
+            //Point point = _sucreUnitOfWork.repoSucrePoint.FirstOrDefault(
+            //                                                    filter: item => item.Id == Id.GetValueOrDefault(),
+            //                                                    includeProperties: "Energy,Cex");
+            Point point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == Id.GetValueOrDefault(),
+                                                                    includeProperties: "Energy,Cex");
             if (point == null) return NotFound(point);
             PointM pointM = new PointM();
             PointTableM pointTableM = new PointTableM()
@@ -112,7 +126,7 @@ namespace Sucre.Controllers
                 Description = point.Description,
                 EnergyName = point.Energy.EnergyName,
                 //CexName = _pointDb.GetStringCex(point.Cex),
-                CexName = _pointDb.GetStringName(point.Cex),
+                CexName = _sucreUnitOfWork.repoSucrePoint.GetStringName(point.Cex),
                 ServiceStaff = point.ServiceStaff
             };
             //sp_Point(ref point, ref pointM, true);
@@ -122,16 +136,19 @@ namespace Sucre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public IActionResult DeletePost(int? Id)
+        public async Task<IActionResult> DeletePost(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Point point = _pointDb.Find(Id.GetValueOrDefault());
+            //Point point = _sucreUnitOfWork.repoSucrePoint.Find(Id.GetValueOrDefault());
+            Point point = await _sucreUnitOfWork.repoSucrePoint.FindAsync(Id.GetValueOrDefault());
             if (point == null) return NotFound(point);
-            _pointDb.Remove(point);
-            _pointDb.Save();
+            _sucreUnitOfWork.repoSucrePoint.Remove(point);
+            //_sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        #region Каналы
         [HttpGet]
         public async Task<IActionResult> PointCannalesIndex(int? Id)
         {
@@ -140,7 +157,7 @@ namespace Sucre.Controllers
             if (Id == null || Id.Value == 0)
                 return BadRequest("Id null or equal zero");
 
-            Point pointCanalesDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+            Point pointCanalesDb = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
                                                                     filter: item => item.Id == Id.Value,
                                                                     includeProperties: WC.CanalsName);
 
@@ -190,8 +207,11 @@ namespace Sucre.Controllers
             IEnumerable<Canal> cannalesId;
             if (listIdCannales.Count == 0)
             {
-                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(includeProperties: WC.ParameterTypeName,
-                                                                isTracking: false);
+                //cannalesId = _sucreUnitOfWork.repoSucreCanal.GetAll(includeProperties: WC.ParameterTypeName,
+                //                                                isTracking: false);
+                cannalesId = await _sucreUnitOfWork.repoSucreCanal.GetAllAsync(
+                                                                        includeProperties: WC.ParameterTypeName,
+                                                                        isTracking: false);
             }
             else
             {
@@ -210,9 +230,13 @@ namespace Sucre.Controllers
                     }
                 }
 
-                cannalesId = _sukreUnitOfWork.repoSukreCanal.GetAll(filter: epFilter, 
-                                                                includeProperties: WC.ParameterTypeName,
-                                                                isTracking: false);
+                //cannalesId = _sucreUnitOfWork.repoSucreCanal.GetAll(filter: epFilter, 
+                //                                                includeProperties: WC.ParameterTypeName,
+                //                                                isTracking: false);
+                cannalesId = await _sucreUnitOfWork.repoSucreCanal.GetAllAsync(
+                                                                        filter: epFilter,
+                                                                        includeProperties: WC.ParameterTypeName,
+                                                                        isTracking: false);
 
             }
 
@@ -231,12 +255,7 @@ namespace Sucre.Controllers
             };
             
             pointCannalesM.FreeCanalesSelectList = returnValues;
-            
 
-
-         
-         
-           
             //var dddd = pointCannalessM.ToList();
             //var ssss = $"{dddd[0].Id.ToString()}->{dddd[0].Name}->Count cannal: {dddd[0].CannalesM.Count().ToString()}"; 
             //return Ok("ssss");
@@ -250,13 +269,14 @@ namespace Sucre.Controllers
         {
             //var id = Id;
             //var idc = IdCannale;            
-            Point pointDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+            Point pointDb = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
                                                                     filter: item => item.Id == Id,
                                                                     includeProperties: WC.CanalsName);
             Canal canal = pointDb.Canals.FirstOrDefault(item => item.Id == IdCannale);
             pointDb.Canals.Remove(canal);
-            _sukreUnitOfWork.Commit();
-            
+            //_sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.CommitAsync();
+
             return RedirectToAction(nameof(PointCannalesIndex), new { Id = Id });
             //return Ok("ssss");
             //return View(pointCannalesM);
@@ -266,26 +286,31 @@ namespace Sucre.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PointCannalesAdding(int Id, int Add, PointCannalesM pointCannalesM)
         {
+
+            if (pointCannalesM.AddCannale == 0)
+                return RedirectToAction(nameof(PointCannalesIndex), new { Id = Id });
+            int AddIdCannale = pointCannalesM.AddCannale;            
+
             //var res = HttpContext;
             //var id = Id;
             //var idc = Add;
-            int AddIdCannale = pointCannalesM.AddCannale;
 
-            Point pointDb = await _sukreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+            Point pointDb = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
                                                                     filter: item => item.Id == Id,
                                                                     includeProperties: WC.CanalsName);
-            Canal addCannaleDb = await _sukreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+            Canal addCannaleDb = await _sucreUnitOfWork.repoSucreCanal.FirstOrDefaultAsync(
                                                                     filter: item => item.Id == AddIdCannale,
                                                                     includeProperties: WC.ParameterTypeName);
             pointDb.Canals.Add(addCannaleDb);
-            _sukreUnitOfWork.Commit();
+            //_sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.CommitAsync();
 
             return RedirectToAction(nameof(PointCannalesIndex), new { Id = Id });
 
             //return Ok("ssss");
             //return View(pointCannalesM);
         }
-
+        #endregion
         /// <summary>
         /// Синхронизация между моделью и сущностью
         /// </summary>

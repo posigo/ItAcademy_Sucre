@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2rtSMqnIDktsk9Zbtb7HBCs1gwkPL+WsFoqn4tF9iA5NLvvhFK4tPlLSx3HiBVRFG+KiA1movdncuj6WmjZjUQ==",
+  "dgSpecHash": "qBRM3J8zBYKI8eijcBM0faQaQriGeA+fJYqlPqgRc3EwY8EtCMH8MdFhiOkwWRGOGc1TjpxFpghuER0EVGHDxA==",
   "success": true,
   "projectFilePath": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre_DataAccess\\Sucre_DataAccess.csproj",
   "expectedPackageFiles": [
@@ -46,6 +46,7 @@
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.11\\microsoft.entityframeworkcore.tools.7.0.11.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\posig\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",

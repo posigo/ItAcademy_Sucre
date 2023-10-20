@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sucre_Console", "Sucre_Cons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sucre_DataAccess", "Sucre_DataAccess\Sucre_DataAccess.csproj", "{82D5048C-6D0E-491F-A637-A516919DCA78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucre_Utility", "Sucre_Utility\Sucre_Utility.csproj", "{3C6CDEEF-E85E-4DF1-8F0D-7CFAF76C41AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sucre_Utility", "Sucre_Utility\Sucre_Utility.csproj", "{3C6CDEEF-E85E-4DF1-8F0D-7CFAF76C41AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

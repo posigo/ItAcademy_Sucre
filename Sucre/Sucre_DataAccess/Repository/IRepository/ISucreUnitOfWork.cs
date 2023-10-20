@@ -9,17 +9,17 @@ namespace Sucre_DataAccess.Repository.IRepository
 {
     public interface ISucreUnitOfWork: IDisposable
     {
-        IDbSucreAsPaz repoSukreAsPaz
+        IDbSucreAsPaz repoSucreAsPaz
         { get; }
-        IDbSucreCanal repoSukreCanal
+        IDbSucreCanal repoSucreCanal
         { get; }
-        IDbSucreCex repoSukreEnergyCex
+        IDbSucreCex repoSucreCex
         { get; }
-        IDbSucreEnergy repoSukreEnergy
+        IDbSucreEnergy repoSucreEnergy
         { get; }
-        IDbSucreParameterType repoSukreParameterType
+        IDbSucreParameterType repoSucreParameterType
         { get; }
-        IDbSucrePoint repoSukrePoint
+        IDbSucrePoint repoSucrePoint
         { get; }
 
         void Commit();

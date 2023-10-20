@@ -41,7 +41,7 @@ namespace Sucre_DataAccess.Repository.IRepository
         void RemoveRange(IEnumerable<T> entities);
         Task RemoveRangeAsync(IEnumerable<T> entities);
 
-        void Save();
-        Task SaveAsync();
+        //void Save();
+        //Task SaveAsync();
     }
 }

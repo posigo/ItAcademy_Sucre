@@ -21,12 +21,24 @@
       "PackagePath": "staticwebassets\\images\\Sukred.png"
     },
     {
+      "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\Sukred1.png",
+      "PackagePath": "staticwebassets\\images\\Sukred1.png"
+    },
+    {
+      "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIciBg1.png",
+      "PackagePath": "staticwebassets\\images\\SukredIciBg1.png"
+    },
+    {
       "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIco.jpg",
       "PackagePath": "staticwebassets\\images\\SukredIco.jpg"
     },
     {
       "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIco.png",
       "PackagePath": "staticwebassets\\images\\SukredIco.png"
+    },
+    {
+      "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIco1.png",
+      "PackagePath": "staticwebassets\\images\\SukredIco1.png"
     },
     {
       "Id": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIcoY.png",

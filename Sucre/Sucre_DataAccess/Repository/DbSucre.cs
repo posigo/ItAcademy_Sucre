@@ -106,6 +106,7 @@ namespace Sucre_DataAccess.Repository
 
             return await query.ToListAsync();
         }
+        
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
@@ -124,14 +125,14 @@ namespace Sucre_DataAccess.Repository
             await Task.Run(() => RemoveRange(entities));
         }
 
-        public void Save()
-        {
-            _db.SaveChanges();
-        }
-        public async Task SaveAsync()
-        {
-            await _db.SaveChangesAsync();
-        }
+        //public void Save()
+        //{
+        //    _db.SaveChanges();
+        //}
+        //public async Task SaveAsync()
+        //{
+        //    await _db.SaveChangesAsync();
+        //}
 
     }
 }

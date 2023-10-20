@@ -7,12 +7,12 @@ namespace Sucre.Controllers
 {
     public class EnergyController : Controller
     {
-        private readonly IDbSucreEnergy _energyDb;
+        //private readonly IDbSucreEnergy _energyDb;
         private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
         public EnergyController(IDbSucreEnergy energyDb, ISucreUnitOfWork sucreUnitOfWork)
         {
-            _energyDb = energyDb;
+            //_energyDb = energyDb;
             _sucreUnitOfWork = sucreUnitOfWork;
 
         }
@@ -21,7 +21,7 @@ namespace Sucre.Controllers
         public async Task<IActionResult> Index()
         {
             //var energiesDb = await _energyDb.GetAllAsync();
-            var energiesDb = await _sucreUnitOfWork.repoSukreEnergy.GetAllAsync();
+            var energiesDb = await _sucreUnitOfWork.repoSucreEnergy.GetAllAsync();
             IEnumerable<EnergyM> energiesM = energiesDb.Select(u => new EnergyM
             {
                 Id = u.Id,
@@ -53,7 +53,7 @@ namespace Sucre.Controllers
             else
             {
                 //Energy energy = await _energyDb.FindAsync(Id.GetValueOrDefault());
-                Energy energy = _energyDb.Find(Id.GetValueOrDefault());
+                Energy energy = await _sucreUnitOfWork.repoSucreEnergy.FindAsync(Id.GetValueOrDefault());
                 if (energy == null)
                 {
                     return NotFound();
@@ -109,12 +109,12 @@ namespace Sucre.Controllers
                     //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                     sp_Energy(ref energy, ref energyM, false);
                     //await _energyDb.AddAsync(energy);                    
-                    _energyDb.Add(energy);
+                    await _sucreUnitOfWork.repoSucreEnergy.AddAsync(energy);
                 }
                 else
                 {
                     //Update
-                    energy = await _energyDb.FirstOrDefaultAsync(filter: item => item.Id == energyM.Id, isTracking: false);
+                    energy = await _sucreUnitOfWork.repoSucreEnergy.FirstOrDefaultAsync(filter: item => item.Id == energyM.Id, isTracking: false);
                     if (energy == null)
                     {
                         return NotFound(energy);
@@ -126,11 +126,11 @@ namespace Sucre.Controllers
                         //parameterType.Mnemo = parameterTypeM.Mnemo;
                         //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                         sp_Energy(ref energy, ref energyM, false);
-                        _energyDb.Update(energy);                        
+                        _sucreUnitOfWork.repoSucreEnergy.Update(energy);                        
                     }
                 }
                 //_energyDb.SaveAsync();
-                _energyDb.Save();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(energyM);
@@ -180,7 +180,7 @@ namespace Sucre.Controllers
         public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Energy energy = await _energyDb.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault());
+            Energy energy = await _sucreUnitOfWork.repoSucreEnergy.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault());
             if (energy == null) return NotFound(energy);
             EnergyM energyM = new EnergyM();
             sp_Energy(ref energy, ref energyM, true);
@@ -204,11 +204,11 @@ namespace Sucre.Controllers
         public async Task<IActionResult> DeletePost(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            var energy = await _energyDb.FindAsync(Id.GetValueOrDefault());
+            var energy = await _sucreUnitOfWork.repoSucreEnergy.FindAsync(Id.GetValueOrDefault());
             if (energy == null) return NotFound(energy);
-            _energyDb.Remove(energy);
+            _sucreUnitOfWork.repoSucreEnergy.Remove(energy);
             //_energyDb.SaveAsync();
-            _energyDb.Save();
+            await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));            
         }
 

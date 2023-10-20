@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualBasic;
 using Sucre_DataAccess.Entities;
-using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
@@ -15,14 +14,14 @@ namespace Sucre.Controllers
 {
     public class CanalController : Controller
     {
-        private readonly IDbSucreCanal _canalDb;
-        private readonly IDbSucreAsPaz _asPazDb;
+        //private readonly IDbSucreCanal _canalDb;
+        //private readonly IDbSucreAsPaz _asPazDb;
         private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
         public CanalController(IDbSucreCanal canalDb, IDbSucreAsPaz asPazDb, ISucreUnitOfWork sucreUnitOfWork)
         {
-            _canalDb = canalDb;        
-            _asPazDb = asPazDb;
+            //_canalDb = canalDb;        
+            //_asPazDb = asPazDb;
             _sucreUnitOfWork = sucreUnitOfWork;
         }
 
@@ -31,7 +30,8 @@ namespace Sucre.Controllers
         {
 
             //var canalsDb = _canalDb.GetAll(includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
-            var canalsDb = _sucreUnitOfWork.repoSukreCanal.GetAll(includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
+            //var canalsDb = _sucreUnitOfWork.repoSucreCanal.GetAll(includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
+            var canalsDb = await _sucreUnitOfWork.repoSucreCanal.GetAllAsync(includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
             ICollection<CanalTableM> canalTableMs = new HashSet<CanalTableM>();
             
             foreach (var canal in canalsDb) 
@@ -82,7 +82,7 @@ namespace Sucre.Controllers
                     canalM.PointMs =(ICollection<PointM>)canal.Points;                    
                 }
                 canalTableM.canalM = canalM;
-                canalTableM.ParameterTypeName = _canalDb.GetStringName(canal.ParameterType);
+                canalTableM.ParameterTypeName = _sucreUnitOfWork.repoSucreCanal.GetStringName(canal.ParameterType);
 
                 canalTableMs.Add(canalTableM);
             }            
@@ -96,7 +96,7 @@ namespace Sucre.Controllers
             {
                 CanalM = new CanalM(),
                 //ParametryTyoeSelectList = _canalDb.GetAllDropdownList(WC.ParameterTypeName)
-                ParametryTyoeSelectList = _sucreUnitOfWork.repoSukreCanal.GetAllDropdownList(WC.ParameterTypeName)
+                ParametryTyoeSelectList = _sucreUnitOfWork.repoSucreCanal.GetAllDropdownList(WC.ParameterTypeName)
             };
             if (Id == null || Id.Value == 0)
             {
@@ -105,7 +105,7 @@ namespace Sucre.Controllers
             else
             {
                 //Canal canal = _canalDb.Find(Id.GetValueOrDefault());
-                Canal canal = await _sucreUnitOfWork.repoSukreCanal.FindAsync(Id.GetValueOrDefault());
+                Canal canal = await _sucreUnitOfWork.repoSucreCanal.FindAsync(Id.GetValueOrDefault());
                 if (canal == null)
                 {
                     return NotFound($"Channel with Id equal to {Id.GetValueOrDefault()} not found");
@@ -131,14 +131,18 @@ namespace Sucre.Controllers
                 {
                     //Creating                    
                     sp_Canal(ref canal, ref canalM, false);
-                    _sucreUnitOfWork.repoSukreCanal.Add(canal);
+                    //_sucreUnitOfWork.repoSucreCanal.Add(canal);
+                    await _sucreUnitOfWork.repoSucreCanal.AddAsync(canal);
                 }
                 else
                 {
                     //Update
                     //canal = _canalDb.FirstOrDefault(filter: item => item.Id == canalM.Id, isTracking: false);
-                    canal = _sucreUnitOfWork.repoSukreCanal.FirstOrDefault(filter: item => item.Id == canalM.Id, 
-                                                                        isTracking: false);
+                    //canal = _sucreUnitOfWork.repoSucreCanal.FirstOrDefault(filter: item => item.Id == canalM.Id, 
+                    //                                                    isTracking: false);
+                    canal = await _sucreUnitOfWork.repoSucreCanal.FirstOrDefaultAsync(
+                                                                            filter: item => item.Id == canalM.Id,
+                                                                            isTracking: false);
                     if (canal == null)
                     {
                         return NotFound($"Channel with Id equal to {canalM.Id} not found");
@@ -146,19 +150,22 @@ namespace Sucre.Controllers
                     else
                     {
                         sp_Canal(ref canal, ref canalM, false);
-                        _sucreUnitOfWork.repoSukreCanal.Update(canal);
+                        _sucreUnitOfWork.repoSucreCanal.Update(canal);
                     }
                 }
                 if (!canal.AsPazEin)
                 {
-                    AsPaz asPaz = _sucreUnitOfWork.repoSukreAsPaz.FirstOrDefault(filter: item => item.CanalId == canal.Id);
+                    //AsPaz asPaz = _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefault(filter: item => item.CanalId == canal.Id);
+                    AsPaz asPaz = await _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefaultAsync(
+                                                                                filter: item => item.CanalId == canal.Id);
                     if (asPaz != null)
                     {
-                        _sucreUnitOfWork.repoSukreAsPaz.Remove(asPaz);
+                        _sucreUnitOfWork.repoSucreAsPaz.Remove(asPaz);
                         //_asPazDb.Save();
                     }
                 }
-                _sucreUnitOfWork.Commit();
+                //_sucreUnitOfWork.Commit();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(canalM);
@@ -168,9 +175,12 @@ namespace Sucre.Controllers
         public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound("The passed ID is empty or equal to zero");
-            Canal canal = _sucreUnitOfWork.repoSukreCanal.FirstOrDefault(
-                                            filter: item => item.Id == Id.GetValueOrDefault(), 
-                                            includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
+            //Canal canal = _sucreUnitOfWork.repoSucreCanal.FirstOrDefault(
+            //                                filter: item => item.Id == Id.GetValueOrDefault(), 
+            //                                includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
+            Canal canal = await _sucreUnitOfWork.repoSucreCanal.FirstOrDefaultAsync(
+                                                                    filter: item => item.Id == Id.GetValueOrDefault(),
+                                                                    includeProperties: $"{WC.ParameterTypeName},{WC.AsPazName}");
             if (canal == null) 
                 return NotFound($"Searching for an entry in the Channel entity with ID = {Id.GetValueOrDefault()} did not produce results");
             CanalM canalM = new CanalM();
@@ -208,7 +218,7 @@ namespace Sucre.Controllers
             CanalTableM canalTableM = new CanalTableM()
             {
                 canalM = canalM,
-                ParameterTypeName = _canalDb.GetStringName(canal.ParameterType)
+                ParameterTypeName = _sucreUnitOfWork.repoSucreCanal.GetStringName(canal.ParameterType)
             };
             
             return View(canalTableM);
@@ -222,11 +232,17 @@ namespace Sucre.Controllers
         {
             if (Id == null || Id == 0) 
                 return NotFound("The passed ID is empty or equal to zero");
-            Canal canal = _sucreUnitOfWork.repoSukreCanal.Find(Id.GetValueOrDefault());
-            if (canal == null) 
+            //Canal canal = _sucreUnitOfWork.repoSucreCanal.Find(Id.GetValueOrDefault());
+            Canal cannale = await _sucreUnitOfWork.repoSucreCanal.FindAsync(Id.GetValueOrDefault());
+            if (cannale == null)
                 return NotFound($"Searching for an entry in the Channel entity with ID = {Id.GetValueOrDefault()} did not produce results");
-            _sucreUnitOfWork.repoSukreCanal.Remove(canal);
-            _sucreUnitOfWork.Commit();
+            if (cannale.AsPazEin != null)
+            {
+                cannale.AsPaz = await _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefaultAsync(item => item.CanalId == Id.GetValueOrDefault());
+            }            
+            _sucreUnitOfWork.repoSucreCanal.Remove(cannale);
+            //_sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -262,6 +278,7 @@ namespace Sucre.Controllers
             }
         }
 
+        #region АСиПаз
         //public IActionResult IndexAsPaz()
         //{
         //    var AsPazsDb = _asPazDb.GetAll(includeProperties: $"{WC.CanalName}");
@@ -294,12 +311,12 @@ namespace Sucre.Controllers
             ICollection<AsPaz> AsPazsDb = new HashSet<AsPaz>();
             if (CanalId == null || CanalId == 0)
             {
-                AsPazsDb = (ICollection<AsPaz>)(await _sucreUnitOfWork.repoSukreAsPaz.GetAllAsync(includeProperties: $"{WC.CanalName}"));
+                AsPazsDb = (ICollection<AsPaz>)(await _sucreUnitOfWork.repoSucreAsPaz.GetAllAsync(includeProperties: $"{WC.CanalName}"));
                 
             }            
             else
             {
-                AsPazsDb = (ICollection<AsPaz>)(await _sucreUnitOfWork.repoSukreAsPaz.GetAllAsync(filter: item => item.CanalId == CanalId.GetValueOrDefault(),
+                AsPazsDb = (ICollection<AsPaz>)(await _sucreUnitOfWork.repoSucreAsPaz.GetAllAsync(filter: item => item.CanalId == CanalId.GetValueOrDefault(),
                                                                                                 includeProperties: $"{WC.CanalName}"));
             }
 
@@ -342,7 +359,7 @@ namespace Sucre.Controllers
             }
             else
             {
-                AsPaz asPaz = await _sucreUnitOfWork.repoSukreAsPaz.FirstOrDefaultAsync(filter: item => item.Id == Id.Value && 
+                AsPaz asPaz = await _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefaultAsync(filter: item => item.Id == Id.Value && 
                                                                                     item.CanalId == canalId.Value);
                 if (asPaz == null)
                 {
@@ -362,7 +379,7 @@ namespace Sucre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpsertAsPaz(AsPazCanalM asPazCanalM)
+        public async Task<IActionResult> UpsertAsPaz(AsPazCanalM asPazCanalM)
         {
             if (asPazCanalM.CanalId == null && asPazCanalM.CanalId == 0 &&
                 asPazCanalM.AsPazM.CanalId == null && asPazCanalM.AsPazM.CanalId == 0)
@@ -378,13 +395,16 @@ namespace Sucre.Controllers
                     //asPazM = asPazCanalM.AsPazM;
                     sp_AsPaz(ref asPaz, ref asPazM, false);
 
-                    _sucreUnitOfWork.repoSukreAsPaz.Add(asPaz);
+                    await _sucreUnitOfWork.repoSucreAsPaz.AddAsync(asPaz);
                 }
                 else
                 {
                     //Update
-                    asPaz = _sucreUnitOfWork.repoSukreAsPaz.FirstOrDefault(filter: item => item.Id == asPazCanalM.AsPazM.Id && 
-                                                                            item.CanalId == asPazCanalM.CanalId, isTracking: false);
+                    //asPaz = _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefault(filter: item => item.Id == asPazCanalM.AsPazM.Id && 
+                    //                                                        item.CanalId == asPazCanalM.CanalId, isTracking: false);
+                    asPaz = await _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefaultAsync(
+                                                                filter: item => item.Id == asPazCanalM.AsPazM.Id &&
+                                                                item.CanalId == asPazCanalM.CanalId, isTracking: false);
                     if (asPaz == null)
                     {
                         return NotFound($"The AsPaz of a channel with Id equal to {asPazCanalM.CanalId} was not found");
@@ -394,11 +414,11 @@ namespace Sucre.Controllers
                         AsPazM asPazM = asPazCanalM.AsPazM;
                         asPazM.CanalId = asPazCanalM.CanalId;
                         sp_AsPaz(ref asPaz, ref asPazM, false);
-                        _sucreUnitOfWork.repoSukreAsPaz.Update(asPaz);
+                        _sucreUnitOfWork.repoSucreAsPaz.Update(asPaz);                        
                     }
                 }
                 //_sucreUnitOfWork.Commit();
-                _sucreUnitOfWork.repoSukreAsPaz.Save();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -410,7 +430,7 @@ namespace Sucre.Controllers
         public async Task<IActionResult> DeleteAsPaz(int? Id)
         {
             if (Id == null || Id == 0) return BadRequest("Id AsPaz is empty or equal to zero");
-            AsPaz asPaz = await _sucreUnitOfWork.repoSukreAsPaz.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault(),
+            AsPaz asPaz = await _sucreUnitOfWork.repoSucreAsPaz.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault(),
                                                                             includeProperties: $"{WC.CanalName}");            
             if (asPaz == null) return NotFound(new String($"The AcPaz of a channel with ID equal to {Id.GetValueOrDefault()} was not found"));
             AsPazCanalM asPazCanalM = new AsPazCanalM();
@@ -423,14 +443,14 @@ namespace Sucre.Controllers
             return View(asPazCanalM);
 
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("DeleteAsPaz")]
-        public IActionResult DeleteAsPazPost(int? Id)
+        public async Task<IActionResult> DeleteAsPazPost(int? Id)
         {
             if (Id == null || Id == 0) return NotFound("Id AsPaz is empty or equal to zero");
-            AsPaz asPaz = _sucreUnitOfWork.repoSukreAsPaz.Find(Id.GetValueOrDefault());            
+            AsPaz asPaz = await _sucreUnitOfWork.repoSucreAsPaz.FindAsync(Id.GetValueOrDefault());            
             if (asPaz == null) 
                 return NotFound($"The AcPaz of a channel with ID equal to {Id.GetValueOrDefault()} was not found");
 
@@ -438,14 +458,14 @@ namespace Sucre.Controllers
             if (asPaz.CanalId != null && asPaz.CanalId != 0)            
                 canalId = asPaz.CanalId.GetValueOrDefault();            
 
-            _sucreUnitOfWork.repoSukreAsPaz.Remove(asPaz);
+            _sucreUnitOfWork.repoSucreAsPaz.Remove(asPaz);
 
-            Canal canal = _sucreUnitOfWork.repoSukreCanal.Find(canalId);
+            Canal canal = await _sucreUnitOfWork.repoSucreCanal.FindAsync(canalId);
             if (canal != null)
                 canal.AsPazEin = false;
 
-            _sucreUnitOfWork.repoSukreCanal.Update(canal);
-            _sucreUnitOfWork.Commit();
+            _sucreUnitOfWork.repoSucreCanal.Update(canal);
+            await _sucreUnitOfWork.CommitAsync();
                         
             return RedirectToAction(nameof(IndexAsPaz));
         }
@@ -499,8 +519,9 @@ namespace Sucre.Controllers
                 asPazM.CanalId = asPaz.CanalId.Value;
             }
         }
+        #endregion
 
-
+        #region Точки учёта
         [HttpGet]
         public async Task<IActionResult> CannalePointsIndex(int? Id)
         {
@@ -509,7 +530,7 @@ namespace Sucre.Controllers
             if (Id == null || Id.Value == 0)
                 return BadRequest("Channel Id is null or equal to zero");
 
-            Canal canalDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+            Canal canalDb = await _sucreUnitOfWork.repoSucreCanal.FirstOrDefaultAsync(
                                             filter: item => item.Id == Id.Value,
                                             includeProperties: $"{WC.ParameterTypeName},{WC.PointsName}");
             #region dynamic predicate
@@ -561,9 +582,12 @@ namespace Sucre.Controllers
             IEnumerable<Point> PointsId;
             if (listIdPoints.Count == 0)
             {
-                PointsId = _sucreUnitOfWork.repoSukrePoint.GetAll(
-                                                includeProperties: $"{WC.EnergyName},{WC.CexName}",
-                                                isTracking: false);
+                //PointsId = _sucreUnitOfWork.repoSucrePoint.GetAll(
+                //                                includeProperties: $"{WC.EnergyName},{WC.CexName}",
+                //                                isTracking: false);
+                PointsId = await _sucreUnitOfWork.repoSucrePoint.GetAllAsync(
+                                                                   includeProperties: $"{WC.EnergyName},{WC.CexName}",
+                                                                   isTracking: false);
             }
             else
             {
@@ -582,7 +606,10 @@ namespace Sucre.Controllers
                     }
                 }
 
-                PointsId = _sucreUnitOfWork.repoSukrePoint.GetAll(filter: epFilter,
+                //PointsId = _sucreUnitOfWork.repoSucrePoint.GetAll(filter: epFilter,
+                //                                                includeProperties: $"{WC.EnergyName},{WC.CexName}",
+                //                                                isTracking: false);
+                PointsId = await _sucreUnitOfWork.repoSucrePoint.GetAllAsync(filter: epFilter,
                                                                 includeProperties: $"{WC.EnergyName},{WC.CexName}",
                                                                 isTracking: false);
             }
@@ -595,7 +622,7 @@ namespace Sucre.Controllers
             foreach (var item in PointsId)
             {
                 SelectListItem value = new SelectListItem();
-                string cexName=_sucreUnitOfWork.repoSukrePoint.GetStringName(item.Cex);
+                string cexName=_sucreUnitOfWork.repoSucrePoint.GetStringName(item.Cex);
                 value.Text = $"{item.Id},{item.Name},{item.Energy.EnergyName},{cexName}";
                 value.Value = item.Id.ToString();
 
@@ -614,12 +641,12 @@ namespace Sucre.Controllers
         {
             //var id = Id;
             //var idc = IdCannale;            
-            Canal cannaleDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+            Canal cannaleDb = await _sucreUnitOfWork.repoSucreCanal.FirstOrDefaultAsync(
                                                     filter: item => item.Id == Id,
                                                     includeProperties: $"{WC.PointsName},{WC.ParameterTypeName}");
             Point point = cannaleDb.Points.FirstOrDefault(item => item.Id == IdPoint);
             cannaleDb.Points.Remove(point);
-            _sucreUnitOfWork.Commit();
+            _sucreUnitOfWork.CommitAsync();
 
             return RedirectToAction(nameof(CannalePointsIndex), new { Id = Id });
             //return Ok("ssss");
@@ -630,23 +657,25 @@ namespace Sucre.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CannalePointsAdding(int Id, int Add, CannalePointsM cannalePointsM)
         {
+            if (cannalePointsM.AddPoint == 0) 
+                return RedirectToAction(nameof(CannalePointsIndex), new { Id = Id });
             int AddIdPoint = cannalePointsM.AddPoint;
-
-            Canal cannaleDb = await _sucreUnitOfWork.repoSukreCanal.FirstOrDefaultAsync(
+            
+            Canal cannaleDb = _sucreUnitOfWork.repoSucreCanal.FirstOrDefault(
                                                         filter: item => item.Id == Id,
                                                         includeProperties: $"{WC.PointsName},{WC.ParameterTypeName}");
-            Point addPointDb = await _sucreUnitOfWork.repoSukrePoint.FirstOrDefaultAsync(
+            Point addPointDb = _sucreUnitOfWork.repoSucrePoint.FirstOrDefault(
                                                 filter: item => item.Id == AddIdPoint,
                                                 includeProperties: $"{WC.EnergyName},{WC.CexName}");
             cannaleDb.Points.Add(addPointDb);
-            _sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.CommitAsync();
 
             return RedirectToAction(nameof(CannalePointsIndex), new { Id = Id });
 
             //return Ok("ssss");
             //return View(pointCannalesM);
         }
-
+        #endregion
 
     }
 }

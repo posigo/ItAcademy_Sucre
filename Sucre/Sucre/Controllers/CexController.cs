@@ -7,17 +7,19 @@ namespace Sucre.Controllers
 {
     public class CexController : Controller
     {
-        private readonly IDbSucreCex _cexDb;
+        //private readonly IDbSucreCex _cexDb;
+        private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
-        public CexController(IDbSucreCex cexDb)
+        public CexController(IDbSucreCex cexDb, ISucreUnitOfWork sucreUnitOfWork)
         {
-            _cexDb = cexDb;            
+            //_cexDb = cexDb;            
+            _sucreUnitOfWork = sucreUnitOfWork;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var cexsDb = _cexDb.GetAll();
+            var cexsDb =await _sucreUnitOfWork.repoSucreCex.GetAllAsync();
             IEnumerable<CexM> cexsM = cexsDb.Select(u => new CexM
             {
                 Id = u.Id,
@@ -31,7 +33,7 @@ namespace Sucre.Controllers
         }
 
         [HttpGet]
-        public IActionResult Upsert(int? Id)
+        public async Task<IActionResult> Upsert(int? Id)
         {
             CexM cexM = new CexM();
             if (Id == null)
@@ -40,7 +42,7 @@ namespace Sucre.Controllers
             }
             else
             {
-                Cex cex = _cexDb.Find(Id.GetValueOrDefault());
+                Cex cex = await _sucreUnitOfWork.repoSucreCex.FindAsync(Id.GetValueOrDefault());
                 if (cex == null)
                 {
                     return NotFound();
@@ -56,7 +58,7 @@ namespace Sucre.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(CexM cexM)
+        public async Task<IActionResult> Upsert(CexM cexM)
         {
             if (ModelState.IsValid)
             {
@@ -69,12 +71,14 @@ namespace Sucre.Controllers
                     //parameterType.Mnemo = parameterTypeM.Mnemo;
                     //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                     sp_Cex(ref cex, ref cexM, false);
-                    _cexDb.Add(cex);
+                    await _sucreUnitOfWork.repoSucreCex.AddAsync(cex);
                 }
                 else
                 {
                     //Update
-                    cex = _cexDb.FirstOrDefault(filter: item => item.Id == cexM.Id, isTracking: false);
+                    cex = await _sucreUnitOfWork.repoSucreCex.FirstOrDefaultAsync(
+                                                                filter: item => item.Id == cexM.Id, 
+                                                                isTracking: false);
                     if (cex == null)
                     {
                         return NotFound(cex);
@@ -86,20 +90,20 @@ namespace Sucre.Controllers
                         //parameterType.Mnemo = parameterTypeM.Mnemo;
                         //parameterType.UnitMeas = parameterTypeM.UnitMeas;
                         sp_Cex(ref cex, ref cexM, false);
-                        _cexDb.Update(cex);
+                        _sucreUnitOfWork.repoSucreCex.Update(cex);
                     }
                 }
-                _cexDb.Save();
+                await _sucreUnitOfWork.CommitAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(cexM);
         }
 
         [HttpGet]
-        public IActionResult Delete(int? Id)
+        public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Cex cex = _cexDb.FirstOrDefault(filter: item => item.Id == Id.GetValueOrDefault());
+            Cex cex = await _sucreUnitOfWork.repoSucreCex.FirstOrDefaultAsync(filter: item => item.Id == Id.GetValueOrDefault());
             if (cex == null) return NotFound(cex);
             CexM cexM = new CexM();
             sp_Cex(ref cex, ref cexM, true);
@@ -109,13 +113,13 @@ namespace Sucre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public IActionResult DeletePost(int? Id)
+        public async Task<IActionResult> DeletePost(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            Cex cex = _cexDb.Find(Id.GetValueOrDefault());
+            Cex cex = await _sucreUnitOfWork.repoSucreCex.FindAsync(Id.GetValueOrDefault());
             if (cex == null) return NotFound(cex);
-            _cexDb.Remove(cex);
-            _cexDb.Save();
+            _sucreUnitOfWork.repoSucreCex.Remove(cex);
+            await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
 

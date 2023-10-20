@@ -12,48 +12,48 @@ namespace Sucre_DataAccess.Repository
     public class SucreUnitOfWork : ISucreUnitOfWork
     {
         private ApplicationDbContext _dbSucre;
-        private IDbSucreAsPaz _repoSukreAsPaz;
-        private IDbSucreCanal _repoSukreCanal;
-        private IDbSucreCex _repoSukreCex;
-        private IDbSucreEnergy _repoSukreEnergy;
-        private IDbSucreParameterType _repoSukreParameterType;
-        private IDbSucrePoint _repoSukrePoint;
+        private IDbSucreAsPaz _repoSucreAsPaz;
+        private IDbSucreCanal _repoSucreCanal;
+        private IDbSucreCex _repoSucreCex;
+        private IDbSucreEnergy _repoSucreEnergy;
+        private IDbSucreParameterType _repoSucreParameterType;
+        private IDbSucrePoint _repoSucrePoint;
 
         public SucreUnitOfWork(ApplicationDbContext dbSucre,
-                            IDbSucreAsPaz repoSukreAsPaz,
-                            IDbSucreCanal repoSukreCanal,
-                            IDbSucreCex repoSukreCex,
-                            IDbSucreEnergy repoSukreEnergy,
+                            IDbSucreAsPaz repoSucreAsPaz,
+                            IDbSucreCanal repoSucreCanal,
+                            IDbSucreCex repoSucreCex,
+                            IDbSucreEnergy repoSucreEnergy,
                             IDbSucreParameterType repoSucreParameterType,
                             IDbSucrePoint repoSucrePoint)
         {
             _dbSucre = dbSucre;
-            _repoSukreAsPaz = repoSukreAsPaz;
-            _repoSukreCanal = repoSukreCanal;
-            _repoSukreCex = repoSukreCex;
-            _repoSukreEnergy = repoSukreEnergy;
-            _repoSukreParameterType = repoSucreParameterType;
-            _repoSukrePoint = repoSucrePoint ;
+            _repoSucreAsPaz = repoSucreAsPaz;
+            _repoSucreCanal = repoSucreCanal;
+            _repoSucreCex = repoSucreCex;
+            _repoSucreEnergy = repoSucreEnergy;
+            _repoSucreParameterType = repoSucreParameterType;
+            _repoSucrePoint = repoSucrePoint ;
         }
 
-        public IDbSucreAsPaz repoSukreAsPaz => _repoSukreAsPaz;
+        public IDbSucreAsPaz repoSucreAsPaz => _repoSucreAsPaz;
 
-        public IDbSucreCanal repoSukreCanal => _repoSukreCanal;
+        public IDbSucreCanal repoSucreCanal => _repoSucreCanal;
 
-        public IDbSucreCex repoSukreEnergyCex => _repoSukreCex;
+        public IDbSucreCex repoSucreCex => _repoSucreCex;
 
-        public IDbSucreEnergy repoSukreEnergy
+        public IDbSucreEnergy repoSucreEnergy
         {
-            get { return _repoSukreEnergy; }
+            get { return _repoSucreEnergy; }
         }
-        public IDbSucreParameterType repoSukreParameterType
+        public IDbSucreParameterType repoSucreParameterType
         {
-            get { return _repoSukreParameterType; }
+            get { return _repoSucreParameterType; }
         }
 
-        public IDbSucrePoint repoSukrePoint
+        public IDbSucrePoint repoSucrePoint
         {
-            get { return _repoSukrePoint;}
+            get { return _repoSucrePoint;}
         }
 
         public void Commit() => _dbSucre.SaveChanges();

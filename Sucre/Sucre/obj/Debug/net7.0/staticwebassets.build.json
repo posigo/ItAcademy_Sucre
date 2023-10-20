@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2KN6YoFCxwOAoXed1W/H8f6EIWhnPCP1xc4aOReXfcU=",
+  "Hash": "NB/slne6VzSRH/ztMOFM2hPc4k1+PQhoXzvNCWB5v/4=",
   "Source": "Sucre",
   "BasePath": "_content/Sucre",
   "Mode": "Default",
@@ -119,6 +119,40 @@
       "OriginalItemSpec": "wwwroot\\images\\Sukred.png"
     },
     {
+      "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\Sukred1.png",
+      "SourceId": "Sucre",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\",
+      "BasePath": "_content/Sucre",
+      "RelativePath": "images/Sukred1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Sukred1.png"
+    },
+    {
+      "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIciBg1.png",
+      "SourceId": "Sucre",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\",
+      "BasePath": "_content/Sucre",
+      "RelativePath": "images/SukredIciBg1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\SukredIciBg1.png"
+    },
+    {
       "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIco.jpg",
       "SourceId": "Sucre",
       "SourceType": "Discovered",
@@ -151,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\SukredIco.png"
+    },
+    {
+      "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIco1.png",
+      "SourceId": "Sucre",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\",
+      "BasePath": "_content/Sucre",
+      "RelativePath": "images/SukredIco1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\SukredIco1.png"
     },
     {
       "Identity": "C:\\Projects\\ItAcademy\\Sukre-v00\\Sucre\\Sucre\\wwwroot\\images\\SukredIcoY.png",

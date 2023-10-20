@@ -12,7 +12,7 @@ namespace Sucre_DataAccess.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
-            
+               
         }
 
         public DbSet<AsPaz> AsPazs { get; set; }
@@ -38,6 +38,10 @@ namespace Sucre_DataAccess.Data
             modelBuilder.Entity<Canal>().Ignore(field => field.ReportDetails);
             modelBuilder.Entity<Point>().Ignore(field => field.ReportDetails);
             modelBuilder.Entity<Report>().Ignore(field => field.ReportDetails);
+
+            //modelBuilder.Entity<ParameterType>().HasKey(x => x.Id);
+            //modelBuilder.Entity<ParameterType>().Property(x => x.Id).ValueGeneratedOnAdd();
+
         }
 
     }

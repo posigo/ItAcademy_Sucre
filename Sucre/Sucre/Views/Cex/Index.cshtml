@@ -62,7 +62,7 @@
         @* <div class="row row-cols-auto alert alert-danger" role="alert">
             <p class="text-danger h4">The list of metering point locations is empty!</p>
         </div> *@
-        <partial name="_DisplayOfEmptyList" view-data="ViewData" />
-        
+        @*<partial name="_DisplayOfEmptyList" view-data="ViewData" />*@
+        await Html.RenderPartialAsync("_DisplayOfEmptyList", ViewData["DisplayOfEmptyList"]);
     }
 </div>

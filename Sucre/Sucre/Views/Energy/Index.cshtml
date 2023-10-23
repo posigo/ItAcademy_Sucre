@@ -53,6 +53,7 @@
         @* <div class="alert alert-danger" role="alert">
             <p class="text-danger h4">The list of energy types is empty!</p>
         </div> *@
-        <partial name="_DisplayOfEmptyList" view-data="ViewData" />
+        @*<partial name="_DisplayOfEmptyList" view-data="ViewData" />*@
+        await Html.RenderPartialAsync("_DisplayOfEmptyList", ViewData["DisplayOfEmptyList"]);
     }
 </div>

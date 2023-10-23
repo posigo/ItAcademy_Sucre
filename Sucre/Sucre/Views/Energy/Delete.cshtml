@@ -17,10 +17,12 @@
                     <div class="col-8">
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="EnergyName"></label>
+                                @Html.LabelFor(model => model.EnergyName, "type of energy environment", null)
+                                @*<label asp-for="EnergyName"></label>*@
                             </div>
                             <div class="col-8">
-                                <input asp-for="EnergyName" class="form-control" disabled />                                
+                                @Html.TextBoxFor(model => model.EnergyName,null, new{@class="form-control", @readonly="readonly"})
+                                @*<input asp-for="EnergyName" class="form-control" disabled />                                *@
                             </div>
                         </div>                        
                     </div>

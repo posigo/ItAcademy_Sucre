@@ -6,7 +6,8 @@
 
 <div class="container">
     <form method="post" asp-action="Delete" enctype="multipart/form-data">
-        <input asp-for="@Model.Id" hidden>        
+        @Html.HiddenFor(model => model.Id)
+        @* <input asp-for="@Model.Id" hidden>         *@
         <div class="row card p-3 bg-white box-shadow">
             <div class="card-header">
                 @* <h2 class="text-primary pl-3">Add Parameter Type</h2>                 *@

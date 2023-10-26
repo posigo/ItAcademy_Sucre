@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// АС и ПАЗ
     /// </summary>
     [Table("AsPazs")]
-    public class AsPaz
+    public class AsPaz : IBaseEntity
     {
         [Key]
         public int Id { get; set; }

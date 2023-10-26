@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// Типы физических параметров
     /// </summary>
     [Table("ParameterTypes")]
-    public class ParameterType
+    public class ParameterType : IBaseEntity
     {
         [Key]
         public int Id { get; set; }

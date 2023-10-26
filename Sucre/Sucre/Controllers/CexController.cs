@@ -35,6 +35,7 @@ namespace Sucre.Controllers
         [HttpGet]
         public async Task<IActionResult> Upsert(int? Id)
         {
+            TempData["FieldIsEmpty"] = null;
             CexM cexM = new CexM();
             if (Id == null)
             {
@@ -60,8 +61,20 @@ namespace Sucre.Controllers
         [HttpPost]
         public async Task<IActionResult> Upsert(CexM cexM)
         {
+            TempData["FieldIsEmpty"] = null;
             if (ModelState.IsValid)
             {
+
+                if ((cexM.Management == null || cexM.Management.Trim() == "") &&
+                    (cexM.CexName == null || cexM.CexName.Trim() == "") &&
+                    (cexM.Area == null || cexM.Area.Trim() == "") &&
+                    (cexM.Device == null || cexM.Device.Trim() == "") &&
+                    (cexM.Location == null || cexM.Location.Trim() == ""))
+                {
+                    TempData["FieldIsEmpty"] = "There is no record of the location of the metering point";
+                    return View(cexM); ;
+                }
+
                 Cex cex = new Cex();
                 if (cexM.Id == 0)
                 {
@@ -107,6 +120,7 @@ namespace Sucre.Controllers
             if (cex == null) return NotFound(cex);
             CexM cexM = new CexM();
             sp_Cex(ref cex, ref cexM, true);
+            cexM.FullName = _sucreUnitOfWork.repoSucreCex.FullName(cex);
             return View(cexM);
         }
 

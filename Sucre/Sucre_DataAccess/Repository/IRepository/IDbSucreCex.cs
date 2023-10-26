@@ -9,6 +9,7 @@ namespace Sucre_DataAccess.Repository.IRepository
 {
     public interface IDbSucreCex: IDbSucre<Cex>
     {
+        string FullName(Cex cex);
         void Update(Cex cex);
         Task UpdateAsync(Cex cex);
     }

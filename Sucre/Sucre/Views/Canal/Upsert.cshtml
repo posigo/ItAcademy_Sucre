@@ -18,7 +18,8 @@
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         @if (Model.CanalM.Id !=0)
         {
-            <input asp-for="@Model.CanalM.Id" hidden>
+            @Html.HiddenFor(model => model.CanalM.Id)
+            @* <input asp-for="@Model.CanalM.Id" hidden> *@
         }
         <div class="row card p-3 bg-white box-shadow">
             <div class="card-header">                
@@ -29,60 +30,82 @@
                     <div class="col-8">
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="CanalM.Name"></label>
+                                @Html.LabelFor(model => model.CanalM.Name, null, null)
+                                @* <label asp-for="CanalM.Name"></label> *@
                             </div>
                             <div class="col-8">
-                                <input asp-for="CanalM.Name" class="form-control" />
-                                <span asp-validation-for="CanalM.Name" class="text-danger"></span>
+                                @Html.TextBoxFor(model => model.CanalM.Name,null, new{@class="form-control"})
+                                @* <input asp-for="CanalM.Name" class="form-control" /> *@
+                                @Html.ValidationMessageFor(model => model.CanalM.Name, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.Name" class="text-danger"></span> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="CanalM.Description"></label>
+                                @Html.LabelFor(model => model.CanalM.Description, null, null)
+                                @* <label asp-for="CanalM.Description"></label> *@
                             </div>
-                            <div class="col-8">
+                            <div class="col-8">                                
                                 @*<input asp-for="PointM.Description" class="form-control" />*@
-                                <textarea asp-for="CanalM.Description" class="form-control"></textarea>
-                                <span asp-validation-for="CanalM.Description" class="text-danger"></span>
+                                @Html.TextAreaFor(model => model.CanalM.Description, 0, 1, new{@class="form-control"})
+                                @* <textarea asp-for="CanalM.Description" class="form-control"></textarea> *@
+                                @Html.ValidationMessageFor(model => model.CanalM.Description, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.Description" class="text-danger"></span> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="CanalM.ParameterTypeId"></label>
+                                @Html.LabelFor(model => model.CanalM.ParameterTypeId, null, null)
+                                @* <label asp-for="CanalM.ParameterTypeId"></label> *@
                             </div>
                             <div class="col-8">
-                                <select asp-for="CanalM.ParameterTypeId" asp-items="@Model.ParametryTyoeSelectList" class="form-select">
+                                @Html.DropDownListFor(model => model.CanalM.ParameterTypeId,
+                                            Model.ParametryTyoeSelectList, 
+                                            null, 
+                                            new{@class="form-select"})
+                                @* <select asp-for="CanalM.ParameterTypeId" asp-items="@Model.ParametryTyoeSelectList" class="form-select">
                                     <option disabled selected>--Select energy type--</option>
-                                </select>                                
-                                <span asp-validation-for="CanalM.ParameterTypeId" class="text-danger"></span>
+                                </select *@                                
+                                @Html.ValidationMessageFor(model => model.CanalM.ParameterTypeId, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.ParameterTypeId" class="text-danger"></span> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="CanalM.Reader"></label>
+                                @Html.LabelFor(model => model.CanalM.Reader, null, null)
+                                @* <label asp-for="CanalM.Reader"></label> *@
                             </div>
-                            <div class="col-8">
-                                <input type="checkbox" asp-for="CanalM.Reader" class="form-check form-check-input"/>
-                                <span asp-validation-for="CanalM.Reader" class="text-danger"></span>
+                            <div class="col-8">                                
+                                @Html.CheckBoxFor(model => model.CanalM.Reader, new{@class="form-check form-check-input"})
+                                @* <input type="checkbox" asp-for="CanalM.Reader" class="form-check form-check-input"/> *@
+                                @Html.ValidationMessageFor(model => model.CanalM.Reader, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.Reader" class="text-danger"></span> *@
                             </div>
                         </div>                                              
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="CanalM.SourceType"></label>
+                                @Html.LabelFor(model => model.CanalM.SourceType, null, null)
+                                @* <label asp-for="CanalM.SourceType"></label> *@
                             </div>
                             <div class="col-8">
-                                <input type="number" min="0" max="2" asp-for="CanalM.SourceType" class="form-control form-range" />
-                                <span asp-validation-for="CanalM.SourceType" class="text-danger"></span>
+                                @Html.TextBoxFor(model => model.CanalM.SourceType, null,
+                                new{@class="form-control", @type="number", @max="2", @min="0"})
+                                @* <input type="number" min="0" max="2" asp-for="CanalM.SourceType" class="form-control form-range" /> *@
+                                @Html.ValidationMessageFor(model => model.CanalM.SourceType, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.SourceType" class="text-danger"></span> *@
                                 @* <input type="text" readonly="readonly" value="8uhn" /> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
+                                @Html.LabelFor(model => model.CanalM.AsPazEin, null, null)
                                 <label asp-for="CanalM.AsPazEin"></label>
                             </div>
                             <div class="col-8">
-                                <input type="checkbox" asp-for="CanalM.AsPazEin" class="form-check form-check-input" />
-                                <span asp-validation-for="CanalM.AsPazEin" class="text-danger"></span>
+                                @Html.CheckBoxFor(model => model.CanalM.AsPazEin, new{@class="form-check form-check-input"})
+                                @* <input type="checkbox" asp-for="CanalM.AsPazEin" class="form-check form-check-input" /> *@
+                                @Html.ValidationMessageFor(model => model.CanalM.AsPazEin, null, new{@class="text-danger"})
+                                @* <span asp-validation-for="CanalM.AsPazEin" class="text-danger"></span> *@
                             </div>
                         </div>
                     </div>

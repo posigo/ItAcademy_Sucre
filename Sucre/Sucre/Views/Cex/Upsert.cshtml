@@ -1,6 +1,12 @@
 ﻿@model Sucre_Models.CexM
 @{
     Layout = "_Layout";
+    if (TempData["FieldIsEmpty"] != null)
+    {
+        <div class="alert alert-danger text-center">
+            @TempData["FieldIsEmpty"]
+        </div>
+    }    
     var title = "";
     if (Model.Id == 0)
     {
@@ -19,7 +25,8 @@
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         @if (Model.Id !=0)
         {
-            <input asp-for="@Model.Id" hidden>
+            @Html.HiddenFor(model => model.Id)
+            @* <input asp-for="@Model.Id" hidden> *@
         }
         <div class="row card p-3 bg-white box-shadow">
             <div class="card-header">
@@ -29,61 +36,94 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
+
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.Management,null, new{@class="form-control", @type="text", @id="Management"})
+                            @Html.LabelFor(model => model.Management, "Enter the name of the management department", new{@for="Management"})
+                            @Html.ValidationMessageFor(model => model.Management, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.CexName,null, new{@class="form-control", @type="text", @id="CexName"})
+                            @Html.LabelFor(model => model.CexName, "Enter the name of the cex", new{@for="CexName"})
+                            @Html.ValidationMessageFor(model => model.CexName, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.Area,null, new{@class="form-control", @type="text", @id="Area"})
+                            @Html.LabelFor(model => model.Area, "Enter the name of the area", new{@for="Area"})
+                            @Html.ValidationMessageFor(model => model.Area, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.Device,null, new{@class="form-control", @type="text", @id="Device"})
+                            @Html.LabelFor(model => model.Device, "Enter the name of the device", new{@for="Device"})
+                            @Html.ValidationMessageFor(model => model.Device, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.Location,null, new{@class="form-control", @type="text", @id="Location"})                            
+                            @Html.LabelFor(model => model.Location, "Enter the location", new{@for="Location"})                            
+                            @Html.ValidationMessageFor(model => model.Location, null, new{@class="text-danger"})
+                        </div>
+@*
                         <div class="row py-2">
                             <div class="col-4">
                                 @Html.LabelFor(model => model.Management, null, null)
-                                @*<label asp-for="Management"></label>*@
+                                <label asp-for="Management"></label>
                             </div>
                             <div class="col-8">
                                 @Html.TextBoxFor(model => model.Management,null, new{@class="form-control"})
-                                @*<input asp-for="Management" class="form-control" />*@
-                                <span asp-validation-for="Management" class="text-danger"></span>
+                                <input asp-for="Management" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Management, null, new{@class="text-danger"})
+                                 <span asp-validation-for="Management" class="text-danger"></span> 
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
                                 @Html.LabelFor(model => model.CexName, null, null)
-                                @*<label asp-for="CexName"></label>*@
+                                <label asp-for="CexName"></label>
                             </div>
                             <div class="col-8">
                                 @Html.TextBoxFor(model => model.CexName,null, new{@class="form-control"})
-                                @*<input asp-for="CexName" class="form-control" />*@
-                                <span asp-validation-for="CexName" class="text-danger"></span>
+                                <input asp-for="CexName" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.CexName, null, new{@class="text-danger"})
+                                 <span asp-validation-for="CexName" class="text-danger"></span> 
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
                                 @Html.LabelFor(model => model.Area, null, null)
-                                @*<label asp-for="Area"></label>*@
+                                <label asp-for="Area"></label>
                             </div>
                             <div class="col-8">
                                 @Html.TextBoxFor(model => model.Area,null, new{@class="form-control"})
-                                @*<input asp-for="Area" class="form-control" />*@
-                                <span asp-validation-for="Area" class="text-danger"></span>
+                                <input asp-for="Area" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Area, null, new{@class="text-danger"})
+                                 <span asp-validation-for="Area" class="text-danger"></span> 
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
                                 @Html.LabelFor(model => model.Device, null, null)
-                                @*<label asp-for="Device"></label>*@
+                                <label asp-for="Device"></label>
                             </div>
                             <div class="col-8">
                                 @Html.TextBoxFor(model => model.Device,null, new{@class="form-control"})
-                                @*<input asp-for="Device" class="form-control" />*@
-                                <span asp-validation-for="Device" class="text-danger"></span>
+                                <input asp-for="Device" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Device, null, new{@class="text-danger"})
+                                 <span asp-validation-for="Device" class="text-danger"></span> 
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
                                 @Html.LabelFor(model => model.Location, null, null)
-                                @*<label asp-for="Location"></label>*@
+                                <label asp-for="Location"></label>
                             </div>
                             <div class="col-8">
                                 @Html.TextBoxFor(model => model.Location,null, new{@class="form-control"})
-                                @*<input asp-for="Location" class="form-control" />*@
-                                <span asp-validation-for="Location" class="text-danger"></span>
+                                <input asp-for="Location" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Location, null, new{@class="text-danger"})
+                                 <span asp-validation-for="Location" class="text-danger"></span> 
                             </div>
                         </div>
+*@
                     </div>
                     <div class="col-4">
                         Keep

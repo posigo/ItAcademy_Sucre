@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Sucre_Models\Sucre_Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\bootstrap532\" />
+  </ItemGroup>
+
 </Project>

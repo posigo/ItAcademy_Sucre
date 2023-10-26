@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// каналы учёта
     /// </summary>
     [Table("Canals")]
-    public class Canal
+    public class Canal : IBaseEntity
     {
         [Key]
         public int Id { get; set; }

@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// Описание местоположения точки
     /// </summary>
     [Table("Cexs")]
-    public class Cex
+    public class Cex : IBaseEntity
     {
         [Key]
         public int Id { get; set; }

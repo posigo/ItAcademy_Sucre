@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// Точки учета
     /// </summary>
     [Table("Points")]
-    public class Point
+    public class Point : IBaseEntity
     {
         [Key]
         public int Id { get; set; }

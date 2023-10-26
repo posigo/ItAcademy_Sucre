@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sucre_DataAccess.Entities;
+using Sucre_DataAccess.Entities.TDO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucre<T> where T : class
+    public interface IDbSucre<T> where T : class, IBaseEntity
     {
         void Add(T entity);
         Task AddAsync(T entity);
-        
+
+        Task<int> Count();
+
         T Find(int id);
         Task<T> FindAsync(int id);
 
@@ -35,9 +39,16 @@ namespace Sucre_DataAccess.Repository.IRepository
             string includeProperties = null,
             bool isTracking = true);
 
+        IQueryable<T> GetAsQueryable();
+
+        Task<T?> GetById(int id, params Expression<Func<T, object>>[] includes);
+        Task<T?> GetByIdAsNoTracking(int id, params Expression<Func<T, object>>[] includes);
+
+        Task Patch(int id, List<PatchTdo> patchTdos);
+
         void Remove(T entity);
         Task RemoveAsync(T entity);
-
+        Task RemoveByIdAsync(int id);
         void RemoveRange(IEnumerable<T> entities);
         Task RemoveRangeAsync(IEnumerable<T> entities);
 

@@ -1,8 +1,10 @@
-﻿using LinqKit;
+﻿using Humanizer;
+using LinqKit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Sucre_DataAccess.Entities;
+using Sucre_DataAccess.Entities.TDO;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 using Sucre_Utility;
@@ -24,6 +26,15 @@ namespace Sucre.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
+            Point pointss = _sucreUnitOfWork.repoSucrePoint.GetById(2).Result;
+
+            var pointss1 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy).Result;
+            var pointss2 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy, inc => inc.Cex).Result;
+            var pointss3 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy, inc => inc.Cex, inc => inc.Canals).Result;
+            var pointss4 = _sucreUnitOfWork.repoSucrePoint.GetByIdAsNoTracking(3, inc => inc.Energy).Result;
+            var count = _sucreUnitOfWork.repoSucrePoint.Count().Result;
+
             //var pointsDb = _sucreUnitOfWork.repoSucrePoint.GetAll(includeProperties: $"{WC.EnergyName},{WC.CexName}");
             var pointsDb = await _sucreUnitOfWork.repoSucrePoint.GetAllAsync(includeProperties: $"{WC.EnergyName},{WC.CexName}");
             IEnumerable<PointTableM> pointTablesM = pointsDb.Select(u => new PointTableM
@@ -97,7 +108,18 @@ namespace Sucre.Controllers
                     else
                     {                        
                         sp_Point(ref point, ref pointM, false);
-                        _sucreUnitOfWork.repoSucrePoint.Update(point);
+
+                        await _sucreUnitOfWork.repoSucrePoint.Patch(point.Id, new List<PatchTdo>()
+                        {
+                            new() {PropertyName = nameof(point.Name),PropertyValue = point.Name},
+                            new() {PropertyName = nameof(point.Description),PropertyValue = point.Description},
+                            new() {PropertyName = nameof(point.EnergyId),PropertyValue = point.EnergyId},
+                            new() {PropertyName = nameof(point.CexId),PropertyValue = point.CexId},
+                            new() {PropertyName = nameof(point.ServiceStaff),PropertyValue = point.ServiceStaff},
+
+                        });
+
+                        //_sucreUnitOfWork.repoSucrePoint.Update(point);
                     }
                 }
                 //_sucreUnitOfWork.Commit();

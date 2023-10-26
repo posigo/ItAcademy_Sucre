@@ -36,5 +36,6 @@ namespace Sucre_Models
         /// </summary>
         [MaxLength(70)]
         public string? Location { get; set; } = string.Empty;
+        public string? FullName { get; set; } = string.Empty;
     }
 }

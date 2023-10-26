@@ -26,10 +26,20 @@ namespace Sucre_DataAccess.Repository
             if (strInclude == WC.ParameterTypeName)
             {
                 List<SelectListItem> returnValues= new List<SelectListItem>();
-                
+                bool firstElement = true;
                 foreach (var item in _db.ParameterTypes)
-                {
+                {                    
                     SelectListItem value = new SelectListItem();
+                    if (firstElement)
+                    {
+                        value.Text = "--Select the parameter type--";
+                        value.Value = "0";
+                        value.Disabled = true;
+                        value.Selected = true;                        
+                        returnValues.Add(value);
+                        value = new SelectListItem();
+                        firstElement = false;
+                    }
                     //List<string> listText = new List<string>();                    
                     //if (item.Management !=null && item.Management.Trim() !="")
                     //    listText.Add(item.Management);

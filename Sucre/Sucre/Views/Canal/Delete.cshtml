@@ -17,50 +17,62 @@
                     <div class="col-8">
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="canalM.Name"></label>
+                                @Html.LabelFor(model => model.canalM.Name, null, null)
+                                @* <label asp-for="canalM.Name"></label> *@
                             </div>
                             <div class="col-8">
-                                <input asp-for="canalM.Name" class="form-control" disabled />                                
+                                @Html.TextBoxFor(model => model.canalM.Name,null, new{@class="form-control", @readonly="readonly"})
+                                @* <input asp-for="canalM.Name" class="form-control" disabled />                                 *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="canalM.Description"></label>
+                                @Html.LabelFor(model => model.canalM.Description, null, null)
+                                @* <label asp-for="canalM.Description"></label> *@
                             </div>
                             <div class="col-8">
-                                <textarea asp-for="canalM.Description" class="form-control" disabled></textarea>
+                                @Html.TextAreaFor(model => model.canalM.Description, 0, 1, new{@class="form-control", @readonly="readonly"})
+                                @* <textarea asp-for="canalM.Description" class="form-control" disabled></textarea> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="ParameterTypeName"></label>
+                                @Html.LabelFor(model => model.ParameterTypeName, null, null)
+                                @* <label asp-for="ParameterTypeName"></label> *@
                             </div>
                             <div class="col-8">
-                                <input asp-for="ParameterTypeName" class="form-control" disabled />
+                                @Html.TextBoxFor(model => model.ParameterTypeName,null, new{@class="form-control", @readonly="readonly"})
+                                @* <input asp-for="ParameterTypeName" class="form-control" disabled /> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="canalM.Reader"></label>
+                                @Html.LabelFor(model => model.canalM.Reader, null, null)
+                                @* <label asp-for="canalM.Reader"></label> *@
                             </div>
                             <div class="col-8">
-                                <input type="checkbox" asp-for="canalM.Reader" class="form-check form-check-input" disabled />
+                                @Html.CheckBoxFor(model => model.canalM.Reader, new{@class="form-check form-check-input", @disabled="disabled"})
+                                @* <input type="checkbox" asp-for="canalM.Reader" class="form-check form-check-input" disabled /> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="canalM.SourceType"></label>
+                                @Html.LabelFor(model => model.canalM.SourceType, null, null)
+                                @* <label asp-for="canalM.SourceType"></label> *@
                             </div>
                             <div class="col-8">
-                                <input type="number" asp-for="canalM.SourceType" class="form-control" disabled />
+                                @Html.TextBoxFor(model => model.canalM.SourceType,null, new{@class="form-control", @readonly="readonly", @type="number"})
+                                @* <input type="number" asp-for="canalM.SourceType" class="form-control" disabled /> *@
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-4">
-                                <label asp-for="canalM.AsPazEin"></label>
+                                @Html.LabelFor(model => model.canalM.AsPazEin, null, null)
+                                @* <label asp-for="canalM.AsPazEin"></label> *@
                             </div>
                             <div class="col-8">
-                                <input type="checkbox" asp-for="canalM.AsPazEin" class="form-check form-check-input" disabled />
+                                @Html.CheckBoxFor(model => model.canalM.AsPazEin, new{@class="form-check form-check-input", @disabled="disabled"})
+                                @* <input type="checkbox" asp-for="canalM.AsPazEin" class="form-check form-check-input" disabled /> *@
                             </div>
                         </div>
                     </div>

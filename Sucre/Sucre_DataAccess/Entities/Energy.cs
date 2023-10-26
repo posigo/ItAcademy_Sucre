@@ -7,7 +7,7 @@ namespace Sucre_DataAccess.Entities
     /// типы энергии
     /// </summary>
     [Table("Enegies")]
-    public class Energy
+    public class Energy: IBaseEntity
     {
         [Key]
         public int Id { get; set; }

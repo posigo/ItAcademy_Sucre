@@ -82,7 +82,7 @@ namespace Sucre.Controllers
                     canalM.PointMs =(ICollection<PointM>)canal.Points;                    
                 }
                 canalTableM.canalM = canalM;
-                canalTableM.ParameterTypeName = _sucreUnitOfWork.repoSucreCanal.GetStringName(canal.ParameterType);
+                canalTableM.ParameterTypeName = _sucreUnitOfWork.repoSucreParameterType.GetStringName(canal.ParameterType);
 
                 canalTableMs.Add(canalTableM);
             }            
@@ -96,7 +96,8 @@ namespace Sucre.Controllers
             {
                 CanalM = new CanalM(),
                 //ParametryTyoeSelectList = _canalDb.GetAllDropdownList(WC.ParameterTypeName)
-                ParametryTyoeSelectList = _sucreUnitOfWork.repoSucreCanal.GetAllDropdownList(WC.ParameterTypeName)
+                ParametryTyoeSelectList = _sucreUnitOfWork.repoSucreParameterType.
+                        GetAllDropdownList(valueFirstSelect: "--Select parameter type")
             };
             if (Id == null || Id.Value == 0)
             {
@@ -218,7 +219,7 @@ namespace Sucre.Controllers
             CanalTableM canalTableM = new CanalTableM()
             {
                 canalM = canalM,
-                ParameterTypeName = _sucreUnitOfWork.repoSucreCanal.GetStringName(canal.ParameterType)
+                ParameterTypeName = _sucreUnitOfWork.repoSucreParameterType.GetStringName(canal.ParameterType)
             };
             
             return View(canalTableM);
@@ -622,7 +623,7 @@ namespace Sucre.Controllers
             foreach (var item in PointsId)
             {
                 SelectListItem value = new SelectListItem();
-                string cexName=_sucreUnitOfWork.repoSucrePoint.GetStringName(item.Cex);
+                string cexName=_sucreUnitOfWork.repoSucreCex.GetStringName(item.Cex);
                 value.Text = $"{item.Id},{item.Name},{item.Energy.EnergyName},{cexName}";
                 value.Value = item.Id.ToString();
 

@@ -22,13 +22,18 @@ namespace Sucre_DataAccess.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
         }
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             dbSet.Add(entity);
         }
-        public async Task AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
+        }
+
+        public virtual async Task AddManyAsync(T entities)
+        {
+            await dbSet.AddRangeAsync(entities);
         }
 
         public async Task<int> Count()

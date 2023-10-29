@@ -2,6 +2,7 @@
 using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
+using Sucre_Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,53 @@ namespace Sucre_DataAccess.Repository
             return false;
         }
 
-        public string FullName (Cex cex)
-        {            
+        /// <summary>
+        /// Получить список элементов объекта
+        /// </summary>
+        /// <param name="AddFirstSelect">Добавить первый элемент</param>
+        /// <param name="valueFirstSelect">Название первого элемента</param>
+        /// <returns>список элементов</returns>
+        public IEnumerable<SelectListItem> GetAllDropdownList(bool addFirstSelect = true, string valueFirstSelect = null)
+        {
+            List<SelectListItem> returnValues = new List<SelectListItem>();
+            SelectListItem value;
+            
+            if (addFirstSelect)
+            {
+                //value.Text = "--Select metering point location--";
+                //"--Select the location of the metering point--"
+                value = new SelectListItem(
+                    text: (valueFirstSelect == null || valueFirstSelect.Trim() == "") ? 
+                            "--Select from the list--" : 
+                            valueFirstSelect,
+                    value: "0",
+                    selected: true, 
+                    disabled: true);
+
+                returnValues.Add(value);
+
+            }                      
+            
+            foreach (var item in dbSet)
+            {
+                value = new SelectListItem();
+                string textValue = GetStringName(item);
+                value.Text = textValue;
+                value.Value = item.Id.ToString();
+                returnValues.Add(value);
+            };
+            
+            return returnValues;
+        }
+
+        /// <summary>
+        /// Получить имя объекта из полей
+        /// </summary>
+        /// <param name="obj">объект</param>
+        /// <returns>имя объекта</returns>
+        public string GetStringName(object obj)
+        {
+            Cex cex = (Cex)obj;
             List<string> listText = new List<string>();
             if (cex.Management != null && cex.Management.Trim() != "")
                 listText.Add(cex.Management);
@@ -46,16 +92,6 @@ namespace Sucre_DataAccess.Repository
             if (cex.Location != null && cex.Location.Trim() != "")
                 listText.Add(cex.Location);
             return String.Join("->", listText.ToArray());
-         
-        }
-        public IEnumerable<SelectListItem> GetAllDropdownList(string strInclude)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetStringName(object obj)
-        {
-            throw new NotImplementedException();
         }
 
         public void Update(Cex cex)

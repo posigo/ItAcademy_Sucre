@@ -1,5 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    //ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "About The Application";
+
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -23,4 +25,52 @@
             https://github.com/posigo/ItAcademy_Sucre.git
         </a>
     </p>
+
+    <div class="">
+
+    </div>
+    <p class="h5 text-body">
+        Пример элемента с утилитами
+    </p>
+    <p class="h5 text-body-emphasis">
+        Пример элемента с утилитами
+    </p>
+    <p class="h5 text-body-secondary">
+        Пример элемента с утилитами
+    </p>
+    <p class="h5 text-body-tertiary">
+        Пример элемента с утилитами
+    </p>
 </div>
+
+<div id="liveAlertPlaceholder"></div>
+<button type="button" class="btn btn-primary" id="liveAlertBtn">Показать живое уведомление</button>
+
+
+@section Scripts {
+
+    <script>
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        const appendAlert = (message, type) => {
+            const wrapper = document.createElement('div')
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>',
+                '</div>'
+            ].join('')
+
+            alertPlaceholder.append(wrapper)
+        }
+
+        const alertTrigger = document.getElementById('liveAlertBtn')
+        if (alertTrigger) {
+            alertTrigger.addEventListener('click', () => {
+                appendAlert('Nice, you triggered this alert message!', 'success')
+            })
+        }
+    </script>
+
+    
+
+}

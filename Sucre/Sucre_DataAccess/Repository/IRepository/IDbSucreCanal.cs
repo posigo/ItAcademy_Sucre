@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucreCanal: IDbSucre<Canal>, IDbSucreMethodList
+    public interface IDbSucreCanal: IDbSucre<Canal>
     {
         //IEnumerable<SelectListItem> GetAllDropdownList(string strInclude);
         //string GetStringCanal(ParameterType parameterType);

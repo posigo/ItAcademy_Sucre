@@ -19,6 +19,7 @@ namespace Sucre.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            
             var cexsDb =await _sucreUnitOfWork.repoSucreCex.GetAllAsync();
             IEnumerable<CexM> cexsM = cexsDb.Select(u => new CexM
             {
@@ -120,7 +121,8 @@ namespace Sucre.Controllers
             if (cex == null) return NotFound(cex);
             CexM cexM = new CexM();
             sp_Cex(ref cex, ref cexM, true);
-            cexM.FullName = _sucreUnitOfWork.repoSucreCex.FullName(cex);
+            //cexM.FullName = _sucreUnitOfWork.repoSucreCex.FullName(cex);
+            cexM.FullName = _sucreUnitOfWork.repoSucreCex.GetStringName(cex);
             return View(cexM);
         }
 

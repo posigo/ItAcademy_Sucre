@@ -14,12 +14,10 @@ namespace Sucre.Controllers
 {
     public class PointController : Controller
     {
-        //private readonly IDbSucrePoint _pointDb;
         private readonly ISucreUnitOfWork _sucreUnitOfWork;
 
-        public PointController(IDbSucrePoint pointDb, ISucreUnitOfWork sucreUnitOfWork)
+        public PointController(ISucreUnitOfWork sucreUnitOfWork)
         {
-            //_pointDb = pointDb;        
             _sucreUnitOfWork = sucreUnitOfWork;
         }
 
@@ -27,15 +25,6 @@ namespace Sucre.Controllers
         public async Task<IActionResult> Index()
         {
 
-            Point pointss = _sucreUnitOfWork.repoSucrePoint.GetById(2).Result;
-
-            var pointss1 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy).Result;
-            var pointss2 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy, inc => inc.Cex).Result;
-            var pointss3 = _sucreUnitOfWork.repoSucrePoint.GetById(2, inc => inc.Energy, inc => inc.Cex, inc => inc.Canals).Result;
-            var pointss4 = _sucreUnitOfWork.repoSucrePoint.GetByIdAsNoTracking(3, inc => inc.Energy).Result;
-            var count = _sucreUnitOfWork.repoSucrePoint.Count().Result;
-
-            //var pointsDb = _sucreUnitOfWork.repoSucrePoint.GetAll(includeProperties: $"{WC.EnergyName},{WC.CexName}");
             var pointsDb = await _sucreUnitOfWork.repoSucrePoint.GetAllAsync(includeProperties: $"{WC.EnergyName},{WC.CexName}");
             IEnumerable<PointTableM> pointTablesM = pointsDb.Select(u => new PointTableM
             {
@@ -43,7 +32,7 @@ namespace Sucre.Controllers
                 Name = u.Name,
                 ServiceStaff = u.ServiceStaff,
                 EnergyName = u.Energy.EnergyName,
-                CexName = _sucreUnitOfWork.repoSucrePoint.GetStringName(u.Cex)
+                CexName = _sucreUnitOfWork.repoSucreCex.GetStringName(u.Cex)
             });
             return View(pointTablesM);
         }
@@ -54,8 +43,10 @@ namespace Sucre.Controllers
             PointUpsertM pointUpsertM = new PointUpsertM()
             {
                 PointM = new PointM(),
-                EnergySelectList = _sucreUnitOfWork.repoSucrePoint.GetAllDropdownList(WC.EnergyName),
-                CexSelectList = _sucreUnitOfWork.repoSucrePoint.GetAllDropdownList(WC.CexName)
+                EnergySelectList = _sucreUnitOfWork.repoSucreEnergy.GetAllDropdownList(
+                                valueFirstSelect: "--Select energy type--"),
+                CexSelectList = _sucreUnitOfWork.repoSucreCex.GetAllDropdownList(
+                              valueFirstSelect: "--Select the location of the metering point--")
             };
             if (Id == null)
             {
@@ -63,7 +54,6 @@ namespace Sucre.Controllers
             }
             else
             {
-                //Point point = _sucreUnitOfWork.repoSucrePoint.Find(Id.GetValueOrDefault());
                 Point point = await _sucreUnitOfWork.repoSucrePoint.FindAsync(Id.GetValueOrDefault());
                 if (point == null)
                 {
@@ -88,19 +78,14 @@ namespace Sucre.Controllers
                 if (pointM.Id == 0)
                 {
                     //Creating                    
-                    sp_Point(ref point, ref pointM, false);
-                    //_sucreUnitOfWork.repoSucrePoint.Add(point);
+                    sp_Point(ref point, ref pointM, false);                    
                     await _sucreUnitOfWork.repoSucrePoint.AddAsync(point);
                 }
                 else
                 {
                     //Update
-                    //point = _sucreUnitOfWork.repoSucrePoint.FirstOrDefault(
-                    //                                                filter: item => item.Id == pointM.Id, 
-                    //                                                isTracking: false);
-                    point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
-                                                                        filter: item => item.Id == pointM.Id,
-                                                                        isTracking: false);
+                    point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(isTracking: false,
+                                                                        filter: item => item.Id == pointM.Id);
                     if (point == null)
                     {
                         return NotFound(point);
@@ -108,7 +93,6 @@ namespace Sucre.Controllers
                     else
                     {                        
                         sp_Point(ref point, ref pointM, false);
-
                         await _sucreUnitOfWork.repoSucrePoint.Patch(point.Id, new List<PatchTdo>()
                         {
                             new() {PropertyName = nameof(point.Name),PropertyValue = point.Name},
@@ -133,12 +117,8 @@ namespace Sucre.Controllers
         public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0) return NotFound();
-            //Point point = _sucreUnitOfWork.repoSucrePoint.FirstOrDefault(
-            //                                                    filter: item => item.Id == Id.GetValueOrDefault(),
-            //                                                    includeProperties: "Energy,Cex");
-            Point point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(
-                                                                    filter: item => item.Id == Id.GetValueOrDefault(),
-                                                                    includeProperties: "Energy,Cex");
+            Point point = await _sucreUnitOfWork.repoSucrePoint.FirstOrDefaultAsync(includeProperties: "Energy,Cex",
+                                                                    filter: item => item.Id == Id.GetValueOrDefault());
             if (point == null) return NotFound(point);
             PointM pointM = new PointM();
             PointTableM pointTableM = new PointTableM()
@@ -147,8 +127,7 @@ namespace Sucre.Controllers
                 Name = point.Name,
                 Description = point.Description,
                 EnergyName = point.Energy.EnergyName,
-                //CexName = _pointDb.GetStringCex(point.Cex),
-                CexName = _sucreUnitOfWork.repoSucrePoint.GetStringName(point.Cex),
+                CexName = _sucreUnitOfWork.repoSucreCex.GetStringName(point.Cex),
                 ServiceStaff = point.ServiceStaff
             };
             //sp_Point(ref point, ref pointM, true);
@@ -160,12 +139,10 @@ namespace Sucre.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeletePost(int? Id)
         {
-            if (Id == null || Id == 0) return NotFound();
-            //Point point = _sucreUnitOfWork.repoSucrePoint.Find(Id.GetValueOrDefault());
+            if (Id == null || Id == 0) return NotFound();            
             Point point = await _sucreUnitOfWork.repoSucrePoint.FindAsync(Id.GetValueOrDefault());
             if (point == null) return NotFound(point);
-            _sucreUnitOfWork.repoSucrePoint.Remove(point);
-            //_sucreUnitOfWork.Commit();
+            await _sucreUnitOfWork.repoSucrePoint.RemoveAsync(point);            
             await _sucreUnitOfWork.CommitAsync();
             return RedirectToAction(nameof(Index));
         }

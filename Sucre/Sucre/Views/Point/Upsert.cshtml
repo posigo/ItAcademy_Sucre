@@ -27,6 +27,39 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
+
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.PointM.Name,null, new{@class="form-control", @type="text", @id="Name"})
+                            @* <input asp-for="EnergyName" type="text" class="form-control" id="EnegyName"/> *@
+                            @Html.LabelFor(model => model.PointM.Name, "Enter the name of the metering point", new{@for="Name"})
+                            @* <label asp-for="EnergyName" for="EnergyName">Type of energy environment</label> *@
+                            @Html.ValidationMessageFor(model => model.PointM.Name, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.PointM.Description, null, new{@class="form-control", @type="text", @id="Description"})                            
+                            @Html.LabelFor(model => model.PointM.Description, "Enter a description of the metering point", new{@for="Description"})
+                            @Html.ValidationMessageFor(model => model.PointM.Description, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.DropDownListFor(model => model.PointM.EnergyId, Model.EnergySelectList,
+                                                null,
+                                                new{@class="form-select", @id="EnergyId"})
+                            @Html.LabelFor(model => model.PointM.EnergyId, "Choose the type of energy", new{@for="EnergyId"})
+                            @Html.ValidationMessageFor(model => model.PointM.EnergyId, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.DropDownListFor(model => model.PointM.CexId, Model.CexSelectList,
+                                                null,
+                                                new{@class="form-select", @id="CexId"})
+                            @Html.LabelFor(model => model.PointM.EnergyId, "Select the location of the metering point", new{@for="CexId"})
+                            @Html.ValidationMessageFor(model => model.PointM.EnergyId, null, new{@class="text-danger"})
+                        </div>
+                        <div class="row form-floating mb-3 py-1">
+                            @Html.TextBoxFor(model => model.PointM.ServiceStaff, null, new{@class="form-control", @type="text", @id="ServiceStaff"})
+                            @Html.LabelFor(model => model.PointM.ServiceStaff, "Enter the service staff the metering point", new{@for="ServiceStaff"})
+                            @Html.ValidationMessageFor(model => model.PointM.ServiceStaff, null, new{@class="text-danger"})
+                        </div>
+@* 
                         <div class="row py-2">
                             <div class="col-4">
                                 <label asp-for="PointM.Name"></label>
@@ -40,8 +73,7 @@
                             <div class="col-4">
                                 <label asp-for="PointM.Description"></label>
                             </div>
-                            <div class="col-8">
-                                @*<input asp-for="PointM.Description" class="form-control" />*@
+                            <div class="col-8">                                
                                 <textarea asp-for="PointM.Description" class="form-control"></textarea>
                                 <span asp-validation-for="PointM.Description" class="text-danger"></span>
                             </div>
@@ -77,6 +109,7 @@
                                 <span asp-validation-for="PointM.ServiceStaff" class="text-danger"></span>
                             </div>
                         </div>
+ *@
                     </div>
                     <div class="col-4">
                         Keep

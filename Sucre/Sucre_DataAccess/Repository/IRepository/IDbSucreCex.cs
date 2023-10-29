@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucreCex: IDbSucre<Cex>
+    public interface IDbSucreCex: IDbSucre<Cex>, ISelectListItemObj
     {
-        string FullName(Cex cex);
+        //string FullName(Cex cex);
         void Update(Cex cex);
         Task UpdateAsync(Cex cex);
     }

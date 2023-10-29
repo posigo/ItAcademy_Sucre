@@ -20,6 +20,7 @@ namespace Sucre.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            
             //var energiesDb = await _energyDb.GetAllAsync();
             var energiesDb = await _sucreUnitOfWork.repoSucreEnergy.GetAllAsync();
             IEnumerable<EnergyM> energiesM = energiesDb.Select(u => new EnergyM

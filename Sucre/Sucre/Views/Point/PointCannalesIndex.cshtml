@@ -6,11 +6,11 @@
 
 <div class="container">
     <div class="row pt-4 m-0 alert alert-primary">
-        <div class="col-8">
+        <div class="col-6 col-sm-4 col-md-6 col-lg-8">
             <h4 class="text-primary">Linking channels to a metering point with Id = @Model.Id: "@Model.Name"</h4>
         </div>
 
-        <div class="col-4 text-end">
+        <div class="col-6 col-sm-8 col-md-6 col-lg-4 text-end">
             <a asp-controller="Point" asp-action="Index" class="btn btn-primary-custom">
                 Back to the list of metering points
             </a>
@@ -20,7 +20,7 @@
     <form method="post" asp-action="PointCannalesDelete" enctype="multipart/form-data">
         <input asp-for="Id" hidden />
         <div class="table-responsive m-0 p-0 alert alert-light">
-            <table class="table table-bordered table-striped border-primary" style="width: 100%">
+            <table class="table table-secondary table-bordered table-striped border-primary table-hover" style="width: 100%">
                 <thead class="">
                     <tr>
                         <th scope="col">Id</th>

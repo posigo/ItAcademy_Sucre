@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucreEnergy: IDbSucre<Energy>
+    public interface IDbSucreEnergy: IDbSucre<Energy>, ISelectListItemObj
     {
         void Update(Energy energy);
         Task UpdateAsync(Energy energy);

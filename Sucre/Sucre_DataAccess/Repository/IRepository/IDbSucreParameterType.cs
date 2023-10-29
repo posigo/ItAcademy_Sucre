@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucreParameterType: IDbSucre<ParameterType>
+    public interface IDbSucreParameterType: IDbSucre<ParameterType>, ISelectListItemObj
     {
         void Update(ParameterType parameterType);
         Task UpdateAsync(ParameterType parameterType);

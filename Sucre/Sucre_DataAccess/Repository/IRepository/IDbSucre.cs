@@ -13,6 +13,7 @@ namespace Sucre_DataAccess.Repository.IRepository
     {
         void Add(T entity);
         Task AddAsync(T entity);
+        Task AddManyAsync(T entities);
 
         Task<int> Count();
 

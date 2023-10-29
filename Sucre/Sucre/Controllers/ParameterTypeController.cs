@@ -203,9 +203,15 @@ namespace Sucre.Controllers
             ParameterType parameterType = await _sucreUnitOfWork.repoSucreParameterType.FirstOrDefaultAsync(
                                                                                 filter: item => item.Id == Id.GetValueOrDefault());
             if (parameterType == null) return NotFound(parameterType);
-            ParameterTypeM parameterTypeM = new ParameterTypeM();
-            sp_ParameterType(ref parameterType, ref parameterTypeM, true);
-            return View(parameterTypeM);
+            ParameterTypeDelM parameterTypeDelM = new ParameterTypeDelM()
+            { 
+                Id = parameterType.Id,
+                FullName = _sucreUnitOfWork.repoSucreParameterType.GetStringName(parameterType)
+            };
+            //ParameterTypeM parameterTypeM = new ParameterTypeM();
+            //sp_ParameterType(ref parameterType, ref parameterTypeM, true);
+            //return View(parameterTypeM);
+            return View(parameterTypeDelM);
         }
         //[HttpGet]
         //public async Task<IActionResult> Delete(int? Id)

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
 using Sucre_DataAccess.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,31 @@ namespace Sucre_DataAccess.Data
                
         }
 
+        //Alarm and fire automatic protection table
         public DbSet<AsPaz> AsPazs { get; set; }
+        //measurement channel table
         public DbSet<Canal> Canals { get; set; }
+        //table of metering point locations
         public DbSet<Cex> Cexs { get; set; }
+        //table of energy types
         public DbSet<Energy> Energies { get; set; }
+        //user group table
         public DbSet<GroupUser> GroupUsers { get; set; }
+        //table of parameter types
         public DbSet<ParameterType> ParameterTypes { get; set; }
+        //table of metering points
         public DbSet<Point> Points { get; set; }
+        //table reports
         public DbSet<Report> Reports { get; set; }
+        //table report details
         public DbSet<ReportDetail> ReportDetails { get; set; }
+        //table users
         public DbSet<User> Users { get; set; }
+        //daily values table
         public DbSet<ValueDay> ValuesDay { get; set; }
+        //hourly value table
         public DbSet<ValueHour> ValuesHour { get; set; }
+        //table of values by month
         public DbSet<ValueMounth> ValuesMounth { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

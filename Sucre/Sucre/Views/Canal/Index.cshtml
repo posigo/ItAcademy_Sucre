@@ -7,13 +7,15 @@
 
 <div class="container p-3 bg-white">
     <div class="row pt-4 m-0 alert alert-primary">
-        <div class="col-6">
+        <div class="col col-sm-5 col-md-4 col-lg-4">
             <h2 class="text-primary">Channales List</h2>
         </div>
-        <div class="col-6 text-end">            
+        <div class="col col-sm-5 col-md-4 col-lg-6 text-end">
             <a asp-controller="Canal" asp-action="IndexAsPaz" class="btn btn-primary-custom w-auto">
                 Go to the list of AsPaz channels
             </a>
+        </div>
+        <div class="col col-sm-2 col-md-4 col-lg-2 text-end">
             <a asp-controller="Canal" asp-action="Upsert" class="btn btn-primary-custom w-auto">
                 Add channel
             </a>            
@@ -22,8 +24,8 @@
 
     @if (Model.Count()>0)
     {
-        <div class="m-0 p-0 alert alert-light">
-            <table class="table table-bordered border-primary table-striped" style="width: 100%">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 alert alert-light table-responsive">
+            <table class="table table-secondary table-bordered table-striped table-hover" style="width: 100%">
                 <thead valign="middle">
                     <tr>
                         <th>Id</th>

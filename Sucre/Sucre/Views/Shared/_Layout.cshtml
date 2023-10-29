@@ -3,7 +3,7 @@
 @{    
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,44 +15,48 @@
 </head>
 <body>
     <header>
-        <div class="container-fluid row bg-info">
-            <div class="col text-center">
-                <h1 class="display-6 fw-bold">С У К Р Э</h1>
+        <div class="container-fluid">
+            <div class="row bg-info">
+                <div class="col text-center">                    
+                    <p class="h2 fw-bold font-monospace">С У К Р Э</p>                                        
+                </div>
             </div>
         </div>
+        
         <nav class="navbar navbar-expand-sm navbar-expand-lg sticky-bottom bg-body-tertiary" data-bs-theme="">
-            <div class="container-fluid border-bottom border-secondary">
+            <div class="container-fluid border-bottom border-secondary py-0 my-0">
                 @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/SucreIcoBg.png" width="50%" /> </a> *@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/SukredIco1.png" width="40%" /> </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="collapse navbar-collapse font-monospace" id="navbarNavAltMarkup">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle font-monospace" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link link-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Content Admin
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item font-monospace" asp-controller="ParameterType" asp-action="Index">Parameter Types</a></li>
-                                <li><a class="dropdown-item font-monospace" asp-controller="Energy" asp-action="Index">Energies List</a></li>
-                                <li><a class="dropdown-item font-monospace" asp-controller="Cex" asp-action="Index">Locations of metering points</a></li>
-                                <li><a class="dropdown-item font-monospace" asp-controller="Point" asp-action="Index">List of metering points</a></li>
-                                <li><a class="dropdown-item font-monospace" asp-controller="Canal" asp-action="Index">List of cannales</a></li>
+                                <li><a class="dropdown-item" asp-controller="ParameterType" asp-action="Index">Parameter Types</a></li>
+                                <li><a class="dropdown-item" asp-controller="Energy" asp-action="Index">Energies List</a></li>
+                                <li><a class="dropdown-item" asp-controller="Cex" asp-action="Index">Locations of metering points</a></li>
+                                <li><a class="dropdown-item" asp-controller="Point" asp-action="Index">List of metering points</a></li>
+                                <li><a class="dropdown-item" asp-controller="Canal" asp-action="Index">List of cannales</a></li>
                                 @* <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li> *@
                             </ul>
-                        </li>                                             
+                        </li>   
+                        
                     </ul>
-                    <span class="navbar-text">@DbName.DatabaseName</span>
+                    <span class="navbar-text" role="document">@DbName.DatabaseName</span>
 
                 </div>
             </div>
@@ -66,7 +70,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Sucre - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Sucre - <a asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

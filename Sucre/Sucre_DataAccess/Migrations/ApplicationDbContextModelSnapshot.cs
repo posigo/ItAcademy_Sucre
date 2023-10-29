@@ -126,7 +126,6 @@ namespace Sucre_DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 

@@ -38,7 +38,7 @@ namespace Sucre_DataAccess.Entities
         public virtual ICollection<ValueHour> ValueHours { get; set; }
         public virtual ICollection<ValueDay> ValueDays { get; set; }
         public virtual ICollection<ValueMounth> ValueMounths { get; set; }
-        public virtual ICollection<ReportDetail> ReportDetails { get; set; } 
+        //public virtual ICollection<ReportDetail> ReportDetails { get; set; } 
 
         public Canal()
         {
@@ -47,7 +47,7 @@ namespace Sucre_DataAccess.Entities
             this.ValueHours = new HashSet<ValueHour>();
             this.ValueDays = new HashSet<ValueDay>();
             this.ValueMounths = new HashSet<ValueMounth>();
-            this.ReportDetails = new HashSet<ReportDetail>();
+            //this.ReportDetails = new HashSet<ReportDetail>();
         }
     }
 }

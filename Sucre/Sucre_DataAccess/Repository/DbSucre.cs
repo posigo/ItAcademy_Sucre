@@ -1,56 +1,92 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
-using Sucre_DataAccess.Entities.TDO;
+//using Sucre_DataAccess.Entities.TDO;
+using Sucre_Core;
 using Sucre_DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Sucre_DataAccess.Repository
 {
     public class DbSucre<T> : IDbSucre<T> where T : class, IBaseEntity
     {
         private readonly ApplicationDbContext _db;
-        internal DbSet<T> dbSet;
+        //private readonly ILogger<DbSucre<T>> _log;
+        internal DbSet<T> dbSet;        
 
         public DbSucre(ApplicationDbContext db)
+            //,
+            //ILogger<DbSucre<T>> log = null)
         {
             _db = db;
             this.dbSet = _db.Set<T>();
+            //_log = log;
+
+            //log.LogInformation("Repository DbSucre use");
         }
+        /// <summary>
+        /// Add single entity
+        /// </summary>
+        /// <param name="entity">entity</param>
         public virtual void Add(T entity)
         {
             dbSet.Add(entity);
         }
+        /// <summary>
+        /// Add single entity. Async method
+        /// </summary>
+        /// <param name="entity">entity</param>
+        /// <returns></returns>
         public virtual async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
         }
-
+        /// <summary>
+        /// Add multiple entities. Async method
+        /// </summary>
+        /// <param name="entities">entities</param>
+        /// <returns></returns>
         public virtual async Task AddManyAsync(T entities)
         {
             await dbSet.AddRangeAsync(entities);
         }
 
+        /// <summary>
+        /// ? count. Async method
+        /// </summary>
+        /// <returns></returns>
         public async Task<int> Count()
         { 
             return await dbSet.CountAsync();
         }
 
-
+        /// <summary>
+        /// Search for an entity by ID
+        /// </summary>
+        /// <param name="id">ID entity</param>
+        /// <returns></returns>
         public virtual T Find(int id)
         {
             return dbSet.Find(id);
         }
+        /// <summary>
+        /// Search for an entity by ID. Async method
+        /// </summary>
+        /// <param name="id">ID entity</param>
+        /// <returns></returns>
         public virtual async Task<T> FindAsync(int id)
         {
             return await dbSet.FindAsync(id);
         }
 
+        /// <summary>
+        /// Return an entity based on conditions
+        /// </summary>
+        /// <param name="filter">Filter (expression)</param>
+        /// <param name="includeProperties">Pluggable entities</param>
+        /// <param name="isTracking">Tracking</param>
+        /// <returns></returns>
         public T FirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null, bool isTracking = true)
         {
             IQueryable<T> query = dbSet;
@@ -66,6 +102,13 @@ namespace Sucre_DataAccess.Repository
 
             return query.FirstOrDefault();
         }
+        /// <summary>
+        /// Return an entity based on conditions. Async method
+        /// </summary>
+        /// <param name="filter">Filter (expression)</param>
+        /// <param name="includeProperties">Pluggable entities</param>
+        /// <param name="isTracking">Tracking</param>
+        /// <returns></returns>
         public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> filter = null, string includeProperties = null, bool isTracking = true)
         {
             IQueryable<T> query = dbSet;
@@ -82,6 +125,14 @@ namespace Sucre_DataAccess.Repository
             return await query.FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Select entities by conditions
+        /// </summary>
+        /// <param name="filter">Filter (expression)</param>
+        /// <param name="orderBy">Order (expression)</param>
+        /// <param name="includeProperties">Pluggable entities</param>
+        /// <param name="isTracking">Tracking in DB</param>
+        /// <returns></returns>
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null, bool isTracking = true)
         {
             IQueryable<T> query = dbSet;
@@ -101,6 +152,14 @@ namespace Sucre_DataAccess.Repository
             return query.ToList();
 
         }
+        /// <summary>
+        /// Select entities by conditions. Async method
+        /// </summary>
+        /// <param name="filter">Filter (expression)</param>
+        /// <param name="orderBy">Order (expression)</param>
+        /// <param name="includeProperties">Pluggable entities</param>
+        /// <param name="isTracking">Tracking in DB</param>
+        /// <returns></returns>
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, 
                                                 Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
                                                 string includeProperties = null, 

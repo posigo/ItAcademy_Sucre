@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Sucre.Filters;
+using Sucre_Core.LoggerExternal;
 using Sucre_DataAccess.Entities;
-using Sucre_DataAccess.Repository;
 using Sucre_DataAccess.Repository.IRepository;
+using Sucre_DataAccess.Services;
 using Sucre_Models;
 using System.Diagnostics;
 
 namespace Sucre.Controllers
 {
+    //[ResourceFilterController(0)]
+    [ResourceFilterAsyncIE]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -19,6 +24,8 @@ namespace Sucre.Controllers
             _logger = logger;
             _initDb = initDb;
             _configuration = configuration;
+
+            //get db name from connect string
             var connstr = _configuration.GetConnectionString("DefaultConnection").ToString();
             string strDatabase = connstr.Split(';').ToList().FirstOrDefault(item => item.Contains("Database"));
             string result = strDatabase.Split('=').Last().ToString();
@@ -27,6 +34,8 @@ namespace Sucre.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation($"*->Run action Home-{nameof(Index)}");
+            LoggerExternal.LoggerEx.Information($"*->Run action Home-{nameof(Index)}");
             return View();
         }
 
@@ -55,6 +64,7 @@ namespace Sucre.Controllers
             return View(nameof(Index));
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
@@ -66,5 +76,90 @@ namespace Sucre.Controllers
             //return View();
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region lesson filter
+        [ResourceFilterSimple]
+        [ResourceFilterAsyncSimple]
+        [TypeFilter(typeof(ResourceFilterAsyncLog))]
+        //[ServiceFilter(typeof(ResourceFilterAsyncLog))]
+        public async Task<IActionResult> FilterLook()
+        {
+            try
+            {
+                LoggerExternal.LoggerEx.Information($"*->{nameof(FilterLook)}");
+                return Json("FilterLook->Json: Ok");
+
+            }
+            catch (Exception ex) 
+            {
+                LoggerExternal.LoggerEx.Error($"*->{nameof(FilterLook)}!!!");
+                return BadRequest(ex.Message);
+            }
+        }
+        [ResourceFilterAction(0)]
+        public async Task<IActionResult> FilterGlCnAc()
+        {
+            try
+            {
+                LoggerExternal.LoggerEx.Information($"*->{nameof(FilterGlCnAc)}");
+               /// var jj = HttpContext;
+                return Json("FilterGlCnAc->Json: Ok");
+
+            }
+            catch (Exception ex)
+            {
+                LoggerExternal.LoggerEx.Error($"*->{nameof(FilterGlCnAc)}!!!");
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [ResourceFilterAction(0)]
+        [ActionFilterFirst]
+        [ActionFiltesSpaceCleaner]
+        //[ActionFiltesAsyncCheck]
+        [HttpGet]
+        public async Task<IActionResult> MethodForActionFilter()
+        {
+            try
+            {
+                LoggerExternal.LoggerEx.Information($"*->{nameof(MethodForActionFilter)}-Get");
+                var model = new ModelForActionFilter
+                {
+                    Id = Guid.NewGuid(),
+                };
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                LoggerExternal.LoggerEx.Error($"*->{nameof(MethodForActionFilter)}-Get!!!");
+                return BadRequest(ex.Message);
+            }
+        }
+        [ActionFiltesAsyncCheck]
+        //[ActionFilterFirst]
+        [HttpPost]
+        public async Task<IActionResult> MethodForActionFilter(ModelForActionFilter model)
+        {
+            try
+            {
+                LoggerExternal.LoggerEx.Information($"*->{nameof(MethodForActionFilter)}-Post");
+                if (ModelState.IsValid)
+                {
+                    return Json("ModelForActionFilter (Post)->Json: Model Ok");
+                }
+                else
+                {
+                    return Json("ModelForActionFilter (Post)->Json: Model Failed");
+                };
+                
+            }
+            catch (Exception ex)
+            {
+                LoggerExternal.LoggerEx.Error($"*->{nameof(MethodForActionFilter)}-Post!!!");
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
     }
 }

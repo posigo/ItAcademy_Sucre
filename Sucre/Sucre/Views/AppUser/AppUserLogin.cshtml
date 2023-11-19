@@ -1,0 +1,30 @@
+﻿@model Sucre_Models.AppUserRegisterM
+@{
+    ViewData["Title"] = "AppUserRegisterM";
+
+}
+
+<div class="container-fluid">
+    <form method="post" enctype="multipart/form-data" asp-controller="AppUser" asp-action="AppUserLogin">
+        <div class="row row-cols-6 row-cols-auto">
+            <div class="col col-12 col-auto">
+                <div class="row form-floating">
+                    @Html.TextBoxFor(model => model.Email, null, new{@class="form-control", type="text", @id="forEmail"})
+                    @Html.LabelFor(model => model.Email, "Email", new{@for="forEmail"})
+                    @Html.ValidationMessageFor(model => model.Email, null, new{@class="text-danger"})
+                </div>
+                <div class="row form-floating">
+                    <input asp-for="Password" type="password" class="form-control" id="forPassw" />
+                    <label asp-for="Password" for="forPassw"></label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                
+                <div class="row">
+                    <input type="submit" class="btn btn-success w-50" value="In" />
+                    <a asp-action="AppUserRegister" class="btn btn-info w-50">Registration</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

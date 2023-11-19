@@ -1,10 +1,9 @@
-﻿using Humanizer;
-using LinqKit;
+﻿using LinqKit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Sucre_DataAccess.Entities;
-using Sucre_DataAccess.Entities.TDO;
+//using Sucre_DataAccess.Entities.TDO;
+using Sucre_Core;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 using Sucre_Utility;

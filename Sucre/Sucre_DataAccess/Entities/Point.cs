@@ -28,12 +28,12 @@ namespace Sucre_DataAccess.Entities
         [ForeignKey("CexId")]
         public virtual Cex Cex { get; set;}
         public virtual ICollection<Canal> Canals { get; set; }
-        public virtual ICollection<ReportDetail> ReportDetails { get; set; }
+        //public virtual ICollection<ReportDetail> ReportDetails { get; set; }
 
         public Point()
         {
             this.Canals = new HashSet<Canal>();
-            this.ReportDetails = new HashSet<ReportDetail>();
+            //this.ReportDetails = new HashSet<ReportDetail>();
         }
     }
 }

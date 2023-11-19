@@ -1,0 +1,466 @@
+2023-11-17 20:22:28.421 +03:00 [INF] *->------Program Main start 2023-11-17 20:22:28 ------
+2023-11-17 20:22:29.294 +03:00 [INF] *->------Application Run------
+2023-11-17 20:22:29.707 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 20:22:29.861 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 20:22:30.348 +03:00 [INF] *->App run (Development)
+2023-11-17 20:22:30.418 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 20:22:30.769 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 20:22:30.771 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 20:22:30.778 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 20:22:30.779 +03:00 [INF] Hosting environment: Development
+2023-11-17 20:22:30.780 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 20:22:33.161 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 20:22:33.307 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:22:33.388 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:22:33.409 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:22:33.411 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:22:33.777 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:22:33.778 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:22:33.797 +03:00 [INF] Executing ViewResult, running view Index.
+2023-11-17 20:22:34.045 +03:00 [INF] *->InitApplicattionDbContext->get DatabaseName
+2023-11-17 20:22:34.238 +03:00 [INF] Executed ViewResult - view Index executed in 453.4348ms.
+2023-11-17 20:22:34.246 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:22:34.247 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:22:34.250 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 843.7593ms
+2023-11-17 20:22:34.252 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:22:34.297 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 - text/html;+charset=utf-8 1140.7362ms
+2023-11-17 20:22:34.328 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_vs/browserLink - -
+2023-11-17 20:22:34.328 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - -
+2023-11-17 20:22:34.353 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - - - 200 11980 application/javascript;+charset=utf-8 25.1193ms
+2023-11-17 20:22:34.394 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 66.9092ms
+2023-11-17 20:22:52.382 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/FilterGlCnAc - -
+2023-11-17 20:22:52.396 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.FilterGlCnAc (Sucre)'
+2023-11-17 20:22:52.415 +03:00 [INF] Route matched with {action = "FilterGlCnAc", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FilterGlCnAc() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:22:52.431 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:22:52.433 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:22:52.434 +03:00 [INF] *->FILTER_TEST_RESOURCE...ActionIn
+2023-11-17 20:22:52.459 +03:00 [INF] *->FilterGlCnAc
+2023-11-17 20:22:52.463 +03:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2023-11-17 20:22:52.497 +03:00 [INF] *->FILTER_TEST_RESOURCE...ActionOut
+2023-11-17 20:22:52.499 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:22:52.500 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:22:52.501 +03:00 [INF] Executed action Sucre.Controllers.HomeController.FilterGlCnAc (Sucre) in 69.7138ms
+2023-11-17 20:22:52.503 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.FilterGlCnAc (Sucre)'
+2023-11-17 20:22:52.508 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/home/FilterGlCnAc - - - 200 - application/json;+charset=utf-8 126.0830ms
+2023-11-17 20:24:41.100 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/filterlook - -
+2023-11-17 20:24:41.123 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:24:41.131 +03:00 [INF] Route matched with {action = "FilterLook", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FilterLook() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:24:41.147 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleIn
+2023-11-17 20:24:41.152 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleAsync
+2023-11-17 20:24:41.153 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:24:41.154 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:24:41.160 +03:00 [INF] *->FilterLook
+2023-11-17 20:24:41.162 +03:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2023-11-17 20:24:41.163 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:24:41.164 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:24:41.166 +03:00 [INF] Executed action Sucre.Controllers.HomeController.FilterLook (Sucre) in 19.2396ms
+2023-11-17 20:24:41.169 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:24:41.172 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/home/filterlook - - - 200 - application/json;+charset=utf-8 72.4641ms
+2023-11-17 20:34:25.982 +03:00 [INF] *->------Program Main start 2023-11-17 20:34:25 ------
+2023-11-17 20:34:26.644 +03:00 [INF] *->------Application Run------
+2023-11-17 20:34:26.888 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 20:34:27.044 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 20:34:27.433 +03:00 [INF] *->App run (Development)
+2023-11-17 20:34:27.501 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 20:34:27.865 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 20:34:27.867 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 20:34:27.874 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 20:34:27.876 +03:00 [INF] Hosting environment: Development
+2023-11-17 20:34:27.877 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 20:34:30.375 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 20:34:30.510 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:34:30.582 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:34:30.601 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:34:30.603 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:34:30.918 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:34:30.919 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:34:30.942 +03:00 [INF] Executing ViewResult, running view Index.
+2023-11-17 20:34:31.179 +03:00 [INF] *->InitApplicattionDbContext->get DatabaseName
+2023-11-17 20:34:31.400 +03:00 [INF] Executed ViewResult - view Index executed in 472.3258ms.
+2023-11-17 20:34:31.406 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:34:31.407 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:34:31.410 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 810.2587ms
+2023-11-17 20:34:31.412 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:34:31.449 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 - text/html;+charset=utf-8 1078.6453ms
+2023-11-17 20:34:31.454 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - -
+2023-11-17 20:34:31.459 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_vs/browserLink - -
+2023-11-17 20:34:31.477 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - - - 200 11980 application/javascript;+charset=utf-8 22.0959ms
+2023-11-17 20:34:31.522 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 62.7340ms
+2023-11-17 20:34:38.732 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/filterlook - -
+2023-11-17 20:34:38.744 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:34:38.761 +03:00 [INF] Route matched with {action = "FilterLook", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FilterLook() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:34:38.774 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleIn
+2023-11-17 20:34:38.777 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleAsync
+2023-11-17 20:34:38.779 +03:00 [INF] *->FILTER_TEST_RESOURCE...LoggerAsync
+2023-11-17 20:34:38.781 +03:00 [WRN] !!!Filter SimpleAsyncLogResourceFilter-OnResourceExecutionAsync - 17.11.2023 20:34:38 - Microsoft.AspNetCore.Routing.RouteValueDictionary - 
+2023-11-17 20:34:38.782 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:34:38.783 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:34:38.803 +03:00 [INF] *->FilterLook
+2023-11-17 20:34:38.808 +03:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2023-11-17 20:34:38.840 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:34:38.841 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:34:38.843 +03:00 [INF] Executed action Sucre.Controllers.HomeController.FilterLook (Sucre) in 69.0094ms
+2023-11-17 20:34:38.844 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:34:38.846 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/home/filterlook - - - 200 - application/json;+charset=utf-8 114.4574ms
+2023-11-17 20:37:34.734 +03:00 [INF] *->------Program Main start 2023-11-17 20:37:34 ------
+2023-11-17 20:37:35.285 +03:00 [INF] *->------Application Run------
+2023-11-17 20:37:35.489 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 20:37:35.584 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 20:37:35.906 +03:00 [INF] *->App run (Development)
+2023-11-17 20:37:35.955 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 20:37:36.260 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 20:37:36.262 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 20:37:36.267 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 20:37:36.268 +03:00 [INF] Hosting environment: Development
+2023-11-17 20:37:36.269 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 20:37:38.249 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 20:37:38.365 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:37:38.420 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:37:38.440 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:37:38.442 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:37:38.688 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:37:38.689 +03:00 [INF] *->Run action Home-Index
+2023-11-17 20:37:38.707 +03:00 [INF] Executing ViewResult, running view Index.
+2023-11-17 20:37:38.936 +03:00 [INF] *->InitApplicattionDbContext->get DatabaseName
+2023-11-17 20:37:39.088 +03:00 [INF] Executed ViewResult - view Index executed in 394.0168ms.
+2023-11-17 20:37:39.095 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:37:39.096 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:37:39.100 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 661.1445ms
+2023-11-17 20:37:39.102 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 20:37:39.140 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 - text/html;+charset=utf-8 894.6224ms
+2023-11-17 20:37:39.142 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - -
+2023-11-17 20:37:39.142 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_vs/browserLink - -
+2023-11-17 20:37:39.165 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - - - 200 11980 application/javascript;+charset=utf-8 23.2238ms
+2023-11-17 20:37:39.207 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 64.8621ms
+2023-11-17 20:38:03.418 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/filterlook - -
+2023-11-17 20:38:03.431 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:38:03.450 +03:00 [INF] Route matched with {action = "FilterLook", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FilterLook() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 20:38:03.463 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 20:38:03.464 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 20:38:03.465 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleIn
+2023-11-17 20:38:03.469 +03:00 [INF] *->FILTER_TEST_RESOURCE...SimpleAsync
+2023-11-17 20:38:03.472 +03:00 [INF] *->FILTER_TEST_RESOURCE...LoggerAsync
+2023-11-17 20:38:03.474 +03:00 [WRN] !!!Filter SimpleAsyncLogResourceFilter-OnResourceExecutionAsync - 17.11.2023 20:38:03 - Microsoft.AspNetCore.Routing.RouteValueDictionary - 
+2023-11-17 20:38:03.499 +03:00 [INF] *->FilterLook
+2023-11-17 20:38:03.503 +03:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2023-11-17 20:38:03.529 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 20:38:03.531 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 20:38:03.532 +03:00 [INF] Executed action Sucre.Controllers.HomeController.FilterLook (Sucre) in 68.8358ms
+2023-11-17 20:38:03.534 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.FilterLook (Sucre)'
+2023-11-17 20:38:03.536 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/home/filterlook - - - 200 - application/json;+charset=utf-8 118.1413ms
+2023-11-17 21:03:11.140 +03:00 [INF] *->------Program Main start 2023-11-17 21:03:11 ------
+2023-11-17 21:03:11.809 +03:00 [INF] *->------Application Run------
+2023-11-17 21:03:12.134 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:03:12.277 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:03:12.793 +03:00 [INF] *->App run (Development)
+2023-11-17 21:03:12.899 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:03:13.209 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:03:13.210 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:03:13.216 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:03:13.217 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:03:13.218 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:03:24.705 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:03:24.833 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:03:24.896 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:03:24.913 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:03:24.915 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:03:24.918 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:08:12.971 +03:00 [INF] *->------Program Main start 2023-11-17 21:08:12 ------
+2023-11-17 21:08:13.739 +03:00 [INF] *->------Application Run------
+2023-11-17 21:08:14.046 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:08:14.160 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:08:15.026 +03:00 [INF] *->App run (Development)
+2023-11-17 21:08:15.073 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:08:15.395 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:08:15.396 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:08:15.403 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:08:15.404 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:08:15.406 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:08:16.693 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:08:16.806 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:08:16.863 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:08:16.883 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:08:16.884 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:08:16.887 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:08:37.005 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:08:37.033 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:08:37.034 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:08:37.055 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 20156.2167ms
+2023-11-17 21:08:37.065 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:08:37.076 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 20386.3451ms
+2023-11-17 21:08:37.191 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/favicon.ico - -
+2023-11-17 21:08:37.312 +03:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre\wwwroot\favicon.ico'
+2023-11-17 21:08:37.319 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/favicon.ico - - - 200 5430 image/x-icon 127.2396ms
+2023-11-17 21:08:48.293 +03:00 [INF] *->------Program Main start 2023-11-17 21:08:48 ------
+2023-11-17 21:08:48.833 +03:00 [INF] *->------Application Run------
+2023-11-17 21:08:49.055 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:08:49.147 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:08:49.464 +03:00 [INF] *->App run (Development)
+2023-11-17 21:08:49.513 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:08:49.818 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:08:49.819 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:08:49.825 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:08:49.826 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:08:49.827 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:08:50.982 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:08:51.093 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:08:51.141 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:08:51.158 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:08:51.160 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:08:51.162 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:08:51.177 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:08:51.212 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:08:51.220 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:08:51.228 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 65.082ms
+2023-11-17 21:08:51.235 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:08:51.244 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 265.5822ms
+2023-11-17 21:09:21.673 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:09:21.685 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:21.687 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:09:21.701 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:09:21.702 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:09:21.704 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:09:21.707 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:09:21.710 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:09:21.711 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:09:21.712 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 11.0675ms
+2023-11-17 21:09:21.714 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:21.716 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 43.2680ms
+2023-11-17 21:09:31.011 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:09:31.029 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:31.031 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:09:31.044 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:09:31.046 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:09:31.047 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:09:31.049 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:09:31.051 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:09:31.053 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:09:31.054 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 9.6728ms
+2023-11-17 21:09:31.056 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:31.058 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 46.9316ms
+2023-11-17 21:09:31.087 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/favicon.ico - -
+2023-11-17 21:09:31.115 +03:00 [INF] The file /favicon.ico was not modified
+2023-11-17 21:09:31.120 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/favicon.ico - - - 304 - image/x-icon 33.2610ms
+2023-11-17 21:09:43.984 +03:00 [INF] *->------Program Main start 2023-11-17 21:09:43 ------
+2023-11-17 21:09:44.466 +03:00 [INF] *->------Application Run------
+2023-11-17 21:09:44.672 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:09:44.755 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:09:45.058 +03:00 [INF] *->App run (Development)
+2023-11-17 21:09:45.202 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:09:45.472 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:09:45.473 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:09:45.479 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:09:45.480 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:09:45.481 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:09:46.859 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:09:46.982 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:47.029 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:09:47.045 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:09:47.046 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:09:47.048 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:09:47.064 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:09:47.084 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:09:47.091 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:09:47.099 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 49.8134ms
+2023-11-17 21:09:47.104 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:09:47.111 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 259.4730ms
+2023-11-17 21:09:58.440 +03:00 [INF] *->------Program Main start 2023-11-17 21:09:58 ------
+2023-11-17 21:09:58.983 +03:00 [INF] *->------Application Run------
+2023-11-17 21:09:59.187 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:09:59.305 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:09:59.612 +03:00 [INF] *->App run (Development)
+2023-11-17 21:09:59.665 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:09:59.975 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:09:59.977 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:09:59.984 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:09:59.985 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:09:59.986 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:10:02.057 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:10:02.186 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:10:02.243 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:10:02.259 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:10:02.261 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:10:02.263 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:10:02.279 +03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2023-11-17 21:10:02.310 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 21:10:02.321 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 21:10:02.328 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 65.5339ms
+2023-11-17 21:10:02.335 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:10:02.349 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 46 text/plain;+charset=utf-8 295.2153ms
+2023-11-17 21:10:11.712 +03:00 [INF] *->------Program Main start 2023-11-17 21:10:11 ------
+2023-11-17 21:10:12.199 +03:00 [INF] *->------Application Run------
+2023-11-17 21:10:12.487 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:10:12.579 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:10:12.876 +03:00 [INF] *->App run (Development)
+2023-11-17 21:10:12.920 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:10:13.211 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:10:13.213 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:10:13.218 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:10:13.220 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:10:13.221 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:10:14.926 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:10:15.049 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:10:15.102 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:10:15.121 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:10:15.123 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:10:15.126 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:11:10.740 +03:00 [INF] *->------Program Main start 2023-11-17 21:11:10 ------
+2023-11-17 21:11:11.231 +03:00 [INF] *->------Application Run------
+2023-11-17 21:11:11.446 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:11:11.554 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:11:11.893 +03:00 [INF] *->App run (Development)
+2023-11-17 21:11:11.960 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:11:12.273 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:11:12.275 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:11:12.284 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:11:12.286 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:11:12.287 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:11:14.160 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:11:14.267 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:11:14.338 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:11:14.364 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:11:14.366 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:11:14.368 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE
+2023-11-17 21:18:18.762 +03:00 [INF] *->------Program Main start 2023-11-17 21:18:18 ------
+2023-11-17 21:18:19.438 +03:00 [INF] *->------Application Run------
+2023-11-17 21:18:19.742 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:18:19.886 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:18:20.283 +03:00 [INF] *->App run (Development)
+2023-11-17 21:18:20.460 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:18:20.856 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:18:20.858 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:18:20.863 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:18:20.864 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:18:20.865 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:18:22.814 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:18:22.939 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:18:23.009 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:18:23.025 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:18:23.026 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:18:23.029 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+2023-11-17 21:26:11.499 +03:00 [INF] *->------Program Main start 2023-11-17 21:26:11 ------
+2023-11-17 21:26:12.055 +03:00 [INF] *->------Application Run------
+2023-11-17 21:26:12.267 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:26:12.392 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:26:12.688 +03:00 [INF] *->App run (Development)
+2023-11-17 21:26:12.737 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:26:13.015 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:26:13.016 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:26:13.024 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:26:13.025 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:26:13.026 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:26:14.911 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:26:15.015 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:26:15.069 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:26:15.087 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:26:15.088 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:26:15.091 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+2023-11-17 21:28:22.585 +03:00 [INF] *->------Program Main start 2023-11-17 21:28:22 ------
+2023-11-17 21:28:23.156 +03:00 [INF] *->------Application Run------
+2023-11-17 21:28:23.380 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:28:23.469 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:28:23.797 +03:00 [INF] *->App run (Development)
+2023-11-17 21:28:23.844 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:28:24.154 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:28:24.156 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:28:24.163 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:28:24.164 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:28:24.165 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:28:25.231 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:28:25.341 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:28:25.389 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:28:25.402 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:28:25.404 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:28:25.406 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0
+2023-11-17 21:32:56.640 +03:00 [INF] *->------Program Main start 2023-11-17 21:32:56 ------
+2023-11-17 21:32:57.250 +03:00 [INF] *->------Application Run------
+2023-11-17 21:32:57.460 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 21:32:57.564 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 21:32:57.848 +03:00 [INF] *->App run (Development)
+2023-11-17 21:32:57.892 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 21:32:58.189 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 21:32:58.191 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 21:32:58.197 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 21:32:58.198 +03:00 [INF] Hosting environment: Development
+2023-11-17 21:32:58.199 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 21:32:59.885 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 21:33:00.014 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 21:33:00.076 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 21:33:00.098 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 21:33:00.102 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 21:33:00.105 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0
+2023-11-17 23:14:53.158 +03:00 [INF] *->------Program Main start 2023-11-17 23:14:53 ------
+2023-11-17 23:14:53.368 +03:00 [INF] *->------Application Run------
+2023-11-17 23:14:53.465 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 23:14:53.505 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 23:14:53.656 +03:00 [INF] *->App run (Development)
+2023-11-17 23:14:53.678 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 23:14:53.825 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 23:14:53.826 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 23:14:53.829 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 23:14:53.829 +03:00 [INF] Hosting environment: Development
+2023-11-17 23:14:53.830 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 23:14:54.996 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 23:14:55.043 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 23:14:55.067 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 23:14:55.074 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 23:14:55.074 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 23:14:55.075 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+2023-11-17 23:14:57.903 +03:00 [INF] *->Run action Home-Index
+2023-11-17 23:14:57.903 +03:00 [INF] *->Run action Home-Index
+2023-11-17 23:14:57.913 +03:00 [INF] Executing ViewResult, running view Index.
+2023-11-17 23:14:58.021 +03:00 [INF] *->InitApplicattionDbContext->get DatabaseName
+2023-11-17 23:14:58.105 +03:00 [INF] Executed ViewResult - view Index executed in 199.1559ms.
+2023-11-17 23:14:58.108 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 23:14:58.109 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 23:14:58.110 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 3037.1559ms
+2023-11-17 23:14:58.111 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 23:14:58.125 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 - text/html;+charset=utf-8 3130.6222ms
+2023-11-17 23:14:58.126 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/Sucre.styles.css?v=r3ojiAAUhTaJRKEv4THWu99ZucGG3Q99-RUoIdEeJDo - -
+2023-11-17 23:14:58.137 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - -
+2023-11-17 23:14:58.137 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_vs/browserLink - -
+2023-11-17 23:14:58.138 +03:00 [INF] The file /Sucre.styles.css was not modified
+2023-11-17 23:14:58.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/Sucre.styles.css?v=r3ojiAAUhTaJRKEv4THWu99ZucGG3Q99-RUoIdEeJDo - - - 304 - text/css 23.1874ms
+2023-11-17 23:14:58.179 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - - - 200 11980 application/javascript;+charset=utf-8 41.7158ms
+2023-11-17 23:14:58.204 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 67.0202ms
+2023-11-17 23:22:32.219 +03:00 [INF] *->------Program Main start 2023-11-17 23:22:32 ------
+2023-11-17 23:22:32.509 +03:00 [INF] *->------Application Run------
+2023-11-17 23:22:32.649 +03:00 [INF] *->Services register successfully (Microsoft.AspNetCore.Builder.WebApplicationBuilder)
+2023-11-17 23:22:32.703 +03:00 [INF] *->App create succesfully (Microsoft.AspNetCore.Builder.WebApplication)
+2023-11-17 23:22:33.036 +03:00 [INF] *->App run (Development)
+2023-11-17 23:22:33.059 +03:00 [INF] User profile is available. Using 'C:\Users\posig\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-17 23:22:33.204 +03:00 [INF] Now listening on: https://localhost:7291
+2023-11-17 23:22:33.204 +03:00 [INF] Now listening on: http://localhost:5202
+2023-11-17 23:22:33.206 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-11-17 23:22:33.207 +03:00 [INF] Hosting environment: Development
+2023-11-17 23:22:33.207 +03:00 [INF] Content root path: C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre
+2023-11-17 23:22:34.298 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/ - -
+2023-11-17 23:22:34.347 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 23:22:34.377 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 23:22:34.383 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 23:22:34.384 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 23:22:34.385 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+2023-11-17 23:22:34.664 +03:00 [INF] *->Run action Home-Index
+2023-11-17 23:22:34.664 +03:00 [INF] *->Run action Home-Index
+2023-11-17 23:22:34.673 +03:00 [INF] Executing ViewResult, running view Index.
+2023-11-17 23:22:34.786 +03:00 [INF] *->InitApplicattionDbContext->get DatabaseName
+2023-11-17 23:22:34.882 +03:00 [INF] Executed ViewResult - view Index executed in 215.4306ms.
+2023-11-17 23:22:34.886 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerOut
+2023-11-17 23:22:34.886 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalOut
+2023-11-17 23:22:34.887 +03:00 [INF] Executed action Sucre.Controllers.HomeController.Index (Sucre) in 504.2383ms
+2023-11-17 23:22:34.888 +03:00 [INF] Executed endpoint 'Sucre.Controllers.HomeController.Index (Sucre)'
+2023-11-17 23:22:34.903 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/ - - - 200 - text/html;+charset=utf-8 606.3383ms
+2023-11-17 23:22:34.907 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_vs/browserLink - -
+2023-11-17 23:22:34.907 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - -
+2023-11-17 23:22:34.925 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_framework/aspnetcore-browser-refresh.js - - - 200 11980 application/javascript;+charset=utf-8 17.5778ms
+2023-11-17 23:22:34.942 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 34.5763ms
+2023-11-17 23:23:13.764 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/filterglgnac - -
+2023-11-17 23:23:13.772 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7291/home/filterglgnac - - - 404 0 - 7.4768ms
+2023-11-17 23:23:54.819 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7291/home/FilterGlCnAc - -
+2023-11-17 23:23:54.857 +03:00 [INF] Executing endpoint 'Sucre.Controllers.HomeController.FilterGlCnAc (Sucre)'
+2023-11-17 23:23:54.864 +03:00 [INF] Route matched with {action = "FilterGlCnAc", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FilterGlCnAc() on controller Sucre.Controllers.HomeController (Sucre).
+2023-11-17 23:23:54.869 +03:00 [INF] *->FILTER_TEST_RESOURCE...GlobalIn
+2023-11-17 23:23:54.869 +03:00 [INF] *->FILTER_TEST_RESOURCE...ControllerIn
+2023-11-17 23:23:54.869 +03:00 [INF] *->FILTER_TEST_RESOURCE...IE - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+2023-11-17 23:23:54.870 +03:00 [INF] *->FILTER_TEST_RESOURCE...ActionIn
+2023-11-17 23:23:54.878 +03:00 [INF] *->FilterGlCnAc

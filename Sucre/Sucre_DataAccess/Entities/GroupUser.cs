@@ -19,12 +19,12 @@ namespace Sucre_DataAccess.Entities
         [MaxLength(255)]
         public string Description { get; set; } = string.Empty;
 
-        public virtual ICollection<User> Users { get; set;}
+        public virtual ICollection<AppUser> AppUsers { get; set;}
         public virtual ICollection<Report> Reports { get; set;}
-
+        
         public GroupUser()
         {
-            this.Users = new HashSet<User>();
+            this.AppUsers = new HashSet<AppUser>();
             this.Reports = new HashSet<Report>();
         }
 

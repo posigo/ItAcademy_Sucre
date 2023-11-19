@@ -1,0 +1,49 @@
+Guid guid = Guid.NewGuid();
+ShortGuid sguid1 = guid; // implicitly cast the guid as a shortguid
+Console.WriteLine(sguid1);
+Console.WriteLine(sguid1.Guid);
+
+
+https://www.okta.com/identity-101/hashing-algorithms/
+
+https://www.md5hashgenerator.com/?_ga=2.59968490.612108049.1700381940-146559234.1700381940
+https://www.md5online.org/md5-decrypt.html
+
+https://10015.io/tools/md5-encrypt-decrypt
+
+static string CreateMD5(string input)
+{
+    // Use input string to calculate MD5 hash
+    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+    {
+        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+        byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+        return Convert.ToHexString(hashBytes); // .NET 5 +
+
+        // Convert the byte array to hexadecimal string prior to .NET 5
+        // StringBuilder sb = new System.Text.StringBuilder();
+        // for (int i = 0; i < hashBytes.Length; i++)
+        // {
+        //     sb.Append(hashBytes[i].ToString("X2"));
+        // }
+        // return sb.ToString();
+    }
+}
+
+https://csharp.webdelphi.ru/algoritmy-xeshirovaniya-v-net-c/
+https://www.techiedelight.com/ru/generate-md5-hash-of-string-csharp/
+https://vscode.ru/helpful-things/heshirovanie-md5-hash-na-c-sharp.html
+
+
+validationb
+
+https://www.youtube.com/watch?v=uROqKzRBdtA
+https://ru.stackoverflow.com/questions/630322/%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-fluentvalidation-%D0%B2-%D0%BF%D0%B0%D1%82%D0%B5%D1%80%D0%BD%D0%B5-repository
+
+http://iantonov.me/page/fluent-validation-v-asp-net-mvc-prilozhenijah-osnovy
+
+
+https://docs.fluentvalidation.net/en/latest/built-in-validators.html
+
+https://docs.fluentvalidation.net/en/latest/testing.html#mocking

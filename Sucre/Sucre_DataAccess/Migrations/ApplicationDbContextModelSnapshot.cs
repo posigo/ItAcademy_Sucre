@@ -52,6 +52,40 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("GroupUserReport");
                 });
 
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ApplicationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("AppUsers");
+                });
+
             modelBuilder.Entity("Sucre_DataAccess.Entities.AsPaz", b =>
                 {
                     b.Property<int>("Id")
@@ -311,59 +345,6 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entities.ReportDetail", b =>
-                {
-                    b.Property<int>("CanalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PointId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CanalId");
-
-                    b.HasIndex("PointId");
-
-                    b.HasIndex("ReportId");
-
-                    b.ToTable("ReportDetails");
-                });
-
-            modelBuilder.Entity("Sucre_DataAccess.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("Sucre_DataAccess.Entities.ValueDay", b =>
                 {
                     b.Property<int>("Id")
@@ -457,6 +438,17 @@ namespace Sucre_DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sucre_DataAccess.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("Sucre_DataAccess.Entities.GroupUser", "GroupUser")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GroupUser");
+                });
+
             modelBuilder.Entity("Sucre_DataAccess.Entities.AsPaz", b =>
                 {
                     b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
@@ -494,44 +486,6 @@ namespace Sucre_DataAccess.Migrations
                     b.Navigation("Cex");
 
                     b.Navigation("Energy");
-                });
-
-            modelBuilder.Entity("Sucre_DataAccess.Entities.ReportDetail", b =>
-                {
-                    b.HasOne("Sucre_DataAccess.Entities.Canal", "Canal")
-                        .WithMany()
-                        .HasForeignKey("CanalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sucre_DataAccess.Entities.Point", "Point")
-                        .WithMany()
-                        .HasForeignKey("PointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sucre_DataAccess.Entities.Report", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Canal");
-
-                    b.Navigation("Point");
-
-                    b.Navigation("Report");
-                });
-
-            modelBuilder.Entity("Sucre_DataAccess.Entities.User", b =>
-                {
-                    b.HasOne("Sucre_DataAccess.Entities.GroupUser", "GroupUser")
-                        .WithMany("Users")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GroupUser");
                 });
 
             modelBuilder.Entity("Sucre_DataAccess.Entities.ValueDay", b =>
@@ -590,7 +544,7 @@ namespace Sucre_DataAccess.Migrations
 
             modelBuilder.Entity("Sucre_DataAccess.Entities.GroupUser", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("Sucre_DataAccess.Entities.ParameterType", b =>

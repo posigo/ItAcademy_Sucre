@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sucre.Filters;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using Sucre_Models;
 
 namespace Sucre.Controllers
 {
+    //[SimpleResourceFilter]
+    [ResourceFilterAsyncSimple]
+    [FakeNotFoundResourceFilter] //не понял 
     public class EnergyController : Controller
     {
         //private readonly IDbSucreEnergy _energyDb;
@@ -20,7 +24,8 @@ namespace Sucre.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            
+            var cont = HttpContext;
+            string sdsd = cont.Request.Headers["User-Agent"].ToString();
             //var energiesDb = await _energyDb.GetAllAsync();
             var energiesDb = await _sucreUnitOfWork.repoSucreEnergy.GetAllAsync();
             IEnumerable<EnergyM> energiesM = energiesDb.Select(u => new EnergyM
@@ -43,7 +48,7 @@ namespace Sucre.Controllers
         //    return View(energiesM);
         //}
        
-        [HttpGet]
+        [HttpGet]        
         public async Task<IActionResult> Upsert(int? Id)
         {
             EnergyM energyM = new EnergyM();

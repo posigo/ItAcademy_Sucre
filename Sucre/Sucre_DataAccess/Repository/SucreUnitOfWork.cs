@@ -1,4 +1,6 @@
-﻿using Sucre_DataAccess.Data;
+﻿using Microsoft.Extensions.Logging;
+using Sucre_Core.LoggerExternal;
+using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
 using System;
@@ -12,12 +14,13 @@ namespace Sucre_DataAccess.Repository
     public class SucreUnitOfWork : ISucreUnitOfWork
     {
         private ApplicationDbContext _dbSucre;
-        private IDbSucreAsPaz _repoSucreAsPaz;
-        private IDbSucreCanal _repoSucreCanal;
-        private IDbSucreCex _repoSucreCex;
-        private IDbSucreEnergy _repoSucreEnergy;
-        private IDbSucreParameterType _repoSucreParameterType;
-        private IDbSucrePoint _repoSucrePoint;
+        private readonly IDbSucreAsPaz _repoSucreAsPaz;
+        private readonly IDbSucreCanal _repoSucreCanal;
+        private readonly IDbSucreCex _repoSucreCex;
+        private readonly IDbSucreEnergy _repoSucreEnergy;
+        private readonly IDbSucreParameterType _repoSucreParameterType;
+        private readonly IDbSucrePoint _repoSucrePoint;
+        private readonly ILogger<SucreUnitOfWork> _log;
 
         public SucreUnitOfWork(ApplicationDbContext dbSucre,
                             IDbSucreAsPaz repoSucreAsPaz,
@@ -25,7 +28,8 @@ namespace Sucre_DataAccess.Repository
                             IDbSucreCex repoSucreCex,
                             IDbSucreEnergy repoSucreEnergy,
                             IDbSucreParameterType repoSucreParameterType,
-                            IDbSucrePoint repoSucrePoint)
+                            IDbSucrePoint repoSucrePoint,
+                            ILogger<SucreUnitOfWork> log)
         {
             _dbSucre = dbSucre;
             _repoSucreAsPaz = repoSucreAsPaz;
@@ -34,6 +38,9 @@ namespace Sucre_DataAccess.Repository
             _repoSucreEnergy = repoSucreEnergy;
             _repoSucreParameterType = repoSucreParameterType;
             _repoSucrePoint = repoSucrePoint ;
+            _log = log;
+            _log.LogInformation("SucreUnitOfWork use");
+            LoggerExternal.LoggerEx.Information("*->SucreUnitOfWork use");
         }
 
         public IDbSucreAsPaz repoSucreAsPaz => _repoSucreAsPaz;

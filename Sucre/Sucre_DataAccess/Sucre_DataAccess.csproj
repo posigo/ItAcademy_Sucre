@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sucre_Core\Sucre_Core.csproj" />
     <ProjectReference Include="..\Sucre_Utility\Sucre_Utility.csproj" />
   </ItemGroup>
 

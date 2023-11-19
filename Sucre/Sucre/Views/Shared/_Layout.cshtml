@@ -1,5 +1,11 @@
-﻿@using Sucre_DataAccess.Repository
-@inject Sucre_DataAccess.Repository.InitApplicattionDbContext DbName
+﻿
+@using Microsoft.AspNetCore.Identity;
+@using Sucre_DataAccess.Entities;
+@using Sucre_DataAccess.Services
+@*@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+*@
+@inject InitApplicattionDbContext DbName
 @{    
 }
 <!DOCTYPE html>
@@ -53,10 +59,28 @@
                                 @* <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li> *@
                             </ul>
-                        </li>   
+                        </li>                           
+                    </ul>
+                    @{
+                        
+                    }
+                    <ul class="navbar-nav">
+                        
+                        
+                        
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item navbar-text fw-bold">@User.Identity.Name</li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="AppUser" asp-action="AppUserLogout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="AppUser" asp-action="AppUserLogin">Login</a></li>
+                        }
                         
                     </ul>
-                    <span class="navbar-text" role="document">@DbName.DatabaseName</span>
+                    
+                    <span class="navbar-text fw-bold" role="document">@DbName.DatabaseName</span>
 
                 </div>
             </div>

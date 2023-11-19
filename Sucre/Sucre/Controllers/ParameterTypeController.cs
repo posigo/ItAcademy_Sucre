@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sucre.Filters;
+using Sucre_Core.LoggerExternal;
 using Sucre_DataAccess;
 using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
@@ -11,15 +13,19 @@ namespace Sucre.Controllers
     {
         //private readonly IDbSucreParameterType _parameterTypeDb;
         private readonly ISucreUnitOfWork _sucreUnitOfWork;
+        private readonly ILogger<ParameterTypeController> _log;
 
         public ParameterTypeController(IDbSucreParameterType parameterTypeDb,
-                                    ISucreUnitOfWork sucreUnitOfWork)
+                                    ISucreUnitOfWork sucreUnitOfWork,
+                                    ILogger<ParameterTypeController> log)
         {
             //_parameterTypeDb = parameterTypeDb;
             _sucreUnitOfWork = sucreUnitOfWork;     
+            _log = log;
 
         }
 
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -28,6 +34,12 @@ namespace Sucre.Controllers
             var ggg = await _sucreUnitOfWork.repoSucreParameterType.GetAllAsync();
             IEnumerable<ParameterTypeM> fff = ggg.Select(u => new ParameterTypeM { 
                 Id = u.Id, Name = u.Name, Mnemo = u.Mnemo, UnitMeas = u.UnitMeas });
+            
+            var t = TestGlobalFilterResourceValue.GlobalResourceIn;
+            _log.LogInformation($"!!!{t}!!!");
+            LoggerExternal.LoggerEx.Information($"!!!{t}!!!");
+            Console.WriteLine(t);
+
             return View(fff);
         }
 

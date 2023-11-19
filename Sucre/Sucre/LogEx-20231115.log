@@ -1,0 +1,4 @@
+2023-11-15 23:02:57.218 +03:00 [INF] *->------Program Main start 2023-11-15 23:02:57 ------
+2023-11-15 23:02:57.269 +03:00 [FTL] *->!!! FATAL ERROR. Programs-Main...fucked up
+System.DivideByZeroException: Attempted to divide by zero.
+   at Sucre.Program.Main(String[] args) in C:\Projects\ItAcademy\Sukre-v00\Sucre\Sucre\Program.cs:line 37

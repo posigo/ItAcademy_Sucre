@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sucre_Core.LoggerExternal;
 using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
@@ -18,6 +19,7 @@ namespace Sucre_DataAccess.Repository
         public DbSucreCex(ApplicationDbContext db): base(db)
         {
             _db = db;
+            LoggerExternal.LoggerEx.Information($"*->Use IRepository DbSucreCex-{DateTime.Now.ToShortTimeString()}");
         }
 
         public bool CheckAllFieldsEmpty (Cex cex)

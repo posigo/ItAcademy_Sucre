@@ -17,6 +17,8 @@ namespace Sucre_DataAccess.Data
                
         }
 
+        //table application users
+        public DbSet<AppUser> AppUsers { get; set; }
         //Alarm and fire automatic protection table
         public DbSet<AsPaz> AsPazs { get; set; }
         //measurement channel table
@@ -34,9 +36,7 @@ namespace Sucre_DataAccess.Data
         //table reports
         public DbSet<Report> Reports { get; set; }
         //table report details
-        public DbSet<ReportDetail> ReportDetails { get; set; }
-        //table users
-        public DbSet<User> Users { get; set; }
+        //public DbSet<ReportDetail> ReportDetails { get; set; }        
         //daily values table
         public DbSet<ValueDay> ValuesDay { get; set; }
         //hourly value table
@@ -49,10 +49,10 @@ namespace Sucre_DataAccess.Data
             modelBuilder.Entity<ValueDay>().HasKey(key => new { key.Id, key.Date });
             modelBuilder.Entity<ValueHour>().HasKey(key => new { key.Id, key.Date, key.Hour });
             modelBuilder.Entity<ValueMounth>().HasKey(key => new { key.Id, key.Date });
-            modelBuilder.Entity<ReportDetail>().HasNoKey();
-            modelBuilder.Entity<Canal>().Ignore(field => field.ReportDetails);
-            modelBuilder.Entity<Point>().Ignore(field => field.ReportDetails);
-            modelBuilder.Entity<Report>().Ignore(field => field.ReportDetails);
+            //modelBuilder.Entity<ReportDetail>().HasNoKey();
+            //modelBuilder.Entity<Canal>().Ignore(field => field.ReportDetails);
+            //modelBuilder.Entity<Point>().Ignore(field => field.ReportDetails);
+            //modelBuilder.Entity<Report>().Ignore(field => field.ReportDetails);
 
             //modelBuilder.Entity<ParameterType>().HasKey(x => x.Id);
             //modelBuilder.Entity<ParameterType>().Property(x => x.Id).ValueGeneratedOnAdd();

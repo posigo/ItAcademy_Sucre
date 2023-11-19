@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sucre_Core\Sucre_Core.csproj" />
+    <ProjectReference Include="..\Sucre_DataAccess\Sucre_DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

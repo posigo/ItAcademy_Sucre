@@ -15,12 +15,12 @@ namespace Sucre_DataAccess.Entities
         public string Description { get; set; } = string.Empty;
 
         public virtual ICollection<GroupUser> GroupUsers { get; set; }
-        public virtual ICollection<ReportDetail> ReportDetails { get; set; }
+        //public virtual ICollection<ReportDetail> ReportDetails { get; set; }
 
         public Report()
         {
             this.GroupUsers = new HashSet<GroupUser>();
-            this.ReportDetails = new HashSet<ReportDetail>();
+            //this.ReportDetails = new HashSet<ReportDetail>();
         }
     }
 }

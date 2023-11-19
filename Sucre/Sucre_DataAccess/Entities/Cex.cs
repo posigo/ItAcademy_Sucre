@@ -15,27 +15,27 @@ namespace Sucre_DataAccess.Entities
         /// Управление
         /// </summary>
         [MaxLength(35)]
-        public string? Management { get; set; } = string.Empty;
+        public string? Management { get; set; }
         /// <summary>
         /// цех
         /// </summary>
         [MaxLength(35)]
-        public string? CexName { get; set; } = string.Empty;
+        public string? CexName { get; set; }
         /// <summary>
         /// участок
         /// </summary>
         [MaxLength(50)]
-        public string? Area { get; set; } = string.Empty;
+        public string? Area { get; set; }
         /// <summary>
         /// устанорвка
         /// </summary>
         [MaxLength(50)]
-        public string? Device { get; set; } = string.Empty;
+        public string? Device { get; set; }
         /// <summary>
         /// локация
         /// </summary>
         [MaxLength(70)]
-        public string? Location { get; set; } = string.Empty;
+        public string? Location { get; set; }
 
         public virtual ICollection<Point> Points { get; set; }
     }

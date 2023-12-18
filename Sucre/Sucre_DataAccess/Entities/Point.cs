@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sucre_Core;
 
 namespace Sucre_DataAccess.Entities
 {
@@ -7,7 +8,7 @@ namespace Sucre_DataAccess.Entities
     /// Точки учета
     /// </summary>
     [Table("Points")]
-    public class Point : IBaseEntity
+    public class Point : IBaseEntity<int>
     {
         [Key]
         public int Id { get; set; }

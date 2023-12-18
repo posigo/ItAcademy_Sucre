@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sucre_DataAccess.Entities
+namespace Sucre_Models
 {
     public class AppUserM
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [MaxLength(30)]
         public string? Name { get; set; }
         [MaxLength(255)]
@@ -15,12 +13,13 @@ namespace Sucre_DataAccess.Entities
         [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
+        
+        public string PasswordHash { get; set; }
         [Required]
-        public string PasswordHash { get; set; } = string.Empty;
-        [Required]
-        public int GroupId { get; set; }
+        public int GroupNumber { get; set; }
+        //public IEnumerable<SelectListItem> GroupSelectList { get; set; }
 
-        public IEnumerable<SelectListItem> GroupSelectList { get; set; }
+        public bool IsEdit { get; set; }
 
     }
 }

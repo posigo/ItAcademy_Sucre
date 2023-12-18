@@ -1,12 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json.Linq;
 using Sucre_DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Data
 {
@@ -16,11 +9,13 @@ namespace Sucre_DataAccess.Data
         {
                
         }
-
-        //table application users
-        public DbSet<AppUser> AppUsers { get; set; }
+                
+        //table application roles
+        public DbSet<AppRole> AppRoles { get; set; }
         //Alarm and fire automatic protection table
         public DbSet<AsPaz> AsPazs { get; set; }
+        //table application users
+        public DbSet<AppUser> AppUsers { get; set; }
         //measurement channel table
         public DbSet<Canal> Canals { get; set; }
         //table of metering point locations

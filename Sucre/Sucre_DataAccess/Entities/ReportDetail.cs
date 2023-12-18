@@ -1,7 +1,4 @@
-﻿//using Microsoft.Analytics.Interfaces;
-//using Microsoft.Analytics.Types.Sql;
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sucre_DataAccess.Entities
 {

@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_Models
 {
@@ -23,7 +18,7 @@ namespace Sucre_Models
         /// <summary>
         /// колеккция точек учёта привязанных к каналу
         /// </summary>
-        public ICollection<PointM> PointsM { get; set; } = new HashSet<PointM>();
+        public IEnumerable<PointM> PointsM { get; set; } = new HashSet<PointM>();
         /// <summary>
         /// Список точек учёта не привязанных к каналу
         /// </summary>

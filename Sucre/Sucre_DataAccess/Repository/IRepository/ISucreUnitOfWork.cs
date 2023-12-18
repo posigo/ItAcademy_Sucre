@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sucre_DataAccess.Repository.IRepository
+﻿namespace Sucre_DataAccess.Repository.IRepository
 {
     public interface ISucreUnitOfWork: IDisposable
     {
+        IDbSucreAppRole repoSucreAppRole
+        { get; }
+        IDbSucreAppUser repoSucreAppUser
+        { get; }
         IDbSucreAsPaz repoSucreAsPaz
         { get; }
         IDbSucreCanal repoSucreCanal
@@ -16,6 +13,8 @@ namespace Sucre_DataAccess.Repository.IRepository
         IDbSucreCex repoSucreCex
         { get; }
         IDbSucreEnergy repoSucreEnergy
+        { get; }
+        IDbSucreGroupUser repoSucreGroupUser
         { get; }
         IDbSucreParameterType repoSucreParameterType
         { get; }

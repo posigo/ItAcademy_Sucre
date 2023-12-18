@@ -47,3 +47,19 @@ http://iantonov.me/page/fluent-validation-v-asp-net-mvc-prilozhenijah-osnovy
 https://docs.fluentvalidation.net/en/latest/built-in-validators.html
 
 https://docs.fluentvalidation.net/en/latest/testing.html#mocking
+
+
+
+https://habr.com/ru/articles/672382/
+https://highload.today/c-sharp-regex/
+https://csharp.webdelphi.ru/rabota-s-regulyarnymi-vyrazheniyami-v-c/
+https://csharp.webdelphi.ru/marshrutizaciya-v-asp-net-core-sozdanie-sobstvennyx-ogranichenij-marshrutov-interfejs-irouteconstraint/
+https://csharp.webdelphi.ru/szhatie-otvetov-v-asp-net-core-nastrojki-szhatiya/
+
+!!!https://csharp.webdelphi.ru/poluchenie-dannyx-zaprosa-rabota-s-httprequest/
+
+https://csharp.webdelphi.ru/asp-net-core/asp-net-core-mvc/
+https://csharp.webdelphi.ru/modeli-v-asp-net-core-mvc-privyazka-modeli/
+
+
+

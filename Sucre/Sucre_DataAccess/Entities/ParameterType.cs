@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sucre_Core;
 
 namespace Sucre_DataAccess.Entities
 {
@@ -7,7 +8,7 @@ namespace Sucre_DataAccess.Entities
     /// Типы физических параметров
     /// </summary>
     [Table("ParameterTypes")]
-    public class ParameterType : IBaseEntity
+    public class ParameterType : IBaseEntity<int>
     {
         [Key]
         public int Id { get; set; }

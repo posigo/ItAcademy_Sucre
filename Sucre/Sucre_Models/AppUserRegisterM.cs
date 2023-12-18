@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Sucre_Models
 {
@@ -16,5 +11,8 @@ namespace Sucre_Models
         public string Password { get; set; }
         [Compare("Password")]
         public string PasswordConfirmation { get; set; }
+        //[Required]
+        public string? ReturnUrl { get; set; }
+
     }
 }

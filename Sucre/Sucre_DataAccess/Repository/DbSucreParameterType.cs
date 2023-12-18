@@ -2,16 +2,10 @@
 using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
-using Sucre_Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository
 {
-    public class DbSucreParameterType : DbSucre<ParameterType>, IDbSucreParameterType
+    public class DbSucreParameterType : DbSucre<ParameterType, int>, IDbSucreParameterType
     {
         private readonly ApplicationDbContext _db;
 

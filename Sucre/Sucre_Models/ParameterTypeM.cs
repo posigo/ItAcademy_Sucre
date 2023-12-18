@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Sucre_Models
 {
@@ -16,6 +11,7 @@ namespace Sucre_Models
         public string Mnemo { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please enter UNIT MEASSURE of type parameter.")]
         public string UnitMeas { get; set; } = string.Empty;
+
 
     }
 }

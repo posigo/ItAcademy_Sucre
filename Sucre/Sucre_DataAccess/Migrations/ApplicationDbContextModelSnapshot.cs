@@ -17,10 +17,25 @@ namespace Sucre_DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AppRoleAppUser", b =>
+                {
+                    b.Property<Guid>("AppRolesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUsersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AppRolesId", "AppUsersId");
+
+                    b.HasIndex("AppUsersId");
+
+                    b.ToTable("AppRoleAppUser");
+                });
 
             modelBuilder.Entity("CanalPoint", b =>
                 {
@@ -52,13 +67,32 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("GroupUserReport");
                 });
 
-            modelBuilder.Entity("Sucre_DataAccess.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Sucre_DataAccess.Entities.AppRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoles");
+                });
+
+            modelBuilder.Entity("Sucre_DataAccess.Entities.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -68,7 +102,7 @@ namespace Sucre_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupId")
+                    b.Property<int>("GroupNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -80,8 +114,6 @@ namespace Sucre_DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
 
                     b.ToTable("AppUsers");
                 });
@@ -248,10 +280,8 @@ namespace Sucre_DataAccess.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -408,6 +438,21 @@ namespace Sucre_DataAccess.Migrations
                     b.ToTable("ValuesMounth");
                 });
 
+            modelBuilder.Entity("AppRoleAppUser", b =>
+                {
+                    b.HasOne("Sucre_DataAccess.Entities.AppRole", null)
+                        .WithMany()
+                        .HasForeignKey("AppRolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sucre_DataAccess.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("AppUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CanalPoint", b =>
                 {
                     b.HasOne("Sucre_DataAccess.Entities.Canal", null)
@@ -436,17 +481,6 @@ namespace Sucre_DataAccess.Migrations
                         .HasForeignKey("ReportsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Sucre_DataAccess.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("Sucre_DataAccess.Entities.GroupUser", "GroupUser")
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GroupUser");
                 });
 
             modelBuilder.Entity("Sucre_DataAccess.Entities.AsPaz", b =>
@@ -540,11 +574,6 @@ namespace Sucre_DataAccess.Migrations
             modelBuilder.Entity("Sucre_DataAccess.Entities.Energy", b =>
                 {
                     b.Navigation("Points");
-                });
-
-            modelBuilder.Entity("Sucre_DataAccess.Entities.GroupUser", b =>
-                {
-                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("Sucre_DataAccess.Entities.ParameterType", b =>

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sucre_Core;
 
 namespace Sucre_DataAccess.Entities
 {
@@ -7,7 +8,7 @@ namespace Sucre_DataAccess.Entities
     /// типы энергии
     /// </summary>
     [Table("Enegies")]
-    public class Energy: IBaseEntity
+    public class Energy: IBaseEntity<int>
     {
         [Key]
         public int Id { get; set; }

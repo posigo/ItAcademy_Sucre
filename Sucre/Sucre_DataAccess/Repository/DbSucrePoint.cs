@@ -1,18 +1,10 @@
 ﻿using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Sucre_DataAccess.Repository.IRepository;
-using Microsoft.Extensions.Primitives;
-using Sucre_Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository
 {
-    public class DbSucrePoint : DbSucre<Point>, IDbSucrePoint
+    public class DbSucrePoint : DbSucre<Point, int>, IDbSucrePoint
     {
         private readonly ApplicationDbContext _db;
 

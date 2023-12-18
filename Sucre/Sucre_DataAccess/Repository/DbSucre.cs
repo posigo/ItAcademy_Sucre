@@ -1,15 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sucre_DataAccess.Data;
-using Sucre_DataAccess.Entities;
-//using Sucre_DataAccess.Entities.TDO;
 using Sucre_Core;
 using Sucre_DataAccess.Repository.IRepository;
 using System.Linq.Expressions;
-using Microsoft.Extensions.Logging;
+using Sucre_Core.DTOs;
 
 namespace Sucre_DataAccess.Repository
 {
-    public class DbSucre<T> : IDbSucre<T> where T : class, IBaseEntity
+    public class DbSucre<T, U> : IDbSucre<T, U> where T : class, IBaseEntity<U>
     {
         private readonly ApplicationDbContext _db;
         //private readonly ILogger<DbSucre<T>> _log;
@@ -25,6 +23,7 @@ namespace Sucre_DataAccess.Repository
 
             //log.LogInformation("Repository DbSucre use");
         }
+
         /// <summary>
         /// Add single entity
         /// </summary>
@@ -66,7 +65,7 @@ namespace Sucre_DataAccess.Repository
         /// </summary>
         /// <param name="id">ID entity</param>
         /// <returns></returns>
-        public virtual T Find(int id)
+        public virtual T Find(U id)
         {
             return dbSet.Find(id);
         }
@@ -75,7 +74,7 @@ namespace Sucre_DataAccess.Repository
         /// </summary>
         /// <param name="id">ID entity</param>
         /// <returns></returns>
-        public virtual async Task<T> FindAsync(int id)
+        public virtual async Task<T> FindAsync(U id)
         {
             return await dbSet.FindAsync(id);
         }
@@ -165,21 +164,30 @@ namespace Sucre_DataAccess.Repository
                                                 string includeProperties = null, 
                                                 bool isTracking = true)
         {
-            IQueryable<T> query = dbSet;
-            if (filter != null)
-                query = query.Where(filter);
+            try
+            {
+                IQueryable<T> query = dbSet;
+                if (filter != null)
+                    query = query.Where(filter);
 
-            if (includeProperties != null)
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                    query = query.Include(includeProp);
+                if (includeProperties != null)
+                    foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                        query = query.Include(includeProp);
 
-            if (orderBy != null)
-                query = orderBy(query);
+                if (orderBy != null)
+                    query = orderBy(query);
 
-            if (!isTracking)
-                query = query.AsNoTracking();
+                if (!isTracking)
+                    query = query.AsNoTracking();
 
-            return await query.ToListAsync();
+                return await query.ToListAsync();
+            }
+            catch (Exception ex) 
+            {
+                throw new NotImplementedException(ex.Message);
+                
+            };
+            return null;
         }
 
         public virtual IQueryable<T> GetAsQueryable()
@@ -187,7 +195,7 @@ namespace Sucre_DataAccess.Repository
             return dbSet.AsQueryable();
         }
 
-        public async Task<T?> GetById(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> GetById(U id, params Expression<Func<T, object>>[] includes)
         {
             var resultQuery = dbSet.AsQueryable();
             if (includes.Any())
@@ -198,7 +206,7 @@ namespace Sucre_DataAccess.Repository
             return await resultQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
-        public async Task<T?> GetByIdAsNoTracking(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> GetByIdAsNoTracking(U id, params Expression<Func<T, object>>[] includes)
         {
             var resultQuery = dbSet.AsNoTracking();
             if (includes.Any())
@@ -210,7 +218,7 @@ namespace Sucre_DataAccess.Repository
             return await resultQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
-        public async Task Patch(int id, List<PatchTdo> patchTdos)
+        public async Task Patch(U id, List<PatchTdo> patchTdos)
         {
             var entity = await GetById(id);
             if (entity != null) 
@@ -235,7 +243,7 @@ namespace Sucre_DataAccess.Repository
         {
             await Task.Run(() => Remove(entity));
         }
-        public virtual async Task RemoveByIdAsync(int id)
+        public virtual async Task RemoveByIdAsync(U id)
         { 
             var entityRemove = await GetById(id);
             if (entityRemove != null)

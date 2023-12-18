@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sucre_Core;
 
 namespace Sucre_DataAccess.Entities
 {
@@ -7,10 +8,10 @@ namespace Sucre_DataAccess.Entities
     /// User
     /// </summary>
     [Table("AppUsers")]
-    public class AppUser
+    public class AppUser:IBaseEntity<Guid>
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [MaxLength(30)]
         public string? Name { get; set; }
         [MaxLength(255)]
@@ -21,9 +22,15 @@ namespace Sucre_DataAccess.Entities
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
         [Required]
-        public int GroupId { get; set; }                
+        public int GroupNumber { get; set; } = 99;               
 
-        [ForeignKey("GroupId")]
-        public virtual GroupUser GroupUser { get; set; }
+        //[ForeignKey("GroupId")]
+        //public virtual GroupUser GroupUser { get; set; }
+        public virtual ICollection<AppRole> AppRoles { get; set; }
+
+        public AppUser()
+        {
+            this.AppRoles = new HashSet<AppRole>();
+        }
     }
 }

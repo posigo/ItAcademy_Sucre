@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Sucre_DataAccess.Services.IServices;
 using Microsoft.Extensions.Logging;
 using Sucre_Core.LoggerExternal;
+using Sucre_Utility;
 
 namespace Sucre_DataAccess.Services
 {
@@ -13,12 +14,16 @@ namespace Sucre_DataAccess.Services
         private ApplicationDbContext _db;
         private IConfiguration _configuration;
 
-        private List<ParameterType> _parameterTypes;
-        private List<Energy> _energies;
-        private List<Cex> _cexs;
-        private List<Point> _points;
-        private List<Canal> _cannales;
+        private List<AppRole> _appRoles;
+        private List<AppUser> _appUsers;
         private List<AsPaz> _asPazs;
+        private List<Canal> _cannales;
+        private List<Cex> _cexs;
+        private List<Energy> _energies;
+        private List<GroupUser> _groupUsers;
+        private List<ParameterType> _parameterTypes;
+        private List<Point> _points;        
+        
         //private readonly ILogger<InitApplicattionDbContext> _log;
 
         public InitApplicattionDbContext(ApplicationDbContext db, 
@@ -30,6 +35,9 @@ namespace Sucre_DataAccess.Services
             //_log = log;
         }
 
+        /// <summary>
+        /// Name of the connected database
+        /// </summary>
         public string DatabaseName
         {
             get
@@ -57,7 +65,9 @@ namespace Sucre_DataAccess.Services
             }
 
         }
-
+        /// <summary>
+        /// Set begin value to Db
+        /// </summary>
         private void SetValueDb()
         {
             _parameterTypes = new List<ParameterType>()
@@ -73,12 +83,14 @@ namespace Sucre_DataAccess.Services
                     Name = "Давление",
                     Mnemo = "P",
                     UnitMeas = "кПа"
-                },new ParameterType()
+                },
+                new ParameterType()
                 {
                     Name = "Давление",
                     Mnemo = "P",
                     UnitMeas = "bar"
-                },new ParameterType()
+                },
+                new ParameterType()
                 {
                     Name = "Температура",
                     Mnemo = "T",
@@ -89,12 +101,14 @@ namespace Sucre_DataAccess.Services
                     Name = "Температура",
                     Mnemo = "T",
                     UnitMeas = "K"
-                },new ParameterType()
+                },
+                new ParameterType()
                 {
                     Name = "Расход в м3",
                     Mnemo = "Q",
                     UnitMeas = "м3"
-                },new ParameterType()
+                },
+                new ParameterType()
                 {
                     Name = "Расход в тоннах",
                     Mnemo = "Q",
@@ -466,10 +480,92 @@ namespace Sucre_DataAccess.Services
             point = _points.FirstOrDefault(item => item.Name == "Metering Test");
             cannalePoints.Points.Add(point);
             _db.Canals.UpdateRange(_cannales);
-
+            _db.SaveChanges();
+            //add groupUser 999
+            _groupUsers = new List<GroupUser>()
+            {
+                new GroupUser()
+                {
+                    Number = 999,
+                    Description = "Доступ ко всем отчётам"
+                },
+                new GroupUser()
+                {
+                    Number = 99,
+                    Description = "Нет доступа к отчётам"
+                }
+            };
+            _db.GroupUsers.AddRange(_groupUsers);
+            _db.SaveChanges();
+            //add roles
+            _appRoles = new List<AppRole>()
+            {
+                new AppRole()
+                {
+                    Name = "Supervisor",
+                    Value = "SUPERVISOR"
+                },
+                new AppRole()
+                {
+                    Name = "Admin",
+                    Value = "ADMIN"
+                },
+                new AppRole()
+                {
+                    Name = "User",
+                    Value = "USER"
+                },
+                new AppRole()
+                {
+                    Name = "Guest",
+                    Value = "GUEST"
+                }
+            };
+            _db.AppRoles.AddRange(_appRoles);
+            //add users
+            _appUsers = new List<AppUser>()
+            {
+                new AppUser()
+                {
+                    Name = "Admin",
+                    Description = "Test admin application",
+                    Email = "admin@admin.him",
+                    PasswordHash = WM.GenerateMD5Hash("admin",_configuration["AppSettings:PasswordSalt"]),
+                    GroupNumber = 999
+                    //GroupUser = _groupUsers.FirstOrDefault(item => item.Name == "999")
+                },
+                new AppUser()
+                {
+                    Name = "User",
+                    Description = "Test user application",
+                    Email = "user@user.him",
+                    PasswordHash = WM.GenerateMD5Hash("user",_configuration["AppSettings:PasswordSalt"]),
+                    GroupNumber = 99
+                    //GroupUser = _groupUsers.FirstOrDefault(item => item.Name == "99")
+                }
+            };
+            _db.AppUsers.AddRange(_appUsers);
+            _db.SaveChanges();
+            AppRole role = _appRoles.FirstOrDefault(item => item.Name == "Admin");
+            AppUser user = _appUsers.FirstOrDefault(item => item.Email == "admin@admin.him");
+            role.AppUsers.Add(user);
+            user.AppRoles.Add(role);
+            _db.AppRoles.Update(role);
+            _db.AppUsers.Update(user);
+            _db.SaveChanges();
+            role = _appRoles.FirstOrDefault(item => item.Name == "User");
+            user = _appUsers.FirstOrDefault(item => item.Email == "user@user.him");
+            role.AppUsers.Add(user);
+            user.AppRoles.Add(role);
+            _db.AppRoles.Update(role);
+            _db.AppUsers.Update(user);
             _db.SaveChanges();
         }
-
+        /// <summary>
+        /// Init DB begin value
+        /// </summary>
+        /// <param name="errMsg"></param>
+        /// <returns></returns>
         public bool InitDbValue(out string errMsg)
         {
             var sds = _db.ContextId;

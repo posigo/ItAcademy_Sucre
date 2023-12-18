@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sucre_Models
 {
@@ -16,6 +15,7 @@ namespace Sucre_Models
         public string? Description { get; set; } = string.Empty;
         [Required]
         public int ParameterTypeId { get; set; }        
+        public string? ParameterTypeName { get; set; }
         [Required]
         public bool Reader { get; set; }
         /// <summary>
@@ -29,16 +29,10 @@ namespace Sucre_Models
         public int SourceType { get; set; }
         [Required]
         public bool AsPazEin { get; set; } = false;
-
-        public AsPazM? AsPazM { get; set; }
-        
-        public ICollection<PointM>? PointMs { get; set; }        
+        public bool AsPazEmpty { get; set; } = false;
 
         public CanalM()
-        {
-            this.Reader = true;
-            this.PointMs = new HashSet<PointM>();
-            this.SourceType = 0;
+        {            
             
         }
     }

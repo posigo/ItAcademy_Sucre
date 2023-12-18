@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Sucre_Models
 {
@@ -17,7 +12,7 @@ namespace Sucre_Models
         [MaxLength(255)]
         public string? Description { get; set; } = string.Empty;
         [Required]
-        public int EnergyId { get; set; }
+        public int EnergyId { get; set; }        
         [Required]
         public int CexId { get; set; }
         [MaxLength(20)]

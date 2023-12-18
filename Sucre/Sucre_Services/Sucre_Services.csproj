@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="7.1.4" />
     <ProjectReference Include="..\Sucre_Core\Sucre_Core.csproj" />
     <ProjectReference Include="..\Sucre_DataAccess\Sucre_DataAccess.csproj" />
+    <ProjectReference Include="..\Sucre_Mappers\Sucre_Mappers.csproj" />
   </ItemGroup>
 
 </Project>

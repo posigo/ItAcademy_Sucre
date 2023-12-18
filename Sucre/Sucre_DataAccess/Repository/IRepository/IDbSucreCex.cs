@@ -1,13 +1,8 @@
 ﻿using Sucre_DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucreCex: IDbSucre<Cex>, ISelectListItemObj
+    public interface IDbSucreCex: IDbSucre<Cex, int>, ISelectListItemObj
     {
         //string FullName(Cex cex);
         void Update(Cex cex);

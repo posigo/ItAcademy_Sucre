@@ -1,11 +1,11 @@
-﻿using Sucre_DataAccess.Entities;
-//using Sucre_DataAccess.Entities.TDO;
+﻿//using Sucre_DataAccess.Entities.TDO;
 using Sucre_Core;
 using System.Linq.Expressions;
+using Sucre_Core.DTOs;
 
 namespace Sucre_DataAccess.Repository.IRepository
 {
-    public interface IDbSucre<T> where T : class, IBaseEntity
+    public interface IDbSucre<T, U> where T : class, IBaseEntity<U>
     {
         /// <summary>
         /// Add single entity
@@ -36,13 +36,13 @@ namespace Sucre_DataAccess.Repository.IRepository
         /// </summary>
         /// <param name="id">ID entity</param>
         /// <returns></returns>
-        T Find(int id);
+        T Find(U id);
         /// <summary>
         /// Search for an entity by ID. Async method
         /// </summary>
         /// <param name="id">ID entity</param>
         /// <returns></returns>
-        Task<T> FindAsync(int id);
+        Task<T> FindAsync(U id);
 
         /// <summary>
         /// Return an entity based on conditions
@@ -96,14 +96,14 @@ namespace Sucre_DataAccess.Repository.IRepository
 
         IQueryable<T> GetAsQueryable();
 
-        Task<T?> GetById(int id, params Expression<Func<T, object>>[] includes);
-        Task<T?> GetByIdAsNoTracking(int id, params Expression<Func<T, object>>[] includes);
+        Task<T?> GetById(U id, params Expression<Func<T, object>>[] includes);
+        Task<T?> GetByIdAsNoTracking(U id, params Expression<Func<T, object>>[] includes);
 
-        Task Patch(int id, List<PatchTdo> patchTdos);
+        Task Patch(U id, List<PatchTdo> patchTdos);
 
         void Remove(T entity);
         Task RemoveAsync(T entity);
-        Task RemoveByIdAsync(int id);
+        Task RemoveByIdAsync(U id);
         void RemoveRange(IEnumerable<T> entities);
         Task RemoveRangeAsync(IEnumerable<T> entities);
 

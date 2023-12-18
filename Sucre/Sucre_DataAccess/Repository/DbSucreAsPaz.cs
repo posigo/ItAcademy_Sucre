@@ -1,15 +1,10 @@
-﻿    using Sucre_DataAccess.Data;
+﻿using Sucre_DataAccess.Data;
 using Sucre_DataAccess.Entities;
 using Sucre_DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sucre_DataAccess.Repository
 {
-    public class DbSucreAsPaz : DbSucre<AsPaz>, IDbSucreAsPaz
+    public class DbSucreAsPaz : DbSucre<AsPaz, int>, IDbSucreAsPaz
     {
         private readonly ApplicationDbContext _db;
 
